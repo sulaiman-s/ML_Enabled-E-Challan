@@ -10,11 +10,11 @@ import {
 
 function AppButton({ title, style, textStyle, height, width, onPress }) {
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+    <TouchableNativeFeedback onPress={onPress}>
       <View style={[style, { height: height, width: width }]}>
         <Text style={textStyle}>{title}</Text>
       </View>
-    </TouchableOpacity>
+    </TouchableNativeFeedback>
   );
 }
 
