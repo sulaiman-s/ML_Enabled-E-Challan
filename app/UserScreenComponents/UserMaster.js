@@ -16,11 +16,7 @@ function UserMaster(props) {
         value="Click below to check your challan status"
         style={{
           marginTop: 30,
-          elevation: 0,
-          borderTopWidth: 2,
-          borderTopColor: "lightslategray",
-          borderBottomWidth: 2,
-          borderBottomColor: "lightslategray",
+          elevation: 5,
         }}
       />
       <View style={styles.btn_view}>
