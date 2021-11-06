@@ -9,7 +9,7 @@ import UserScreen from "./app/screens/UserScreen";
 export default function App() {
   return (
     <View style={styles.container}>
-      <UserScreen />
+      <RegisterScreen />
     </View>
   );
 }

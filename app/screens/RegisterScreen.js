@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View, Platform, StatusBar } from "react-native";
 import AppButton from "../compnents/AppButton";
 import AppInput from "../compnents/AppInput";
-
+import Screen from "../compnents/Screen";
 function RegisterScreen(props) {
   const [FullName, setFullName] = useState("");
   const [gmail, setGmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   return (
-    <View style={styles.cont}>
+    <Screen>
       <View style={{ width: "100%", marginVertical: 20 }}>
         <Text style={styles.h_style}>Register</Text>
       </View>
@@ -46,28 +46,11 @@ function RegisterScreen(props) {
           style={styles.btn}
         />
       </View>
-      <View
-        style={{
-          marginTop: 50,
-          height: 70,
-          width: 300,
-          borderColor: "gray",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 1,
-          borderWidth: 2,
-          borderStyle: "dashed",
-        }}
-      >
-        <Text style={{ fontSize: 15, fontFamily: "Roboto" }}>
-          Already have an account?.
-        </Text>
-        <Text style={{ fontSize: 15, fontFamily: "Roboto", color: "blue" }}>
-          Click To Log In
-        </Text>
+      <View style={styles.option_view}>
+        <Text style={styles.option_txt}>Already have an account?.</Text>
+        <Text style={styles.txt}>Click To Log In</Text>
       </View>
-    </View>
+    </Screen>
   );
 }
 const styles = StyleSheet.create({
@@ -98,6 +81,28 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 30,
     fontFamily: "Roboto",
+  },
+  option_view: {
+    marginTop: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 1,
+    borderWidth: 2,
+    width: 350,
+    height: 70,
+    borderColor: "gray",
+    alignSelf: "center",
+    borderStyle: "dashed",
+  },
+  option_txt: {
+    fontSize: 15,
+    fontFamily: "Roboto",
+  },
+  txt: {
+    fontSize: 15,
+    fontFamily: "Roboto",
+    color: "blue",
   },
 });
 

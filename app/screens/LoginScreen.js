@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import AppInput from "../compnents/AppInput";
+import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
 function LoginScreen(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [Values, setValues] = useState({ uname: "", pass: "" });
   return (
-    <View style={styles.container}>
+    <Screen>
       <View style={{ width: "100%", marginVertical: 25 }}>
         <Text style={styles.h_style}>Log in</Text>
       </View>
@@ -33,41 +34,15 @@ function LoginScreen(props) {
           width={"100%"}
           onPress={() => setValues({ uname: username, pass: password })}
         />
-        <View
-          style={{
-            marginTop: 50,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 1,
-            borderWidth: 2,
-            width: 350,
-            height: 70,
-            borderColor: "gray",
-            alignSelf: "center",
-            borderStyle: "dashed",
-          }}
-        >
-          <Text style={{ fontSize: 15, fontFamily: "Roboto" }}>
-            Dont have an account?.
-          </Text>
-          <Text style={{ fontSize: 15, fontFamily: "Roboto", color: "blue" }}>
-            Click To Create
-          </Text>
+        <View style={styles.option_view}>
+          <Text style={styles.option_txt}>Dont have an account?.</Text>
+          <Text style={styles.txt}>Click To Create</Text>
         </View>
       </View>
-    </View>
+    </Screen>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
-    alignItems: "center",
-    width: "100%",
-    padding: 10,
-    paddingTop: 20,
-  },
   h_style: {
     width: "100%",
     fontSize: 30,
@@ -95,6 +70,28 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 17,
+  },
+  option_view: {
+    marginTop: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 1,
+    borderWidth: 2,
+    width: 350,
+    height: 70,
+    borderColor: "gray",
+    alignSelf: "center",
+    borderStyle: "dashed",
+  },
+  option_txt: {
+    fontSize: 15,
+    fontFamily: "Roboto",
+  },
+  txt: {
+    fontSize: 15,
+    fontFamily: "Roboto",
+    color: "blue",
   },
 });
 

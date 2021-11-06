@@ -1,82 +1,65 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  StatusBar,
-  Platform,
-  ImageBackground,
-} from "react-native";
+import { View, StyleSheet, Text, ImageBackground } from "react-native";
+import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
 
 function FirstScreen(props) {
   return (
-    <View style={styles.cont}>
-      <View style={{ flex: 0.8 }}>
-        <ImageBackground
-          source={require("../assets/bb.jpg")}
-          resizeMode="cover"
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            opacity: 0.7,
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontFamily: "Roboto",
-              fontSize: 30,
-            }}
-          >
-            App Name
-          </Text>
-        </ImageBackground>
-      </View>
-      <View
-        style={{
-          flex: 0.2,
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-        }}
+    <Screen>
+      <ImageBackground
+        source={require("../assets/bb.jpg")}
+        resizeMode="cover"
+        style={styles.bg_img}
       >
+        <Text style={styles.h_text}>App Name</Text>
+      </ImageBackground>
+      <View style={styles.btn_view}>
         <AppButton
           title="LOG IN"
           height={52}
           width={167}
-          style={{
-            borderWidth: 2,
-            borderRadius: 6,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          textStyle={{ fontFamily: "Roboto", fontWeight: "bold" }}
+          style={styles.btn}
+          textStyle={styles.btn_txt}
         />
         <AppButton
           title="REGISTER"
           height={52}
           width={167}
-          style={{
-            borderWidth: 2,
-            borderRadius: 6,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          textStyle={{ fontFamily: "Roboto", fontWeight: "bold" }}
+          style={styles.btn}
+          textStyle={styles.btn_txt}
         />
       </View>
-    </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  cont: {
-    flex: 1,
+  bg_img: {
     width: "100%",
-    marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
+    flex: 1,
+    justifyContent: "center",
+    opacity: 0.7,
+    alignItems: "center",
   },
+  h_text: {
+    fontWeight: "bold",
+    fontFamily: "Roboto",
+    fontSize: 30,
+  },
+  btn_view: {
+    flex: 0.2,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "100%",
+  },
+  btn: {
+    borderWidth: 2,
+    borderRadius: 6,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btn_txt: { fontFamily: "Roboto", fontWeight: "bold" },
 });
 
 export default FirstScreen;
