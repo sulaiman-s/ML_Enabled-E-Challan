@@ -1,9 +1,21 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
 
 function UserListItem({ ch_Number, number, type, date, price }) {
+  const navigation = useNavigation();
   return (
-    <TouchableNativeFeedback>
+    <TouchableNativeFeedback
+      onPress={() =>
+        navigation.navigate("upload", {
+          ch_Number,
+          number,
+          type,
+          date,
+          price,
+        })
+      }
+    >
       <View style={styles.ch_view}>
         <View style={styles.ch_h}>
           <Text style={styles.ch_h_txt}>Challan No #{ch_Number}</Text>

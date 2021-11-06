@@ -15,6 +15,7 @@ function UserSearch(props) {
         placeholder="Enter Vehicle Number"
         onChangeText={(text) => setSearch(text)}
         iconName="search-web"
+        viewStyle={{ borderColor: "tomato" }}
       />
     </View>
   );

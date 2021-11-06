@@ -1,13 +1,16 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { Text, StyleSheet, View, Platform, StatusBar } from "react-native";
 import AppButton from "../compnents/AppButton";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
+useNavigation;
 function RegisterScreen(props) {
   const [FullName, setFullName] = useState("");
   const [gmail, setGmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const navigation = useNavigation();
   return (
     <Screen>
       <View style={{ width: "100%", marginVertical: 20 }}>
@@ -44,6 +47,7 @@ function RegisterScreen(props) {
           height={50}
           width={"100%"}
           style={styles.btn}
+          onPress={() => navigation.navigate("main")}
         />
       </View>
       <View style={styles.option_view}>

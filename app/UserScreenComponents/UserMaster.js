@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import AdminAlert from "../compnents/AdminAlert";
@@ -7,16 +8,17 @@ import Notification from "../compnents/Notification";
 import Screen from "../compnents/Screen";
 
 function UserMaster(props) {
+  const navigation = useNavigation();
   return (
-    <>
+    <Screen>
       <Label value="Hello UserName!" style={styles.lbl_h} />
       <AdminAlert />
       <Notification />
       <Label
-        value="Click below to check your challan status"
+        value="Select Options"
         style={{
           marginTop: 30,
-          elevation: 5,
+          elevation: 0,
         }}
       />
       <View style={styles.btn_view}>
@@ -26,6 +28,7 @@ function UserMaster(props) {
           textStyle={styles.btn_txt}
           height={74}
           width={166}
+          onPress={() => navigation.navigate("Record")}
         />
         <AppButton
           title="Upload Receipt"
@@ -33,9 +36,10 @@ function UserMaster(props) {
           textStyle={styles.btn_txt}
           height={74}
           width={166}
+          onPress={() => navigation.navigate("upload")}
         />
       </View>
-    </>
+    </Screen>
   );
 }
 
@@ -47,6 +51,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingTop: 10,
     paddingLeft: 100,
+    marginBottom: 30,
   },
   btn: {
     justifyContent: "center",

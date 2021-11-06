@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, FlatList, View, Text } from "react-native";
 import Label from "../compnents/label";
+import Screen from "../compnents/Screen";
 import UserListItem from "../compnents/UserListItem";
 import UserSearch from "./UserSearch";
 const dat = [
@@ -43,12 +44,12 @@ const dat = [
 
 function UserChallanList(props) {
   return (
-    <>
+    <Screen>
       <UserSearch />
       <Label
         value="Related Challans"
         style={{
-          backgroundColor: "lightslategray",
+          backgroundColor: "tomato",
           color: "white",
           marginTop: 5,
         }}
@@ -75,7 +76,7 @@ function UserChallanList(props) {
           ItemSeparatorComponent={() => <View style={{ height: 5 }}></View>}
         />
       )}
-    </>
+    </Screen>
   );
 }
 

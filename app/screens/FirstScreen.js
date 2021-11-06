@@ -2,8 +2,17 @@ import React from "react";
 import { View, StyleSheet, Text, ImageBackground } from "react-native";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
+import { useNavigation } from "@react-navigation/native";
 
-function FirstScreen(props) {
+function FirstScreen({ navigation }) {
+  const navigate = useNavigation();
+
+  const handleLogin = () => {
+    navigation.navigate("Login");
+  };
+  const handleRegister = () => {
+    navigation.navigate("Register");
+  };
   return (
     <Screen>
       <ImageBackground
@@ -20,6 +29,7 @@ function FirstScreen(props) {
           width={167}
           style={styles.btn}
           textStyle={styles.btn_txt}
+          onPress={handleLogin}
         />
         <AppButton
           title="REGISTER"
@@ -27,6 +37,7 @@ function FirstScreen(props) {
           width={167}
           style={styles.btn}
           textStyle={styles.btn_txt}
+          onPress={handleRegister}
         />
       </View>
     </Screen>
@@ -54,12 +65,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   btn: {
-    borderWidth: 2,
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#0fff",
   },
-  btn_txt: { fontFamily: "Roboto", fontWeight: "bold" },
+  btn_txt: { fontFamily: "Roboto", fontWeight: "bold", color: "black" },
 });
 
 export default FirstScreen;

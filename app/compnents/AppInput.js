@@ -2,9 +2,16 @@ import React from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function AppInput({ placeholder, style, onChangeText, iconName, ...rest }) {
+function AppInput({
+  viewStyle,
+  placeholder,
+  style,
+  onChangeText,
+  iconName,
+  ...rest
+}) {
   return (
-    <View style={styles.inp}>
+    <View style={[styles.inp, viewStyle]}>
       <MaterialCommunityIcons name={iconName} size={30} color="gray" />
       <TextInput
         placeholder={placeholder}
