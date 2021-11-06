@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, FlatList, View, Text } from "react-native";
+import Label from "../compnents/label";
 import UserListItem from "../compnents/UserListItem";
 import UserSearch from "./UserSearch";
 const dat = [
@@ -44,20 +45,14 @@ function UserChallanList(props) {
   return (
     <>
       <UserSearch />
-      <Text
+      <Label
+        value="Related Challans"
         style={{
-          alignSelf: "flex-start",
-          marginBottom: 10,
-          fontSize: 15,
-          backgroundColor: "white",
-          elevation: 10,
-          width: "100%",
-          height: 50,
-          paddingTop: 15,
+          backgroundColor: "lightslategray",
+          color: "white",
+          marginTop: 5,
         }}
-      >
-        Results Related To Search
-      </Text>
+      />
       {dat == null ? (
         <View>
           <Text>Nothing was Searched</Text>

@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  TouchableNativeFeedback,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppButton from "../compnents/AppButton";
+import UserListItem from "../compnents/UserListItem";
+import Label from "../compnents/label";
 
 function UploadChallan(props) {
   const [url, setUrl] = useState();
@@ -12,23 +21,37 @@ function UploadChallan(props) {
   };
   return (
     <View style={{ width: "100%" }}>
-      <Text>Upload Challan Image</Text>
-      <TouchableOpacity onPress={handleUpload}>
+      <View>
+        <Text style={{ fontSize: 35, fontFamily: "Roboto", paddingBottom: 10 }}>
+          Upload Receipt
+        </Text>
+        <Label
+          value="Challan Info"
+          style={{ backgroundColor: "#4ecdc4", color: "white", marginTop: 30 }}
+        />
+      </View>
+      <View style={{ marginTop: 10 }}>
+        <UserListItem />
+      </View>
+      <Label
+        value="Upload Receipt of Above Challan"
+        style={{ backgroundColor: "#4ecdc4", color: "white", marginTop: 30 }}
+      />
+      <TouchableNativeFeedback onPress={handleUpload}>
         <View
           style={{
-            backgroundColor: "gray",
-            height: 150,
+            backgroundColor: "lightslategray",
+            height: 170,
             justifyContent: "center",
             alignItems: "center",
             marginTop: 10,
           }}
         >
           {url == null ? (
-            <MaterialCommunityIcons
-              name="camera"
-              size={100}
-              color="lightgray"
-            />
+            <>
+              <MaterialCommunityIcons name="camera" size={100} color="white" />
+              <Text> Select Image From Library </Text>
+            </>
           ) : (
             <Image
               source={{ uri: url }}
@@ -36,26 +59,46 @@ function UploadChallan(props) {
             />
           )}
         </View>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
       <AppButton
         title="Upload"
         textStyle={styles.btn_t}
-        height={30}
-        width={60}
+        height={50}
+        width={"100%"}
         style={styles.btn}
       />
     </View>
   );
 }
 const styles = StyleSheet.create({
+  // primary: "#fc5c65",
+  // secondary: "#4ecdc4",
+  // black: "#000",
+  // white: "#fff",
+  // medium: "#6e6969",
+  // light: "#f8f4f4",
+  // dark: "#0c0c0c",
+  // danger: "#ff5252",
   btn: {
-    backgroundColor: "blue",
+    backgroundColor: "#4ecdc4",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
-    marginTop: 5,
+    marginTop: 25,
   },
   btn_t: {
+    color: "white",
+  },
+  txt: {
+    fontSize: 15,
+    fontFamily: "Roboto",
+    height: 50,
+    width: "100%",
+    elevation: 5,
+    paddingTop: 15,
+    paddingLeft: 15,
+    backgroundColor: "#4ecdc4",
+    marginTop: 30,
     color: "white",
   },
 });

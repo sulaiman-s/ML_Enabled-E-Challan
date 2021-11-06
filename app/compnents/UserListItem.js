@@ -1,21 +1,23 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
 
 function UserListItem({ ch_Number, number, type, date, price }) {
   return (
-    <View style={styles.ch_view}>
-      <View style={styles.ch_h}>
-        <Text style={styles.ch_h_txt}>Challan No #{ch_Number}</Text>
+    <TouchableNativeFeedback>
+      <View style={styles.ch_view}>
+        <View style={styles.ch_h}>
+          <Text style={styles.ch_h_txt}>Challan No #{ch_Number}</Text>
+        </View>
+        <View style={styles.ch_itm}>
+          <Text style={styles.ch_itm_txt}>Number:{number}</Text>
+          <Text style={styles.ch_itm_txt}>Type:{type}</Text>
+        </View>
+        <View style={styles.ch_itm}>
+          <Text style={styles.ch_itm_txt}>Date:{date}</Text>
+          <Text style={styles.ch_itm_txt}>Amount:{price}</Text>
+        </View>
       </View>
-      <View style={styles.ch_itm}>
-        <Text style={styles.ch_itm_txt}>Number:{number}</Text>
-        <Text style={styles.ch_itm_txt}>Type:{type}</Text>
-      </View>
-      <View style={styles.ch_itm}>
-        <Text style={styles.ch_itm_txt}>Date:{date}</Text>
-        <Text style={styles.ch_itm_txt}>Amount:{price}</Text>
-      </View>
-    </View>
+    </TouchableNativeFeedback>
   );
 }
 const styles = StyleSheet.create({
