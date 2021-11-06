@@ -7,9 +7,7 @@ import UserSearch from "../UserScreenComponents/UserSearch";
 function UserScreen(props) {
   return (
     <Screen>
-      <UserSearch />
       <UserChallanList />
-      <UploadChallan />
     </Screen>
   );
 }
