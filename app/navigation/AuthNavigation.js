@@ -35,12 +35,4 @@ const AuthNavigator = () => {
   );
 };
 
-function AuthNavigation(props) {
-  return (
-    <NavigationContainer>
-      <AuthNavigator />
-    </NavigationContainer>
-  );
-}
-
-export default AuthNavigation;
+export default AuthNavigator;

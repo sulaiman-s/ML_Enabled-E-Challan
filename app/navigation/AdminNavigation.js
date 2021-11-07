@@ -45,7 +45,9 @@ const AdminNavigator = () => {
 };
 const AdminTabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{ tabBarHideOnKeyboard: true, headerShown: false }}
+    >
       <Tab.Screen
         name="Home"
         component={AdminNavigator}
@@ -74,12 +76,4 @@ const AdminTabNavigator = () => {
   );
 };
 
-function AdminNavigation(props) {
-  return (
-    <NavigationContainer>
-      <AdminTabNavigator />
-    </NavigationContainer>
-  );
-}
-
-export default AdminNavigation;
+export default AdminTabNavigator;

@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
+import AuthContext from "../Auth/Context";
 function LoginScreen(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [Values, setValues] = useState({ uname: "", pass: "" });
+  const authContext = useContext(AuthContext);
+  const handleLogin = () => {
+    if (username == "Sulaiman" && password == "1234") {
+      authContext.setUser("Sulaiman");
+    } else if (username == "Admin" && password == "1234") {
+      authContext.setUser("Admin");
+    } else {
+      authContext.setUser(null);
+    }
+  };
   return (
     <Screen>
       <View style={{ width: "100%", marginVertical: 25 }}>
@@ -32,7 +43,7 @@ function LoginScreen(props) {
           textStyle={styles.btn_text_Style}
           height={50}
           width={"100%"}
-          onPress={() => setValues({ uname: username, pass: password })}
+          onPress={handleLogin}
         />
         <View style={styles.option_view}>
           <Text style={styles.option_txt}>Dont have an account?.</Text>

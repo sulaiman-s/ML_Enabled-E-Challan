@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
+import React, { useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
+import AuthContext from "../Auth/Context";
 import AdminAlert from "../compnents/AdminAlert";
 import AppButton from "../compnents/AppButton";
 import Label from "../compnents/label";
@@ -9,6 +10,7 @@ import Screen from "../compnents/Screen";
 
 function UserMaster(props) {
   const navigation = useNavigation();
+  const authContext = useContext(AuthContext);
   return (
     <Screen>
       <Label value="Hello UserName!" style={styles.lbl_h} />

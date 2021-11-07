@@ -62,12 +62,4 @@ const UserTabNavigator = () => {
   );
 };
 
-function UserNavigation(props) {
-  return (
-    <NavigationContainer>
-      <UserTabNavigator />
-    </NavigationContainer>
-  );
-}
-
-export default UserNavigation;
+export default UserTabNavigator;
