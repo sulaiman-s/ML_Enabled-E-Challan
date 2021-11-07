@@ -11,8 +11,10 @@ import {
 } from "react-native";
 import AppButton from "../app/compnents/AppButton";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/core";
 
 function AdminCapture(props) {
+  const navigation = useNavigation();
   const [url, setUrl] = useState();
 
   const handleImageFromCamera = async () => {
@@ -73,6 +75,7 @@ function AdminCapture(props) {
         height={50}
         width={"100%"}
         style={styles.btn}
+        onPress={() => navigation.navigate("entry")}
       />
     </Screen>
   );

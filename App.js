@@ -1,10 +1,8 @@
 import React from "react";
-import AdminCapture from "./AdminScreenComponents/AdminCapture";
-import AdminChallanEntries from "./AdminScreenComponents/AdminChallanEntries";
-import AdminMaster from "./AdminScreenComponents/AdminMaster";
-import AdminVerification from "./AdminScreenComponents/AdminVerification";
-import Navigation from "./app/navigation/Navigation";
+import AdminNavigation from "./app/navigation/AdminNavigation";
+import AuthNavigation from "./app/navigation/AuthNavigation";
+import UserNavigation from "./app/navigation/UserNavigation";
 
 export default function App() {
-  return <AdminVerification />;
+  return <AdminNavigation />;
 }

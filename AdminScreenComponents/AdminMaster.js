@@ -5,7 +5,7 @@ import { StyleSheet, View } from "react-native";
 import Notification from "../app/compnents/Notification";
 import AppButton from "../app/compnents/AppButton";
 
-function AdminMaster(props) {
+function AdminMaster({ navigation }) {
   return (
     <Screen>
       <Label value="Hello Admin!" style={styles.lbl_h} />
@@ -24,6 +24,7 @@ function AdminMaster(props) {
           textStyle={styles.btn_txt}
           height={74}
           width={166}
+          onPress={() => navigation.navigate("capture")}
         />
         <AppButton
           title="Check Records"
@@ -31,6 +32,7 @@ function AdminMaster(props) {
           textStyle={styles.btn_txt}
           height={74}
           width={166}
+          onPress={() => navigation.navigate("Record")}
         />
       </View>
     </Screen>

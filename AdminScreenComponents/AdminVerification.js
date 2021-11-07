@@ -4,8 +4,10 @@ import Label from "../app/compnents/label";
 import Screen from "../app/compnents/Screen";
 import { StyleSheet, View, Text } from "react-native";
 import AppButton from "../app/compnents/AppButton";
+import { useNavigation } from "@react-navigation/core";
 
 function AdminVerification(props) {
+  const navigation = useNavigation();
   return (
     <Screen>
       <Label
@@ -37,6 +39,7 @@ function AdminVerification(props) {
           textStyle={styles.btn_txt}
           height={60}
           width={166}
+          onPress={() => navigation.goBack()}
         />
         <AppButton
           title="Upload to Database"

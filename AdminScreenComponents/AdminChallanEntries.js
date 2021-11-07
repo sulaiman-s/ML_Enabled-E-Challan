@@ -5,8 +5,10 @@ import Label from "../app/compnents/label";
 import Screen from "../app/compnents/Screen";
 import { StyleSheet, View } from "react-native";
 import AppButton from "../app/compnents/AppButton";
+import { useNavigation } from "@react-navigation/core";
 
 function AdminChallanEntries(props) {
+  const navigation = useNavigation();
   return (
     <Screen>
       <Text>Setting Information</Text>
@@ -41,6 +43,7 @@ function AdminChallanEntries(props) {
         height={50}
         width={"100%"}
         style={styles.btn}
+        onPress={() => navigation.navigate("verify")}
       />
     </Screen>
   );
