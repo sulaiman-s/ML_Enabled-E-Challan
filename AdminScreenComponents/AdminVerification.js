@@ -1,41 +1,23 @@
 import React from "react";
-import { Modal, Text, TextInput } from "react-native";
 import AppInput from "../app/compnents/AppInput";
 import Label from "../app/compnents/label";
 import Screen from "../app/compnents/Screen";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import AppButton from "../app/compnents/AppButton";
 
 function AdminVerification(props) {
   return (
     <Screen>
-      <Text>Setting Information</Text>
       <Label
-        value="Verfy and Upload challan"
-        style={{ elevation: 0, fontWeight: "bold", fontSize: 16 }}
+        value="Verification"
+        style={{
+          elevation: 5,
+          marginTop: 20,
+          fontWeight: "bold",
+          fontSize: 17,
+        }}
       />
-      <AppInput
-        viewStyle={{ height: 100 }}
-        placeholder="Vehicle Number"
-        textAlign="center"
-        style={{ width: "100%" }}
-        caretHidden
-      />
-      <AppInput
-        viewStyle={{ height: 100 }}
-        placeholder="Enter Type"
-        textAlign="center"
-        style={{ width: "100%" }}
-        caretHidden
-      />
-      <AppInput
-        viewStyle={{ height: 100 }}
-        placeholder="Enter Reason"
-        textAlign="center"
-        style={{ width: "100%" }}
-        caretHidden
-      />
-      {/* <View style={styles.ch_view}>
+      <View style={styles.ch_view}>
         <View style={styles.ch_h}>
           <Text style={styles.ch_h_txt}>Challan No #</Text>
         </View>
@@ -47,28 +29,27 @@ function AdminVerification(props) {
           <Text style={styles.ch_itm_txt}>Date:</Text>
           <Text style={styles.ch_itm_txt}>Amount:</Text>
         </View>
-      </View> */}
-      <AppButton
-        title="Next"
-        textStyle={styles.btn_t}
-        height={50}
-        width={"100%"}
-        style={styles.btn}
-      />
+      </View>
+      <View style={styles.btn_view}>
+        <AppButton
+          title="Go Back"
+          style={styles.btn}
+          textStyle={styles.btn_txt}
+          height={60}
+          width={166}
+        />
+        <AppButton
+          title="Upload to Database"
+          style={styles.btn}
+          textStyle={styles.btn_txt}
+          height={60}
+          width={166}
+        />
+      </View>
     </Screen>
   );
 }
 const styles = StyleSheet.create({
-  btn: {
-    backgroundColor: "#fc5c65",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 5,
-    marginTop: 25,
-  },
-  btn_t: {
-    color: "white",
-  },
   ch_view: {
     width: "100%",
     height: 160,
@@ -96,6 +77,24 @@ const styles = StyleSheet.create({
   ch_itm_txt: {
     fontSize: 20,
     fontFamily: "Roboto",
+  },
+  btn: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: "lightslategray",
+  },
+  btn_view: {
+    width: "100%",
+    height: 100,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  btn_txt: {
+    fontSize: 16,
+    color: "white",
   },
 });
 
