@@ -1,7 +1,8 @@
 import React from "react";
+import AdminCapture from "./AdminScreenComponents/AdminCapture";
 import AdminMaster from "./AdminScreenComponents/AdminMaster";
 import Navigation from "./app/navigation/Navigation";
 
 export default function App() {
-  return <AdminMaster />;
+  return <AdminCapture />;
 }

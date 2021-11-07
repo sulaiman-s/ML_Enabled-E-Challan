@@ -77,7 +77,7 @@ function UploadChallan({ route }) {
             ) : (
               <Image
                 source={{ uri: url }}
-                style={{ height: 100, width: "100%" }}
+                style={{ height: "100%", width: "100%" }}
               />
             )}
           </View>
