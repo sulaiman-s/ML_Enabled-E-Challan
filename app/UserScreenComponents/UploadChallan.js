@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   TouchableNativeFeedback,
+  ScrollView,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppButton from "../compnents/AppButton";
@@ -38,57 +39,63 @@ function UploadChallan({ route }) {
             }}
           />
         </View>
-        <View style={{ marginTop: 10 }}>
-          {route.params == null ? (
-            <UserListItem />
-          ) : (
-            <UserListItem
-              ch_Number={route.params.ch_Number}
-              date={route.params.date}
-              type={route.params.type}
-              price={route.params.price}
-              number={route.params.number}
-            />
-          )}
-        </View>
-        <Label
-          value="Upload Receipt of Above Challan"
-          style={{ backgroundColor: "#4ecdc4", color: "white", marginTop: 30 }}
-        />
-        <TouchableNativeFeedback onPress={handleUpload}>
-          <View
-            style={{
-              backgroundColor: "lightslategray",
-              height: 170,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 10,
-            }}
-          >
-            {url == null ? (
-              <>
-                <MaterialCommunityIcons
-                  name="camera"
-                  size={100}
-                  color="white"
-                />
-                <Text> Select Image From Library </Text>
-              </>
+        <ScrollView>
+          <View style={{ marginTop: 10 }}>
+            {route.params == null ? (
+              <UserListItem />
             ) : (
-              <Image
-                source={{ uri: url }}
-                style={{ height: "100%", width: "100%" }}
+              <UserListItem
+                ch_Number={route.params.ch_Number}
+                date={route.params.date}
+                type={route.params.type}
+                price={route.params.price}
+                number={route.params.number}
               />
             )}
           </View>
-        </TouchableNativeFeedback>
-        <AppButton
-          title="Upload"
-          textStyle={styles.btn_t}
-          height={50}
-          width={"100%"}
-          style={styles.btn}
-        />
+          <Label
+            value="Upload Receipt of Above Challan"
+            style={{
+              backgroundColor: "#4ecdc4",
+              color: "white",
+              marginTop: 30,
+            }}
+          />
+          <TouchableNativeFeedback onPress={handleUpload}>
+            <View
+              style={{
+                backgroundColor: "lightslategray",
+                height: 170,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            >
+              {url == null ? (
+                <>
+                  <MaterialCommunityIcons
+                    name="camera"
+                    size={100}
+                    color="white"
+                  />
+                  <Text> Select Image From Library </Text>
+                </>
+              ) : (
+                <Image
+                  source={{ uri: url }}
+                  style={{ height: "100%", width: "100%" }}
+                />
+              )}
+            </View>
+          </TouchableNativeFeedback>
+          <AppButton
+            title="Upload"
+            textStyle={styles.btn_t}
+            height={50}
+            width={"100%"}
+            style={styles.btn}
+          />
+        </ScrollView>
       </View>
     </Screen>
   );
