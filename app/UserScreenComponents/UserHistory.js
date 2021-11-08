@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 
 function UserHistory(props) {
   return (
-    <Screen>
+    <Screen style={{ marginTop: 50 }}>
       <View>
         <Text>User History will be displayed here</Text>
       </View>

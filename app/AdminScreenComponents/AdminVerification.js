@@ -1,9 +1,9 @@
 import React from "react";
-import AppInput from "../app/compnents/AppInput";
-import Label from "../app/compnents/label";
-import Screen from "../app/compnents/Screen";
+import AppInput from "../compnents/AppInput";
+import Label from "../compnents/label";
+import Screen from "../compnents/Screen";
 import { StyleSheet, View, Text } from "react-native";
-import AppButton from "../app/compnents/AppButton";
+import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/core";
 
 function AdminVerification(props) {
@@ -11,7 +11,7 @@ function AdminVerification(props) {
   return (
     <Screen>
       <Label
-        value="Verification"
+        value="Challan Verification"
         style={{
           elevation: 5,
           marginTop: 20,

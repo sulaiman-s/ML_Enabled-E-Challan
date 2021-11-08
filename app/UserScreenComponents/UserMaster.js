@@ -19,7 +19,7 @@ function UserMaster(props) {
       <Label
         value="Select Options"
         style={{
-          marginTop: 30,
+          marginTop: "5%",
           elevation: 0,
         }}
       />
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingTop: 10,
     paddingLeft: 100,
-    marginBottom: 30,
+    marginBottom: "5%",
   },
   btn: {
     justifyContent: "center",

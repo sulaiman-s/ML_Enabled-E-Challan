@@ -1,17 +1,20 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-function Notification(props) {
+function Notification({ style }) {
   return (
     <View
-      style={{
-        backgroundColor: "#7B61FF",
-        height: 170,
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 10,
-      }}
+      style={[
+        {
+          backgroundColor: "#7B61FF",
+          height: 100,
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 10,
+        },
+        style,
+      ]}
     >
       <Text>Notifications</Text>
     </View>

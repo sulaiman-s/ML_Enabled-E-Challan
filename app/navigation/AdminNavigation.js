@@ -4,41 +4,44 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import UserHistory from "../UserScreenComponents/UserHistory";
-import AdminMaster from "../../AdminScreenComponents/AdminMaster";
-import AdminCapture from "../../AdminScreenComponents/AdminCapture";
-import UserChallanList from "../../app/UserScreenComponents/UserChallanList";
-import AdminChallanEntries from "../../AdminScreenComponents/AdminChallanEntries";
-import AdminVerification from "../../AdminScreenComponents/AdminVerification";
+import AdminMaster from "../AdminScreenComponents/AdminMaster";
+import AdminCapture from "../AdminScreenComponents/AdminCapture";
+import UserChallanList from "../UserScreenComponents/UserChallanList";
+import AdminChallanEntries from "../AdminScreenComponents/AdminChallanEntries";
+import AdminVerification from "../AdminScreenComponents/AdminVerification";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const AdminNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="home"
-        component={AdminMaster}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "tomato",
+        },
+        headerTintColor: "white",
+      }}
+    >
+      <Stack.Screen name="Home" component={AdminMaster} />
       <Stack.Screen
         name="capture"
         component={AdminCapture}
-        options={{ headerShown: false }}
+        options={{ title: "Capture" }}
       />
       <Stack.Screen
         name="entry"
         component={AdminChallanEntries}
-        options={{ headerShown: false }}
+        options={{ title: "Challan Fields " }}
       />
       <Stack.Screen
         name="verify"
         component={AdminVerification}
-        options={{ headerShown: false }}
+        options={{ title: "Final Verification" }}
       />
       <Stack.Screen
         name="Record"
         component={UserChallanList}
-        options={{ headerShown: false }}
+        options={{ title: "Check Records" }}
       />
     </Stack.Navigator>
   );

@@ -1,10 +1,10 @@
 import React from "react";
 import { Modal, Text, TextInput } from "react-native";
-import AppInput from "../app/compnents/AppInput";
-import Label from "../app/compnents/label";
-import Screen from "../app/compnents/Screen";
+import AppInput from "../compnents/AppInput";
+import Label from "../compnents/label";
+import Screen from "../compnents/Screen";
 import { StyleSheet, View } from "react-native";
-import AppButton from "../app/compnents/AppButton";
+import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/core";
 
 function AdminChallanEntries(props) {
@@ -13,8 +13,8 @@ function AdminChallanEntries(props) {
     <Screen>
       <Text>Setting Information</Text>
       <Label
-        value="Verfy and Upload challan"
-        style={{ elevation: 0, fontWeight: "bold", fontSize: 16 }}
+        value="Enter the remaining fields fo challan"
+        style={{ elevation: 0, fontWeight: "bold", fontSize: 16, color: "red" }}
       />
       <AppInput
         viewStyle={{ height: 100 }}

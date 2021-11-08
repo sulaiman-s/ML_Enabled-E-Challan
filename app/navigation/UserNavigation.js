@@ -12,22 +12,17 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const UserNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="home"
-        component={UserMaster}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Record"
-        component={UserChallanList}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="upload"
-        component={UploadChallan}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "tomato",
+        },
+        headerTintColor: "white",
+      }}
+    >
+      <Stack.Screen name="Home" component={UserMaster} />
+      <Stack.Screen name="Record" component={UserChallanList} />
+      <Stack.Screen name="upload" component={UploadChallan} />
     </Stack.Navigator>
   );
 };

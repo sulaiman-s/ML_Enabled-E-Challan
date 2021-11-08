@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Label from "../app/compnents/label";
-import Screen from "../app/compnents/Screen";
+import Label from "../compnents/label";
+import Screen from "../compnents/Screen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Text,
@@ -9,7 +9,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import AppButton from "../app/compnents/AppButton";
+import AppButton from "../compnents/AppButton";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/core";
 
@@ -28,14 +28,6 @@ function AdminCapture(props) {
   return (
     <Screen>
       <Text>Waiting to Scan </Text>
-      <Label
-        value="Capture The Image"
-        style={{
-          fontSize: 13,
-          fontFamily: "Roboto",
-          fontWeight: "bold",
-        }}
-      />
       <TouchableNativeFeedback onPress={handleImageFromLibrary}>
         <View
           style={{

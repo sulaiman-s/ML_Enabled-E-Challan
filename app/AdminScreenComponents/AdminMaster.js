@@ -1,15 +1,15 @@
 import React from "react";
-import Label from "../app/compnents/label";
-import Screen from "../app/compnents/Screen";
+import Label from "../compnents/label";
+import Screen from "../compnents/Screen";
 import { StyleSheet, View } from "react-native";
-import Notification from "../app/compnents/Notification";
-import AppButton from "../app/compnents/AppButton";
+import Notification from "../compnents/Notification";
+import AppButton from "../compnents/AppButton";
 
 function AdminMaster({ navigation }) {
   return (
     <Screen>
       <Label value="Hello Admin!" style={styles.lbl_h} />
-      <Notification />
+      <Notification style={{ height: 150 }} />
       <Label
         value="Select Options"
         style={{

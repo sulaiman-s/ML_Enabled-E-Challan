@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity,
   Image,
   TouchableNativeFeedback,
   ScrollView,
@@ -25,17 +24,12 @@ function UploadChallan({ route }) {
     <Screen>
       <View style={{ width: "100%" }}>
         <View>
-          <Text
-            style={{ fontSize: 35, fontFamily: "Roboto", paddingBottom: 10 }}
-          >
-            Upload Receipt
-          </Text>
           <Label
             value="Challan Info"
             style={{
               backgroundColor: "#4ecdc4",
               color: "white",
-              marginTop: 30,
+              marginTop: "5%",
             }}
           />
         </View>
@@ -58,7 +52,7 @@ function UploadChallan({ route }) {
             style={{
               backgroundColor: "#4ecdc4",
               color: "white",
-              marginTop: 30,
+              marginTop: "5%",
             }}
           />
           <TouchableNativeFeedback onPress={handleUpload}>
@@ -114,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
-    marginTop: 25,
+    marginTop: "5%",
   },
   btn_t: {
     color: "white",
@@ -124,11 +118,9 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     height: 50,
     width: "100%",
-    elevation: 5,
     paddingTop: 15,
     paddingLeft: 15,
     backgroundColor: "#4ecdc4",
-    marginTop: 30,
     color: "white",
   },
 });
