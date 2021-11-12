@@ -95,6 +95,7 @@ function UploadChallan({ route }) {
   );
 }
 const styles = StyleSheet.create({
+  //color pallet
   // primary: "#fc5c65",
   // secondary: "#4ecdc4",
   // black: "#000",

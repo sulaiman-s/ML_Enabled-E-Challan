@@ -9,6 +9,7 @@ import AdminCapture from "../AdminScreenComponents/AdminCapture";
 import UserChallanList from "../UserScreenComponents/UserChallanList";
 import AdminChallanEntries from "../AdminScreenComponents/AdminChallanEntries";
 import AdminVerification from "../AdminScreenComponents/AdminVerification";
+import Setting from "../screens/Setting";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,20 +50,18 @@ const AdminNavigator = () => {
 const AdminTabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={{ tabBarHideOnKeyboard: true, headerShown: false }}
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
+        headerShown: false,
+        tabBarStyle: {
+          alignSelf: "center",
+          width: "90%",
+          borderRadius: 5,
+          bottom: "1%",
+        },
+      }}
     >
-      <Tab.Screen
-        name="Home"
-        component={AdminNavigator}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" size={size} color={color} />
-          ),
-          tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "tomato",
-          tabBarInactiveTintColor: "orange",
-        }}
-      />
       <Tab.Screen
         name="History"
         component={UserHistory}
@@ -70,6 +69,37 @@ const AdminTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" size={size} color={color} />
           ),
+          tabBarItemStyle: { borderRadius: 5 },
+          tabBarActiveTintColor: "white",
+          tabBarActiveBackgroundColor: "tomato",
+          tabBarInactiveTintColor: "orange",
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={AdminNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" size={size} color={color} />
+          ),
+          tabBarItemStyle: { borderRadius: 5 },
+          tabBarActiveTintColor: "white",
+          tabBarActiveBackgroundColor: "tomato",
+          tabBarInactiveTintColor: "orange",
+        }}
+      />
+      <Tab.Screen
+        name="Setting"
+        component={Setting}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons
+              name="account-settings"
+              size={size}
+              color={color}
+            />
+          ),
+          tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
           tabBarActiveBackgroundColor: "tomato",
           tabBarInactiveTintColor: "orange",

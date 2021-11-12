@@ -1,7 +1,11 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-function Label({ value, style }) {
-  return <Text style={[styles.txt, style]}>{value}</Text>;
+function Label({ value, style, onPress }) {
+  return (
+    <Text style={[styles.txt, style]} onPress={onPress}>
+      {value}
+    </Text>
+  );
 }
 const styles = StyleSheet.create({
   txt: {
