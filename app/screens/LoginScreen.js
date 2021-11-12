@@ -4,7 +4,7 @@ import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
 import AuthContext from "../Auth/Context";
-function LoginScreen(props) {
+function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [Values, setValues] = useState({ uname: "", pass: "" });
@@ -47,7 +47,12 @@ function LoginScreen(props) {
         />
         <View style={styles.option_view}>
           <Text style={styles.option_txt}>Dont have an account?.</Text>
-          <Text style={styles.txt}>Click To Create</Text>
+          <Text
+            style={styles.txt}
+            onPress={() => navigation.navigate("Register")}
+          >
+            Click To Create
+          </Text>
         </View>
       </View>
     </Screen>
@@ -58,6 +63,7 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 30,
     fontFamily: "Roboto",
+    marginTop: "10%",
   },
 
   t_inp: {
@@ -72,7 +78,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   btn_style: {
-    backgroundColor: "black",
+    backgroundColor: "#4ecdc4",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 2,

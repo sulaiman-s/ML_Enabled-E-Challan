@@ -1,5 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text, ImageBackground } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ImageBackground,
+  Platform,
+  StatusBar,
+} from "react-native";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/native";
@@ -16,7 +23,7 @@ function FirstScreen({ navigation }) {
   return (
     <Screen>
       <ImageBackground
-        source={require("../assets/bb.jpg")}
+        source={require("../assets/bck.jpg")}
         resizeMode="cover"
         style={styles.bg_img}
       >
@@ -51,6 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     opacity: 0.7,
     alignItems: "center",
+    marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
   },
   h_text: {
     fontWeight: "bold",
@@ -70,7 +78,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#0fff",
   },
-  btn_txt: { fontFamily: "Roboto", fontWeight: "bold", color: "black" },
+  btn_txt: {
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    color: "black",
+    fontSize: 18,
+  },
 });
 
 export default FirstScreen;

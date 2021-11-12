@@ -6,7 +6,7 @@ function UserHistory(props) {
   return (
     <Screen style={{ marginTop: 50 }}>
       <View>
-        <Text>User History will be displayed here</Text>
+        <Text>User History will display here</Text>
       </View>
     </Screen>
   );

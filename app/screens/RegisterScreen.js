@@ -1,16 +1,14 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { Text, StyleSheet, View, Platform, StatusBar } from "react-native";
 import AppButton from "../compnents/AppButton";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
-useNavigation;
-function RegisterScreen(props) {
+
+function RegisterScreen({ navigation }) {
   const [FullName, setFullName] = useState("");
   const [gmail, setGmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  const navigation = useNavigation();
   return (
     <Screen>
       <View style={{ width: "100%", marginVertical: 20 }}>
@@ -47,12 +45,13 @@ function RegisterScreen(props) {
           height={50}
           width={"100%"}
           style={styles.btn}
-          onPress={() => navigation.navigate("main")}
         />
       </View>
       <View style={styles.option_view}>
         <Text style={styles.option_txt}>Already have an account?.</Text>
-        <Text style={styles.txt}>Click To Log In</Text>
+        <Text style={styles.txt} onPress={() => navigation.navigate("Login")}>
+          Click To Log In
+        </Text>
       </View>
     </Screen>
   );
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   btn: {
-    backgroundColor: "black",
+    backgroundColor: "#4ecdc4",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
@@ -85,6 +84,7 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 30,
     fontFamily: "Roboto",
+    marginTop: "10%",
   },
   option_view: {
     marginTop: 50,

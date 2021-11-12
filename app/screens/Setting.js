@@ -1,19 +1,31 @@
-import React, { useContext } from "react";
-import { Platform, StatusBar } from "react-native";
-import AppButton from "../compnents/AppButton";
+import React from "react";
+import { Platform, StatusBar, View, Text } from "react-native";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
-import AuthContext from "../Auth/Context";
+import { useNavigation } from "@react-navigation/core";
+import { Ionicons } from "@expo/vector-icons";
 
 function Setting(props) {
-  const authContext = useContext(AuthContext);
+  const navigation = useNavigation();
   return (
     <Screen
       style={{
         marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
       }}
     >
-      <Label value="Log Out" onPress={() => authContext.setUser(null)} />
+      <View
+        style={{
+          alignSelf: "flex-start",
+          marginBottom: 20,
+          flexDirection: "row",
+        }}
+      >
+        <Ionicons name="chevron-back" size={20} color="blue" />
+        <Text style={{ color: "blue" }} onPress={() => navigation.goBack()}>
+          Go Back
+        </Text>
+      </View>
+      <Label value="Profile" />
     </Screen>
   );
 }

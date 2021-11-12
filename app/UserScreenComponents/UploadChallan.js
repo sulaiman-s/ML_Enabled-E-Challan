@@ -27,9 +27,10 @@ function UploadChallan({ route }) {
           <Label
             value="Challan Info"
             style={{
-              backgroundColor: "#4ecdc4",
-              color: "white",
+              // backgroundColor: "#4ecdc4",
+              color: "tomato",
               marginTop: "5%",
+              elevation: 0,
             }}
           />
         </View>
@@ -50,9 +51,10 @@ function UploadChallan({ route }) {
           <Label
             value="Upload Receipt of Above Challan"
             style={{
-              backgroundColor: "#4ecdc4",
-              color: "white",
+              // backgroundColor: "#4ecdc4",
+              color: "tomato",
               marginTop: "5%",
+              elevation: 0,
             }}
           />
           <TouchableNativeFeedback onPress={handleUpload}>
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
   },
   btn_t: {
-    color: "white",
+    color: "black",
   },
   txt: {
     fontSize: 15,

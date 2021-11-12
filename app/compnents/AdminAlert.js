@@ -10,6 +10,7 @@ function AdminAlert(props) {
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
+        top: "5%",
       }}
     >
       <Text>For Admin to display Alert or any useful info </Text>

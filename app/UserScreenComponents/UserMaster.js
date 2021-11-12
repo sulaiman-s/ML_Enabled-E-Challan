@@ -13,13 +13,13 @@ function UserMaster(props) {
   const authContext = useContext(AuthContext);
   return (
     <Screen>
-      <Label value="Hello UserName!" style={styles.lbl_h} />
+      {/* <Label value="Hello UserName!" style={styles.lbl_h} /> */}
       <AdminAlert />
-      <Notification />
+      {/* <Notification /> */}
       <Label
         value="Select Options"
         style={{
-          marginTop: "5%",
+          marginTop: "30%",
           elevation: 0,
         }}
       />
