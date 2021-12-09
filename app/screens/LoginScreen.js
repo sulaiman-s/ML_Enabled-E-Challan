@@ -4,16 +4,31 @@ import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
 import AuthContext from "../Auth/Context";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState("");
   const [Values, setValues] = useState({ uname: "", pass: "" });
   const authContext = useContext(AuthContext);
-  const handleLogin = () => {
-    if (username == "Sulaiman" && password == "1234") {
-      authContext.setUser("Sulaiman");
-    } else if (username == "Admin" && password == "1234") {
-      authContext.setUser("Admin");
+  const handleLogin = async () => {
+    await axios
+      .post("http://192.168.2.105/user/create/", {
+        username: username,
+        password: password,
+      })
+      .then(({ data }) => {
+        const dat = jwtDecode(data.refresh);
+        setUserData(dat);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    if (userData != null) {
+      authContext.setUser(userData);
     } else {
       authContext.setUser(null);
     }

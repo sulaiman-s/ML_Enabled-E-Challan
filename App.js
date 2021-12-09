@@ -9,9 +9,13 @@ export default function App() {
   const [user, setUser] = useState();
 
   const checker = () => {
-    if (user == "Sulaiman") return <UserDrawer />;
-    else if (user == "Admin") return <AdminDrawer />;
-    else return <AuthNavigator />;
+    if (user) {
+      if (!user.is_admin) {
+        return <UserDrawer />;
+      } else if (user.is_admin) {
+        return <AdminDrawer />;
+      }
+    } else return <AuthNavigator />;
   };
   return (
     <AuthContext.Provider value={{ user, setUser }}>
