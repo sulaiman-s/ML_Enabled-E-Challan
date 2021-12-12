@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TouchableHighlightComponent,
-  TouchableNativeFeedback,
-} from "react-native";
+import { View, Text, TouchableNativeFeedback } from "react-native";
 
 function AppButton({ title, style, textStyle, height, width, onPress }) {
   return (

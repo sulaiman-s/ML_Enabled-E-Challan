@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import UserMaster from "../../app/UserScreenComponents/UserMaster";
@@ -104,6 +103,8 @@ const def = () => {
 };
 
 const CustomDrawer = (props) => {
+  const authContext = useContext(AuthContext);
+  const user = authContext.user;
   return (
     <DrawerContentScrollView {...props}>
       <View
@@ -116,8 +117,8 @@ const CustomDrawer = (props) => {
           style={{ width: "100%", height: 150 }}
         />
         <View style={{ position: "absolute", top: 90 }}>
-          <Text style={{ color: "white" }}>@Sulaiman</Text>
-          <Text style={{ color: "white" }}>Sulaiman@gmail.com</Text>
+          <Text style={{ color: "white" }}>@{user.name}</Text>
+          <Text style={{ color: "white" }}>{user.email}</Text>
         </View>
       </View>
       <DrawerItemList {...props} />

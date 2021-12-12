@@ -1,40 +1,80 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text, StyleSheet, View, Platform, StatusBar } from "react-native";
 import AppButton from "../compnents/AppButton";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
+import AuthContext from "../Auth/Context";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import Url from "../Auth/ApiUrlEndpoints";
 
 function RegisterScreen({ navigation }) {
-  const [FullName, setFullName] = useState("");
+  const [username, setusername] = useState("");
   const [gmail, setGmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const [rdata, setData] = useState();
+  const authContext = useContext(AuthContext);
+  const reg = new FormData();
+  reg.append("email", gmail);
+  reg.append("password", password);
+  reg.append("username", username);
+  const handleRegister = async () => {
+    await axios
+      .post(Url + "/auth/users/", {
+        email: gmail,
+        username: username,
+        password: confirmPass,
+      })
+      .then(({ data }) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    if (rdata) {
+      await axios
+        .post(Url + "/user/create/", {
+          username: username,
+          password: password,
+        })
+        .then(({ data }) => {
+          const dat = jwtDecode(data.refresh);
+          authContext.setUser(dat);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   return (
     <Screen>
       <View style={{ width: "100%", marginVertical: 20 }}>
         <Text style={styles.h_style}>Register</Text>
       </View>
       <AppInput
-        placeholder="Full Name"
-        onTextChange={(text) => setFullName(text)}
+        placeholder="User Name"
+        onChangeText={(text) => setusername(text)}
         style={styles.input}
         iconName="information"
       />
       <AppInput
         placeholder="Gmail"
-        onTextChange={(text) => setGmail(text)}
+        onChangeText={(text) => setGmail(text)}
         style={styles.input}
         iconName="gmail"
       />
       <AppInput
         placeholder="Password"
-        onTextChange={(text) => setPassword(text)}
+        onChangeText={(text) => setPassword(text)}
         style={styles.input}
         iconName="key-variant"
       />
       <AppInput
         placeholder="Confirm Password"
-        onTextChange={(text) => setConfirmPass(text)}
+        onChangeText={(text) => setConfirmPass(text)}
         style={styles.input}
         iconName="key-star"
       />
@@ -45,6 +85,7 @@ function RegisterScreen({ navigation }) {
           height={50}
           width={"100%"}
           style={styles.btn}
+          onPress={handleRegister}
         />
       </View>
       <View style={styles.option_view}>

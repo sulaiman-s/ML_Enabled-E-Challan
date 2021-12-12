@@ -6,31 +6,24 @@ import AppButton from "../compnents/AppButton";
 import AuthContext from "../Auth/Context";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import Url from "../Auth/ApiUrlEndpoints";
 
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState("");
-  const [Values, setValues] = useState({ uname: "", pass: "" });
   const authContext = useContext(AuthContext);
   const handleLogin = async () => {
-    await axios
-      .post("http://192.168.2.105/user/create/", {
+    const { data } = await axios
+      .post(Url + "/user/create/", {
         username: username,
         password: password,
-      })
-      .then(({ data }) => {
-        const dat = jwtDecode(data.refresh);
-        setUserData(dat);
       })
       .catch((error) => {
         console.log(error);
       });
-
-    if (userData != null) {
-      authContext.setUser(userData);
-    } else {
-      authContext.setUser(null);
+    if (data.refresh) {
+      const dat = jwtDecode(data.refresh);
+      authContext.setUser(dat);
     }
   };
   return (
