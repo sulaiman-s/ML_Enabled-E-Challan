@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from "react-native";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
-import AuthContext from "../Auth/Context";
+import AuthContext from "../Authorization/Context";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import Url from "../Auth/ApiUrlEndpoints";
+import Url from "../Authorization/ApiUrlEndpoints";
 
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");

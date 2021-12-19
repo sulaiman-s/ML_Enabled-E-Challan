@@ -3,10 +3,10 @@ import { Text, StyleSheet, View, Platform, StatusBar } from "react-native";
 import AppButton from "../compnents/AppButton";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
-import AuthContext from "../Auth/Context";
+import AuthContext from "../Authorization/Context";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import Url from "../Auth/ApiUrlEndpoints";
+import Url from "../Authorization/ApiUrlEndpoints";
 
 function RegisterScreen({ navigation }) {
   const [username, setusername] = useState("");

@@ -7,7 +7,7 @@ import UserChallanList from "../../app/UserScreenComponents/UserChallanList";
 import UploadChallan from "../../app/UserScreenComponents/UploadChallan";
 import UserHistory from "../UserScreenComponents/UserHistory";
 import Setting from "../screens/Setting";
-import AuthContext from "../Auth/Context";
+import AuthContext from "../Authorization/Context";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,

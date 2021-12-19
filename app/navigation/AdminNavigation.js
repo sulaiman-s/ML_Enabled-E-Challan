@@ -15,7 +15,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import AuthContext from "../Auth/Context";
+import AuthContext from "../Authorization/Context";
 import { TouchableNativeFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { Image, View, Text } from "react-native";

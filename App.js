@@ -1,6 +1,6 @@
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React, { useState } from "react";
-import AuthContext from "./app/Auth/Context";
+import AuthContext from "./app/Authorization/Context";
 import AdminDrawer from "./app/navigation/AdminNavigation";
 import AuthNavigator from "./app/navigation/AuthNavigation";
 import UserDrawer from "./app/navigation/UserNavigation";
