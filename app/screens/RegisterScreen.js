@@ -20,32 +20,28 @@ function RegisterScreen({ navigation }) {
   reg.append("password", password);
   reg.append("username", username);
   const handleRegister = async () => {
-    await axios
+    const { data } = await axios
       .post(Url + "/auth/users/", {
         email: gmail,
         username: username,
         password: confirmPass,
       })
-      .then(({ data }) => {
-        setData(data);
-      })
       .catch((error) => {
         console.log(error);
       });
-
-    if (rdata) {
-      await axios
+    if (data) {
+      const { data } = await axios
         .post(Url + "/user/create/", {
           username: username,
           password: password,
         })
-        .then(({ data }) => {
-          const dat = jwtDecode(data.refresh);
-          authContext.setUser(dat);
-        })
         .catch((error) => {
           console.log(error);
         });
+      if (data) {
+        const dat = jwtDecode(data.refresh);
+        authContext.setUser(dat);
+      }
     }
   };
 

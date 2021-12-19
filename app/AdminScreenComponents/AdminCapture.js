@@ -27,7 +27,7 @@ function AdminCapture(props) {
   };
   return (
     <Screen>
-      <Text>Waiting to Scan </Text>
+      <Text>Waiting... </Text>
       <TouchableNativeFeedback onPress={handleImageFromLibrary}>
         <View
           style={{
