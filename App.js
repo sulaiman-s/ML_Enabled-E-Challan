@@ -6,7 +6,7 @@ import AuthNavigator from "./app/navigation/AuthNavigation";
 import UserDrawer from "./app/navigation/UserNavigation";
 
 export default function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
 
   const checker = () => {
     if (user) {
