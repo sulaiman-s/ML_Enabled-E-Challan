@@ -11,6 +11,7 @@ import Url from "../Authorization/ApiUrlEndpoints";
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const authContext = useContext(AuthContext);
   const handleLogin = async () => {
     const { data } = await axios
@@ -19,13 +20,15 @@ function LoginScreen({ navigation }) {
         password: password,
       })
       .catch((error) => {
-        console.log(error);
+        if (error)
+          setError("No active account found with the given credentials ");
       });
     if (data.refresh) {
       const dat = jwtDecode(data.refresh);
       authContext.setUser(dat);
     }
   };
+
   return (
     <Screen>
       <View style={{ width: "100%", marginVertical: 25 }}>
@@ -44,6 +47,7 @@ function LoginScreen({ navigation }) {
         iconName="key"
         secureTextEntry
       />
+      {error != null ? <Text style={{ color: "red" }}>{error}</Text> : null}
       <View style={styles.btn}>
         <AppButton
           title="Login"

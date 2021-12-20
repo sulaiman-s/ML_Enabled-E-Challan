@@ -148,12 +148,12 @@ const CustomDrawer = (props) => {
   );
 };
 
-const AdminDrawer = () => {
+const handleLogout = () => {
   const authContext = useContext(AuthContext);
-  const handleLogout = () => {
-    authContext.setUser(null);
-    return <></>;
-  };
+  authContext.setUser(null);
+  return <></>;
+};
+const AdminDrawer = () => {
   return (
     <drawer.Navigator
       screenOptions={{

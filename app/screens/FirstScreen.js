@@ -23,11 +23,11 @@ function FirstScreen({ navigation }) {
   return (
     <Screen>
       <ImageBackground
-        source={require("../assets/bck.jpg")}
+        source={require("../assets/bg.jpg")}
         resizeMode="cover"
         style={styles.bg_img}
       >
-        <Text style={styles.h_text}>App Name</Text>
+        <Text style={styles.h_text}>E-Challan</Text>
       </ImageBackground>
       <View style={styles.btn_view}>
         <AppButton
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "Roboto",
     fontSize: 30,
+    marginBottom: "95%",
   },
   btn_view: {
     flex: 0.2,

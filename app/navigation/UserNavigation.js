@@ -126,12 +126,12 @@ const CustomDrawer = (props) => {
   );
 };
 
-const UserDrawer = () => {
+const handleLogout = () => {
   const authContext = useContext(AuthContext);
-  const handleLogout = () => {
-    authContext.setUser(null);
-    return def;
-  };
+  authContext.setUser(null);
+  return def;
+};
+const UserDrawer = () => {
   return (
     <drawer.Navigator
       screenOptions={{

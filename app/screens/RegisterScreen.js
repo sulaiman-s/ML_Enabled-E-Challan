@@ -7,24 +7,38 @@ import AuthContext from "../Authorization/Context";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Url from "../Authorization/ApiUrlEndpoints";
+import * as Yup from "yup";
+import { Formik } from "formik";
 
 function RegisterScreen({ navigation }) {
-  const [username, setusername] = useState("");
-  const [gmail, setGmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
-  const [rdata, setData] = useState();
+  const ErrorMessage = ({ error, visible }) => {
+    if (!visible || !error) return null;
+    return <Text style={{ color: "red" }}>{error}</Text>;
+  };
+
+  let schema = Yup.object().shape({
+    email: Yup.string().required().email().label("Email"),
+    username: Yup.string()
+      .required()
+      .min(8)
+      .matches("[^0-9]", "Add minimum one alphabet")
+      .label("UserName"),
+    password: Yup.string().required().min(8).label("Password"),
+    confirmPassword: Yup.string().required().min(8).label("ConfirmPassword"),
+  });
   const authContext = useContext(AuthContext);
-  const reg = new FormData();
-  reg.append("email", gmail);
-  reg.append("password", password);
-  reg.append("username", username);
-  const handleRegister = async () => {
+
+  const handleRegister = async ({
+    email,
+    username,
+    password,
+    confirmPassword,
+  }) => {
     const { data } = await axios
       .post(Url + "/auth/users/", {
-        email: gmail,
+        email: email,
         username: username,
-        password: confirmPass,
+        password: confirmPassword,
       })
       .catch((error) => {
         console.log(error);
@@ -50,46 +64,78 @@ function RegisterScreen({ navigation }) {
       <View style={{ width: "100%", marginVertical: 20 }}>
         <Text style={styles.h_style}>Register</Text>
       </View>
-      <AppInput
-        placeholder="User Name"
-        onChangeText={(text) => setusername(text)}
-        style={styles.input}
-        iconName="information"
-      />
-      <AppInput
-        placeholder="Gmail"
-        onChangeText={(text) => setGmail(text)}
-        style={styles.input}
-        iconName="gmail"
-      />
-      <AppInput
-        placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
-        style={styles.input}
-        iconName="key-variant"
-      />
-      <AppInput
-        placeholder="Confirm Password"
-        onChangeText={(text) => setConfirmPass(text)}
-        style={styles.input}
-        iconName="key-star"
-      />
-      <View style={{ width: "99%", marginVertical: 10 }}>
-        <AppButton
-          title="Next"
-          textStyle={styles.btn_t}
-          height={50}
-          width={"100%"}
-          style={styles.btn}
-          onPress={handleRegister}
-        />
-      </View>
-      <View style={styles.option_view}>
-        <Text style={styles.option_txt}>Already have an account?.</Text>
-        <Text style={styles.txt} onPress={() => navigation.navigate("Login")}>
-          Click To Log In
-        </Text>
-      </View>
+
+      <Formik
+        initialValues={{
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        }}
+        onSubmit={(values) => handleRegister(values)}
+        validationSchema={schema}
+      >
+        {({ handleSubmit, handleChange, errors, setFieldTouched, touched }) => (
+          <>
+            <AppInput
+              placeholder="User Name"
+              onChangeText={handleChange("username")}
+              style={styles.input}
+              iconName="information"
+              onBlur={() => setFieldTouched("username")}
+            />
+            <ErrorMessage error={errors.username} visible={touched.username} />
+            <AppInput
+              placeholder="Gmail"
+              onChangeText={handleChange("email")}
+              style={styles.input}
+              iconName="gmail"
+              onBlur={() => setFieldTouched("email")}
+            />
+            <ErrorMessage error={errors.email} visible={touched.email} />
+            <AppInput
+              placeholder="Password"
+              onChangeText={handleChange("password")}
+              style={styles.input}
+              iconName="key-variant"
+              onBlur={() => setFieldTouched("password")}
+              secureTextEntry
+            />
+            <ErrorMessage error={errors.password} visible={touched.password} />
+            <AppInput
+              placeholder="Confirm Password"
+              onChangeText={handleChange("confirmPassword")}
+              style={styles.input}
+              iconName="key-star"
+              onBlur={() => setFieldTouched("confirmPassword")}
+              secureTextEntry
+            />
+            <ErrorMessage
+              error={errors.confirmPassword}
+              visible={touched.confirmPassword}
+            />
+            <View style={{ width: "99%", marginVertical: 10 }}>
+              <AppButton
+                title="Next"
+                textStyle={styles.btn_t}
+                height={50}
+                width={"100%"}
+                style={styles.btn}
+                onPress={handleSubmit}
+              />
+            </View>
+            <View style={styles.option_view}>
+              <Text style={styles.option_txt}>Already have an account?.</Text>
+              <Text
+                style={styles.txt}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Click To Log In
+              </Text>
+            </View>
+          </>
+        )}
+      </Formik>
     </Screen>
   );
 }
