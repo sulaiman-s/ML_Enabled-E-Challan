@@ -66,6 +66,7 @@ const UserTabNavigator = () => {
           borderRadius: 5,
           bottom: "1%",
         },
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tab.Screen

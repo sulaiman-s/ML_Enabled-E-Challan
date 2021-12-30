@@ -7,23 +7,31 @@ import UserSearch from "./UserSearch";
 import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
 import Token from "../Authorization/JwtToken";
+import get_challans, { set_challans } from "../ServerResponseData/Challans";
 
 function UserChallanList(props) {
   const [dat, setDat] = useState();
+  const [search, setSearch] = useState();
+  const handleSearch = () => {
+    const challans = get_challans();
+    const filter_challan = challans.filter((x) => x.vehicle_number == search);
+    setDat(filter_challan);
+  };
+
   const get_challanData = async () => {
     const { data } = await axios
       .get(Url + "/challans/allchallans/", {
         headers: { Authorization: "JWT" + Token.refresh },
       })
       .catch((error) => console.log(error));
-    setDat(data);
+    set_challans(data);
   };
   useEffect(() => {
     get_challanData();
   }, []);
   return (
     <Screen>
-      <UserSearch />
+      <UserSearch Search={(t) => setSearch(t)} handleSearch={handleSearch} />
       <Label
         value="Related Challans"
         style={{
@@ -33,7 +41,7 @@ function UserChallanList(props) {
           elevation: 0,
         }}
       />
-      {dat == null ? (
+      {search == null ? (
         <View>
           <Text>Nothing was Searched</Text>
         </View>

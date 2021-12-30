@@ -28,7 +28,6 @@ function LoginScreen({ navigation }) {
       const dat = jwtDecode(data.refresh);
       authContext.setUser(dat);
       SetToken(data.refresh);
-      console.log(Token);
     }
   };
 
