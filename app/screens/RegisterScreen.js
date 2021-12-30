@@ -1,5 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Text, StyleSheet, View, Platform, StatusBar } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Platform,
+  StatusBar,
+  ScrollView,
+} from "react-native";
 import AppButton from "../compnents/AppButton";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
@@ -64,78 +71,91 @@ function RegisterScreen({ navigation }) {
       <View style={{ width: "100%", marginVertical: 20 }}>
         <Text style={styles.h_style}>Register</Text>
       </View>
-
-      <Formik
-        initialValues={{
-          username: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        }}
-        onSubmit={(values) => handleRegister(values)}
-        validationSchema={schema}
-      >
-        {({ handleSubmit, handleChange, errors, setFieldTouched, touched }) => (
-          <>
-            <AppInput
-              placeholder="User Name"
-              onChangeText={handleChange("username")}
-              style={styles.input}
-              iconName="information"
-              onBlur={() => setFieldTouched("username")}
-            />
-            <ErrorMessage error={errors.username} visible={touched.username} />
-            <AppInput
-              placeholder="Gmail"
-              onChangeText={handleChange("email")}
-              style={styles.input}
-              iconName="gmail"
-              onBlur={() => setFieldTouched("email")}
-            />
-            <ErrorMessage error={errors.email} visible={touched.email} />
-            <AppInput
-              placeholder="Password"
-              onChangeText={handleChange("password")}
-              style={styles.input}
-              iconName="key-variant"
-              onBlur={() => setFieldTouched("password")}
-              secureTextEntry
-            />
-            <ErrorMessage error={errors.password} visible={touched.password} />
-            <AppInput
-              placeholder="Confirm Password"
-              onChangeText={handleChange("confirmPassword")}
-              style={styles.input}
-              iconName="key-star"
-              onBlur={() => setFieldTouched("confirmPassword")}
-              secureTextEntry
-            />
-            <ErrorMessage
-              error={errors.confirmPassword}
-              visible={touched.confirmPassword}
-            />
-            <View style={{ width: "99%", marginVertical: 10 }}>
-              <AppButton
-                title="Next"
-                textStyle={styles.btn_t}
-                height={50}
-                width={"100%"}
-                style={styles.btn}
-                onPress={handleSubmit}
+      <ScrollView style={{ width: "100%" }}>
+        <Formik
+          initialValues={{
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
+          onSubmit={(values) => handleRegister(values)}
+          validationSchema={schema}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            errors,
+            setFieldTouched,
+            touched,
+          }) => (
+            <>
+              <AppInput
+                placeholder="User Name"
+                onChangeText={handleChange("username")}
+                style={styles.input}
+                iconName="information"
+                onBlur={() => setFieldTouched("username")}
               />
-            </View>
-            <View style={styles.option_view}>
-              <Text style={styles.option_txt}>Already have an account?.</Text>
-              <Text
-                style={styles.txt}
-                onPress={() => navigation.navigate("Login")}
-              >
-                Click To Log In
-              </Text>
-            </View>
-          </>
-        )}
-      </Formik>
+              <ErrorMessage
+                error={errors.username}
+                visible={touched.username}
+              />
+              <AppInput
+                placeholder="Gmail"
+                onChangeText={handleChange("email")}
+                style={styles.input}
+                iconName="gmail"
+                onBlur={() => setFieldTouched("email")}
+              />
+              <ErrorMessage error={errors.email} visible={touched.email} />
+              <AppInput
+                placeholder="Password"
+                onChangeText={handleChange("password")}
+                style={styles.input}
+                iconName="key-variant"
+                onBlur={() => setFieldTouched("password")}
+                secureTextEntry
+              />
+              <ErrorMessage
+                error={errors.password}
+                visible={touched.password}
+              />
+              <AppInput
+                placeholder="Confirm Password"
+                onChangeText={handleChange("confirmPassword")}
+                style={styles.input}
+                iconName="key-star"
+                onBlur={() => setFieldTouched("confirmPassword")}
+                secureTextEntry
+              />
+              <ErrorMessage
+                error={errors.confirmPassword}
+                visible={touched.confirmPassword}
+              />
+              <View style={{ width: "99%", marginVertical: 10 }}>
+                <AppButton
+                  title="Next"
+                  textStyle={styles.btn_t}
+                  height={50}
+                  width={"100%"}
+                  style={styles.btn}
+                  onPress={handleSubmit}
+                />
+              </View>
+              <View style={styles.option_view}>
+                <Text style={styles.option_txt}>Already have an account?.</Text>
+                <Text
+                  style={styles.txt}
+                  onPress={() => navigation.navigate("Login")}
+                >
+                  Click To Log In
+                </Text>
+              </View>
+            </>
+          )}
+        </Formik>
+      </ScrollView>
     </Screen>
   );
 }
@@ -176,7 +196,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 1,
     borderWidth: 2,
-    width: 350,
+    width: "100%",
     height: 70,
     borderColor: "gray",
     alignSelf: "center",

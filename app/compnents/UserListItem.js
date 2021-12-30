@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
 
-function UserListItem({ ch_Number, number, type, date, price }) {
+function UserListItem({ ch_Number, number, type, stetus, price }) {
   const navigation = useNavigation();
   return (
     <TouchableNativeFeedback
@@ -11,7 +11,7 @@ function UserListItem({ ch_Number, number, type, date, price }) {
           ch_Number,
           number,
           type,
-          date,
+          stetus,
           price,
         })
       }
@@ -25,7 +25,7 @@ function UserListItem({ ch_Number, number, type, date, price }) {
           <Text style={styles.ch_itm_txt}>Type:{type}</Text>
         </View>
         <View style={styles.ch_itm}>
-          <Text style={styles.ch_itm_txt}>Date:{date}</Text>
+          <Text style={styles.ch_itm_txt}>Status:{stetus}</Text>
           <Text style={styles.ch_itm_txt}>Amount:{price}</Text>
         </View>
       </View>

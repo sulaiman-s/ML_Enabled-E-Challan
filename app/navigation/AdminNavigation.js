@@ -120,7 +120,7 @@ const AdminTabNavigator = () => {
   );
 };
 
-const def = () => {
+const Def = () => {
   return <></>;
 };
 
@@ -151,7 +151,7 @@ const CustomDrawer = (props) => {
 const handleLogout = () => {
   const authContext = useContext(AuthContext);
   authContext.setUser(null);
-  return <></>;
+  return <Def />;
 };
 const AdminDrawer = () => {
   return (
@@ -169,7 +169,7 @@ const AdminDrawer = () => {
       />
       <drawer.Screen
         name=".,"
-        component={def}
+        component={Def}
         options={{
           drawerItemStyle: {
             marginTop: "150%",

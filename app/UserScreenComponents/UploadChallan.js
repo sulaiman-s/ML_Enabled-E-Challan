@@ -16,9 +16,12 @@ import Screen from "../compnents/Screen";
 
 function UploadChallan({ route }) {
   const [url, setUrl] = useState();
-  const handleUpload = async () => {
+  const PickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync();
     setUrl(result.uri);
+  };
+  const handleUserUpload = async () => {
+    console.log("uploaded");
   };
   return (
     <Screen>
@@ -41,7 +44,7 @@ function UploadChallan({ route }) {
             ) : (
               <UserListItem
                 ch_Number={route.params.ch_Number}
-                date={route.params.date}
+                date={route.params.stetus}
                 type={route.params.type}
                 price={route.params.price}
                 number={route.params.number}
@@ -57,7 +60,7 @@ function UploadChallan({ route }) {
               elevation: 0,
             }}
           />
-          <TouchableNativeFeedback onPress={handleUpload}>
+          <TouchableNativeFeedback onPress={PickImage}>
             <View
               style={{
                 backgroundColor: "lightslategray",
@@ -90,6 +93,7 @@ function UploadChallan({ route }) {
             height={50}
             width={"100%"}
             style={styles.btn}
+            onPress={handleUserUpload}
           />
         </ScrollView>
       </View>

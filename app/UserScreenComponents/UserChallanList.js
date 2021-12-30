@@ -1,48 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, View, Text } from "react-native";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
 import UserListItem from "../compnents/UserListItem";
 import UserSearch from "./UserSearch";
-const dat = [
-  {
-    id: "0001",
-    number: "Aww-3443",
-    date: "1/2/2020",
-    type: "Bike",
-    price: 200,
-  },
-  {
-    id: "0002",
-    number: "Aww-3443",
-    date: "1/2/2020",
-    type: "Bike",
-    price: 200,
-  },
-  {
-    id: "0003",
-    number: "Aww-3443",
-    date: "1/2/2020",
-    type: "Bike",
-    price: 200,
-  },
-  {
-    id: "0004",
-    number: "Aww-3443",
-    date: "1/2/2020",
-    type: "Bike",
-    price: 200,
-  },
-  {
-    id: "0005",
-    number: "Aww-3443",
-    date: "1/2/2020",
-    type: "Bike",
-    price: 200,
-  },
-];
+import axios from "axios";
+import Url from "../Authorization/ApiUrlEndpoints";
+import Token from "../Authorization/JwtToken";
 
 function UserChallanList(props) {
+  const [dat, setDat] = useState();
+  const get_challanData = async () => {
+    const { data } = await axios
+      .get(Url + "/challans/allchallans/", {
+        headers: { Authorization: "JWT" + Token.refresh },
+      })
+      .catch((error) => console.log(error));
+    setDat(data);
+  };
+  useEffect(() => {
+    get_challanData();
+  }, []);
   return (
     <Screen>
       <UserSearch />
@@ -67,11 +45,11 @@ function UserChallanList(props) {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <UserListItem
-              ch_Number={item.id}
-              number={item.number}
-              date={item.date}
-              type={item.type}
-              price={item.price}
+              // ch_Number={item.}
+              number={item.vehicle_number}
+              stetus={item.challan_status}
+              type={item.vehicle_type}
+              price={item.challan_amount}
             />
           )}
           ItemSeparatorComponent={() => <View style={{ height: 5 }}></View>}

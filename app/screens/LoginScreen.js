@@ -7,6 +7,7 @@ import AuthContext from "../Authorization/Context";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Url from "../Authorization/ApiUrlEndpoints";
+import Token, { SetToken } from "../Authorization/JwtToken";
 
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -26,6 +27,8 @@ function LoginScreen({ navigation }) {
     if (data.refresh) {
       const dat = jwtDecode(data.refresh);
       authContext.setUser(dat);
+      SetToken(data.refresh);
+      console.log(Token);
     }
   };
 
