@@ -5,17 +5,13 @@ import AuthContext from "../Authorization/Context";
 import AdminAlert from "../compnents/AdminAlert";
 import AppButton from "../compnents/AppButton";
 import Label from "../compnents/label";
-import Notification from "../compnents/Notification";
 import Screen from "../compnents/Screen";
 
 function UserMaster(props) {
   const navigation = useNavigation();
-  const authContext = useContext(AuthContext);
   return (
     <Screen>
-      {/* <Label value="Hello UserName!" style={styles.lbl_h} /> */}
       <AdminAlert />
-      {/* <Notification /> */}
       <Label
         value="Select Options"
         style={{
@@ -33,12 +29,12 @@ function UserMaster(props) {
           onPress={() => navigation.navigate("Record")}
         />
         <AppButton
-          title="Upload Receipt"
+          title="Query"
           style={styles.btn}
           textStyle={styles.btn_txt}
           height={74}
           width={166}
-          onPress={() => navigation.navigate("upload")}
+          onPress={() => navigation.navigate("query")}
         />
       </View>
     </Screen>

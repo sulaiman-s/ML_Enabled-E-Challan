@@ -8,6 +8,7 @@ import UploadChallan from "../../app/UserScreenComponents/UploadChallan";
 import UserHistory from "../UserScreenComponents/UserHistory";
 import Setting from "../screens/Setting";
 import AuthContext from "../Authorization/Context";
+import UserQuery from "../UserScreenComponents/UserQuery";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -51,6 +52,7 @@ const UserNavigator = () => {
       />
       <Stack.Screen name="Record" component={UserChallanList} />
       <Stack.Screen name="upload" component={UploadChallan} />
+      <Stack.Screen name="query" component={UserQuery} />
     </Stack.Navigator>
   );
 };

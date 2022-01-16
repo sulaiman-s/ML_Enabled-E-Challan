@@ -2,23 +2,25 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
 
-function UserListItem({ ch_Number, number, type, stetus, price }) {
+function UserListItem({ number, type, stetus, price }) {
   const navigation = useNavigation();
+  const handlePress = () => {
+    if (stetus != "P") {
+      navigation.navigate("upload", {
+        number,
+        type,
+        stetus,
+        price,
+      });
+    } else {
+      alert("Status Paid");
+    }
+  };
   return (
-    <TouchableNativeFeedback
-      onPress={() =>
-        navigation.navigate("upload", {
-          ch_Number,
-          number,
-          type,
-          stetus,
-          price,
-        })
-      }
-    >
+    <TouchableNativeFeedback onPress={() => handlePress()}>
       <View style={styles.ch_view}>
         <View style={styles.ch_h}>
-          <Text style={styles.ch_h_txt}>Challan No #{ch_Number}</Text>
+          <Text style={styles.ch_h_txt}>Challan No #</Text>
         </View>
         <View style={styles.ch_itm}>
           <Text style={styles.ch_itm_txt}>Number:{number}</Text>

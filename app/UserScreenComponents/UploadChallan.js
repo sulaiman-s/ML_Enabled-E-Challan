@@ -13,15 +13,30 @@ import AppButton from "../compnents/AppButton";
 import UserListItem from "../compnents/UserListItem";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
+import axios from "axios";
+import Url from "../Authorization/ApiUrlEndpoints";
+import Token from "../Authorization/JwtToken";
 
-function UploadChallan({ route }) {
+function UploadChallan({ route, navigation }) {
   const [url, setUrl] = useState();
   const PickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync();
     setUrl(result.uri);
   };
   const handleUserUpload = async () => {
-    console.log("uploaded");
+    let Data = new FormData();
+    Data.append("vehicle_number", route.params.number);
+    Data.append("challan_image", {
+      uri: url,
+      name: "publicUpload.jpg",
+      type: "image/jpg",
+    });
+    const { data } = await axios.post(Url + "/cw/upload/", Data, {
+      headers: { Authorization: "JWT" + Token.refresh },
+      Accept: "application/json",
+      "Content-Type": "multipart/form-data",
+    });
+    navigation.navigate("HOME");
   };
   return (
     <Screen>
@@ -43,8 +58,7 @@ function UploadChallan({ route }) {
               <UserListItem />
             ) : (
               <UserListItem
-                ch_Number={route.params.ch_Number}
-                date={route.params.stetus}
+                stetus={route.params.stetus}
                 type={route.params.type}
                 price={route.params.price}
                 number={route.params.number}
