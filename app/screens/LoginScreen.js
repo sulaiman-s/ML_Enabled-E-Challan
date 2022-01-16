@@ -21,8 +21,7 @@ function LoginScreen({ navigation }) {
         password: password,
       })
       .catch((error) => {
-        if (error)
-          setError("No active account found with the given credentials ");
+        if (error) setError("Account not found");
       });
     if (data.refresh) {
       const dat = jwtDecode(data.refresh);

@@ -30,8 +30,18 @@ function RegisterScreen({ navigation }) {
       .min(8)
       .matches("[^0-9]", "Add minimum one alphabet")
       .label("UserName"),
-    password: Yup.string().required().min(8).label("Password"),
-    confirmPassword: Yup.string().required().min(8).label("ConfirmPassword"),
+    password: Yup.string()
+      .required()
+      .min(8)
+      .label("Password")
+      .matches(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})",
+        "Password should contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character"
+      ),
+    confirmPassword: Yup.string()
+      .required()
+      .label("ConfirmPassword")
+      .oneOf([Yup.ref("password"), null], "Password must match"),
   });
   const authContext = useContext(AuthContext);
 
