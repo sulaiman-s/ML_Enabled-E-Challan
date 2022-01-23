@@ -88,7 +88,7 @@ const AdminTabNavigator = () => {
           width: "90%",
           left: "5%",
           borderRadius: 5,
-          bottom: "1%",
+          // bottom: "0.5%",
         },
       }}
     >
