@@ -17,6 +17,8 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { Image, TouchableNativeFeedback, View } from "react-native";
 import { Text } from "react-native";
+import Legal from "../screens/Legal";
+import Help from "../screens/Help";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -140,33 +142,47 @@ const UserDrawer = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="."
+      initialRouteName="HoMe"
       drawerContent={(props) => <CustomDrawer {...props} />}
     >
       <drawer.Screen
-        name="."
+        name="HoMe"
         component={UserTabNavigator}
-        options={{ drawerItemStyle: { display: "none" } }}
-      />
-      <drawer.Screen
-        name=".,"
-        component={Def}
         options={{
-          drawerItemStyle: {
-            marginTop: "150%",
-            height: 1,
-            borderBottomWidth: 2,
-            color: "black",
-          },
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
         }}
       />
 
+      <drawer.Screen
+        name="Legal"
+        component={Legal}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="leaf" size={size} color={color} />
+          ),
+        }}
+      />
+      <drawer.Screen
+        name="Help"
+        component={Help}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <Ionicons
+              name="information-circle-outline"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
       <drawer.Screen
         name="Setting"
         component={Setting}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="settings" size={size} color={color} />
+            <Ionicons name="settings-outline" size={size} color={color} />
           ),
         }}
       />
@@ -175,7 +191,7 @@ const UserDrawer = () => {
         component={handleLogout}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="md-exit" size={size} color={color} />
+            <Ionicons name="exit-outline" size={size} color={color} />
           ),
         }}
       />

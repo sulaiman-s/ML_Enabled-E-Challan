@@ -11,11 +11,17 @@ import get_challans, { set_challans } from "../ServerResponseData/Challans";
 
 function UserChallanList(props) {
   const [dat, setDat] = useState();
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
+  const [message, setMessage] = useState();
   const handleSearch = () => {
     const challans = get_challans();
     const filter_challan = challans.filter((x) => x.vehicle_number == search);
-    setDat(filter_challan);
+    if (filter_challan.length >= 1) {
+      setDat(filter_challan);
+    } else {
+      setMessage("not found");
+      setDat(null);
+    }
   };
 
   const get_challanData = async () => {
@@ -41,16 +47,18 @@ function UserChallanList(props) {
           elevation: 0,
         }}
       />
-      {search == null ? (
+      {dat == null ? (
         <View>
-          <Text>Nothing was Searched</Text>
+          <Text>
+            {!search.length >= 1 ? "Enter a Valid Search Value" : message}
+          </Text>
         </View>
       ) : (
         <FlatList
           showsVerticalScrollIndicator
           style={{ width: "100%" }}
           data={dat}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.vehicle_number}
           renderItem={({ item }) => (
             <UserListItem
               // ch_Number={item.}

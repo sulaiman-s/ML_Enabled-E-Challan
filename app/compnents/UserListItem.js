@@ -5,7 +5,7 @@ import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
 function UserListItem({ number, type, stetus, price }) {
   const navigation = useNavigation();
   const handlePress = () => {
-    if (stetus != "P") {
+    if (stetus != "Paid") {
       navigation.navigate("upload", {
         number,
         type,
