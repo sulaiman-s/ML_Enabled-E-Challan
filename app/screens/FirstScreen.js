@@ -27,7 +27,7 @@ function FirstScreen({ navigation }) {
         resizeMode="cover"
         style={styles.bg_img}
       >
-        <Text style={styles.h_text}>E-Challan</Text>
+        <Text style={styles.h_text}>AVND</Text>
       </ImageBackground>
       <View style={styles.btn_view}>
         <AppButton

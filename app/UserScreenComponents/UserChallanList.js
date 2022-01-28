@@ -60,10 +60,10 @@ function UserChallanList(props) {
           showsVerticalScrollIndicator
           style={{ width: "100%" }}
           data={dat}
-          keyExtractor={(item) => item.vehicle_number}
+          keyExtractor={(item) => item.challan_id}
           renderItem={({ item }) => (
             <UserListItem
-              // ch_Number={item.}
+              ch_Number={item.challan_id}
               number={item.vehicle_number}
               stetus={item.challan_status}
               type={item.vehicle_type}

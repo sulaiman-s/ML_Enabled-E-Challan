@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
 
-function UserListItem({ number, type, stetus, price }) {
+function UserListItem({ ch_Number, number, type, stetus, price }) {
   const navigation = useNavigation();
   const handlePress = () => {
     if (stetus != "Paid") {
@@ -20,7 +20,7 @@ function UserListItem({ number, type, stetus, price }) {
     <TouchableNativeFeedback onPress={() => handlePress()}>
       <View style={styles.ch_view}>
         <View style={styles.ch_h}>
-          <Text style={styles.ch_h_txt}>Challan No #</Text>
+          <Text style={styles.ch_h_txt}>Challan No #{ch_Number}</Text>
         </View>
         <View style={styles.ch_itm}>
           <Text style={styles.ch_itm_txt}>Number:{number}</Text>

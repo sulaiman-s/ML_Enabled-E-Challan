@@ -5,9 +5,32 @@ import Screen from "../compnents/Screen";
 import { StyleSheet, View, Text } from "react-native";
 import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/core";
+import Url from "../Authorization/ApiUrlEndpoints";
+import axios from "axios";
 
-function AdminVerification(props) {
+function AdminVerification({ route }) {
   const navigation = useNavigation();
+  const {
+    vehicle_number,
+    vehicle_type,
+    vehicle_status,
+    challan_amount,
+    vehicle_location,
+  } = route.params.cha;
+  const handleUpload = async () => {
+    const { data } = await axios
+      .post(Url + "/challans/allchallans/", {
+        vehicle_number: vehicle_number,
+        vehicle_type: vehicle_type,
+        challan_amount: challan_amount,
+        challan_status: vehicle_status,
+        challan_location: vehicle_location,
+      })
+      .catch((error) => console.log(error));
+    console.log(data);
+    alert("submitted successfully");
+    navigation.navigate("HOME");
+  };
   return (
     <Screen>
       <Label
@@ -24,12 +47,12 @@ function AdminVerification(props) {
           <Text style={styles.ch_h_txt}>Challan No #</Text>
         </View>
         <View style={styles.ch_itm}>
-          <Text style={styles.ch_itm_txt}>Number:</Text>
-          <Text style={styles.ch_itm_txt}>Type:</Text>
+          <Text style={styles.ch_itm_txt}>Number:{vehicle_number}</Text>
+          <Text style={styles.ch_itm_txt}>Type:{vehicle_type}</Text>
         </View>
         <View style={styles.ch_itm}>
-          <Text style={styles.ch_itm_txt}>Date:</Text>
-          <Text style={styles.ch_itm_txt}>Amount:</Text>
+          <Text style={styles.ch_itm_txt}>status:{vehicle_status}</Text>
+          <Text style={styles.ch_itm_txt}>Amount:{challan_amount}</Text>
         </View>
       </View>
       <View style={styles.btn_view}>
@@ -47,6 +70,7 @@ function AdminVerification(props) {
           textStyle={styles.btn_txt}
           height={60}
           width={166}
+          onPress={handleUpload}
         />
       </View>
     </Screen>
