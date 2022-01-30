@@ -13,6 +13,17 @@ function UserChallanList(props) {
   const [dat, setDat] = useState();
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState();
+  const get_challanData = async () => {
+    const { data } = await axios
+      .get(Url + "/challans/allchallans/", {
+        headers: { Authorization: "JWT" + Token.refresh },
+      })
+      .catch((error) => console.log(error));
+    set_challans(data);
+  };
+  useEffect(() => {
+    get_challanData();
+  }, []);
   const handleSearch = () => {
     const challans = get_challans();
     const filter_challan = challans.filter((x) => x.vehicle_number == search);
@@ -26,17 +37,6 @@ function UserChallanList(props) {
     }
   };
 
-  const get_challanData = async () => {
-    const { data } = await axios
-      .get(Url + "/challans/allchallans/", {
-        headers: { Authorization: "JWT" + Token.refresh },
-      })
-      .catch((error) => console.log(error));
-    set_challans(data);
-  };
-  useEffect(() => {
-    get_challanData();
-  }, []);
   return (
     <Screen>
       <UserSearch Search={(t) => setSearch(t)} handleSearch={handleSearch} />

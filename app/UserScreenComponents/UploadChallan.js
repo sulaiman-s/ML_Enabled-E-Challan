@@ -16,6 +16,7 @@ import Screen from "../compnents/Screen";
 import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
 import Token from "../Authorization/JwtToken";
+import { setUserHistory } from "../ServerResponseData/History";
 
 function UploadChallan({ route, navigation }) {
   const [url, setUrl] = useState();
@@ -36,6 +37,8 @@ function UploadChallan({ route, navigation }) {
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
     });
+    console.log({ url, number: route.params.number });
+    setUserHistory({ url, number: route.params.number });
     navigation.navigate("HOME");
   };
   return (

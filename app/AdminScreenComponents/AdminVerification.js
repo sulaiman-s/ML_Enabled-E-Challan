@@ -7,6 +7,7 @@ import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/core";
 import Url from "../Authorization/ApiUrlEndpoints";
 import axios from "axios";
+import get_historyItems, { setHistory } from "../ServerResponseData/History";
 
 function AdminVerification({ route }) {
   const navigation = useNavigation();
@@ -29,7 +30,19 @@ function AdminVerification({ route }) {
       .catch((error) => console.log(error));
     console.log(data);
     alert("submitted successfully");
-    navigation.navigate("HOME");
+    const d = new Date();
+    const year = d.getFullYear();
+    const months = d.getMonth();
+    const day = d.getDate();
+    const items = {
+      ...route.params.cha,
+      time: `${year}/${months + 1}/${day}`,
+    };
+    console.log(items);
+    setHistory(items);
+    const tt = get_historyItems();
+    console.log(tt[0]);
+    // navigation.navigate("HOME");
   };
   return (
     <Screen>

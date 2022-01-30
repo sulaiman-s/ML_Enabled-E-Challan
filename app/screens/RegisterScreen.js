@@ -18,11 +18,20 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 
 function RegisterScreen({ navigation }) {
+  const [usernameError, setUsernameError] = useState();
+  const [emailError, setEmailError] = useState();
   const ErrorMessage = ({ error, visible }) => {
     if (!visible || !error) return null;
     return <Text style={{ color: "red" }}>{error}</Text>;
   };
-
+  const UserNameError = () => {
+    if (!usernameError) return null;
+    return <Text style={{ color: "red" }}>{usernameError}</Text>;
+  };
+  const EmailError = () => {
+    if (!emailError) return null;
+    return <Text style={{ color: "red" }}>{emailError}</Text>;
+  };
   let schema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
     username: Yup.string()
@@ -59,6 +68,8 @@ function RegisterScreen({ navigation }) {
       })
       .catch((error) => {
         console.log(error);
+        setUsernameError(error.response.data.username);
+        setEmailError(error.response.data.email);
       });
     if (data) {
       const { data } = await axios
@@ -82,6 +93,8 @@ function RegisterScreen({ navigation }) {
         <Text style={styles.h_style}>Register</Text>
       </View>
       <ScrollView style={{ width: "100%" }}>
+        <UserNameError />
+        <EmailError />
         <Formik
           initialValues={{
             username: "",
