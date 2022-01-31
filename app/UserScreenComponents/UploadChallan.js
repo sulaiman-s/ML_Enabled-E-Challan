@@ -38,7 +38,15 @@ function UploadChallan({ route, navigation }) {
       "Content-Type": "multipart/form-data",
     });
     console.log({ url, number: route.params.number });
-    setUserHistory({ url, number: route.params.number });
+    const d = new Date();
+    const year = d.getFullYear();
+    const months = d.getMonth();
+    const day = d.getDate();
+    setUserHistory({
+      url,
+      number: route.params.number,
+      time: `${year}/${months + 1}/${day}`,
+    });
     navigation.navigate("HOME");
   };
   return (

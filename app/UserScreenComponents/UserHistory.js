@@ -81,12 +81,22 @@ function UserHistory(props) {
               </Text>
               <Image
                 style={{
-                  width: "100%",
+                  width: "34%",
                   height: "100%",
                   paddingTop: 15,
                 }}
                 source={{ uri: v.url }}
               />
+              <Text
+                style={{
+                  width: "33%",
+                  height: "100%",
+                  paddingTop: 15,
+                  backgroundColor: "#4ecdc4",
+                }}
+              >
+                Date:{v.time}
+              </Text>
             </View>
           ))}
     </Screen>
