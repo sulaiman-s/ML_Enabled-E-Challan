@@ -12,7 +12,10 @@ function UserHistory(props) {
   const auth = useContext(AuthContext);
   return (
     <Screen style={{ marginTop: 50 }}>
-      <Label value="Upload History" />
+      <Label
+        value="Upload History"
+        style={{ backgroundColor: "rgb(71,118,172)", borderRadius: 5 }}
+      />
 
       {auth.user.is_admin
         ? history.map((v) => (
@@ -74,29 +77,21 @@ function UserHistory(props) {
                   width: "33%",
                   height: "100%",
                   paddingTop: 15,
-                  backgroundColor: "#4ecdc4",
+                  backgroundColor: "rgb(82,174,211)",
                 }}
               >
                 Vehicle:{v.number}
+                {"\n"}
+                Date:{v.time}
               </Text>
               <Image
                 style={{
-                  width: "34%",
+                  width: "70%",
                   height: "100%",
                   paddingTop: 15,
                 }}
                 source={{ uri: v.url }}
               />
-              <Text
-                style={{
-                  width: "33%",
-                  height: "100%",
-                  paddingTop: 15,
-                  backgroundColor: "#4ecdc4",
-                }}
-              >
-                Date:{v.time}
-              </Text>
             </View>
           ))}
     </Screen>

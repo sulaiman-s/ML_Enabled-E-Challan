@@ -10,6 +10,8 @@ import {
 import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
 import Token from "../Authorization/JwtToken";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Label from "./label";
 
 function AdminAlert(props) {
   const [alertImage, setAlertImage] = useState({});
@@ -45,6 +47,14 @@ function AdminAlert(props) {
             style={{ height: "50%", width: "100%" }}
             resizeMode="cover"
           />
+          <Label
+            value="Message Alerts"
+            style={{
+              backgroundColor: "rgb(82,174,211)",
+              marginTop: "3%",
+              borderRadius: 5,
+            }}
+          />
           <Text
             style={{
               fontSize: 16,
@@ -73,11 +83,17 @@ function AdminAlert(props) {
           style={{
             height: "100%",
             width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
             backgroundColor: "lightgray",
           }}
         >
+          <Label
+            value="Message Alerts"
+            style={{
+              backgroundColor: "rgb(82,174,211)",
+              marginTop: "3%",
+              borderRadius: 5,
+            }}
+          />
           <Text
             style={{
               fontSize: 17,
@@ -99,14 +115,32 @@ function AdminAlert(props) {
           style={{
             height: "5%",
             width: "100%",
-            backgroundColor: "lightgray",
-            alignItems: "center",
+            backgroundColor: "rgb(82,174,211)",
+            // alignItems: "center",
             justifyContent: "center",
+            marginTop: "5%",
+            borderRadius: 5,
           }}
           onPress={() => setvisi(true)}
         >
-          <Text style={{ fontSize: 17 }} numberOfLines={1}>
-            {alertMessage.Alert_Message}
+          <Text
+            style={{ fontSize: 17, position: "absolute" }}
+            numberOfLines={1}
+          >
+            Notifications
+          </Text>
+          <Text
+            style={{
+              backgroundColor: "rgb(71,118,172)",
+              position: "relative",
+              paddingLeft: 6,
+              width: 20,
+              borderRadius: 10,
+              alignSelf: "flex-end",
+              marginBottom: 10,
+            }}
+          >
+            1
           </Text>
         </TouchableOpacity>
       );
@@ -115,6 +149,14 @@ function AdminAlert(props) {
   };
   return (
     <>
+      <Label
+        value="Alerts"
+        style={{
+          elevation: 0,
+          backgroundColor: "rgb(71,118,172)",
+          borderRadius: 5,
+        }}
+      />
       <Message />
       <View
         style={{
@@ -123,7 +165,7 @@ function AdminAlert(props) {
           width: "100%",
           justifyContent: "center",
           alignItems: "center",
-          top: "1%",
+          top: "2%",
         }}
       >
         {alertImage.Alert_Image ? (
@@ -144,19 +186,17 @@ function AdminAlert(props) {
           <TouchableOpacity
             style={{
               height: "5%",
-              width: "100%",
-              backgroundColor: "green",
-              justifyContent: "center",
-              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              right: 3,
             }}
             onPress={() => setvisi(false)}
           >
-            <Text
-              // onPress={() => setvisi(false)}
-              style={{ color: "darkblue", fontSize: 17 }}
-            >
-              close
-            </Text>
+            <MaterialCommunityIcons
+              name="close"
+              size={30}
+              color="rgb(71,118,172)"
+            />
           </TouchableOpacity>
           <View
             style={{

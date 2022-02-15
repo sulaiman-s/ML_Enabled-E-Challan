@@ -45,9 +45,11 @@ function UserChallanList(props) {
         value="Related Challans"
         style={{
           // backgroundColor: "#ACD1AF",
-          color: "tomato",
+          color: "white",
           marginTop: 5,
           elevation: 0,
+          backgroundColor: "rgb(82,174,211)",
+          borderRadius: 5,
         }}
       />
       {dat == null ? (

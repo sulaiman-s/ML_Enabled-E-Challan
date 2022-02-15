@@ -53,6 +53,8 @@ function AdminVerification({ route }) {
           marginTop: 20,
           fontWeight: "bold",
           fontSize: 17,
+          backgroundColor: "rgb(82,174,211)",
+          borderRadius: 5,
         }}
       />
       <View style={styles.ch_view}>
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    backgroundColor: "lightslategray",
+    backgroundColor: "rgb(82,174,211)",
   },
   btn_view: {
     width: "100%",

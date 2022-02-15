@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   btn_style: {
-    backgroundColor: "#4ecdc4",
+    backgroundColor: "rgb(82,174,211)",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 2,
+    borderRadius: 5,
   },
   btn_text_Style: {
     color: "white",

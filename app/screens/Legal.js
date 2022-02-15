@@ -24,8 +24,14 @@ function Legal(props) {
           Go Back
         </Text>
       </View>
-      <Label value="Privacy Policy" />
-      <Label value="Terms & Services" />
+      <Label
+        value="Privacy Policy"
+        style={{ borderRadius: 5, backgroundColor: "rgb(82,174,211)" }}
+      />
+      <Label
+        value="Terms & Services"
+        style={{ borderRadius: 5, backgroundColor: "rgb(82,174,211)" }}
+      />
     </Screen>
   );
 }

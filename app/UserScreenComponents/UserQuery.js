@@ -6,6 +6,7 @@ import AppButton from "../compnents/AppButton";
 import * as Yup from "yup";
 import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
+import { Ionicons } from "@expo/vector-icons";
 
 function UserQuery({ navigation }) {
   const ErrorMessage = ({ error, visible }) => {
@@ -31,6 +32,18 @@ function UserQuery({ navigation }) {
   };
   return (
     <View style={styles.cont}>
+      <View
+        style={{
+          alignSelf: "flex-start",
+          marginBottom: 20,
+          flexDirection: "row",
+        }}
+      >
+        <Ionicons name="chevron-back" size={20} color="blue" />
+        <Text style={{ color: "blue" }} onPress={() => navigation.goBack()}>
+          Go Back
+        </Text>
+      </View>
       <Formik
         initialValues={{ name: "", email: "", mesage: "" }}
         onSubmit={(values) => handleUserQuery(values)}
@@ -39,6 +52,7 @@ function UserQuery({ navigation }) {
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
           <>
             <AppInput
+              style={{ width: "100%" }}
               placeholder="Name"
               onChangeText={handleChange("name")}
               onBlur={() => setFieldTouched("email")}
@@ -46,12 +60,14 @@ function UserQuery({ navigation }) {
             <ErrorMessage error={errors.name} visible={touched.name} />
             <AppInput
               placeholder="email"
+              style={{ width: "100%" }}
               onChangeText={handleChange("email")}
               onBlur={() => setFieldTouched("email")}
             />
             <ErrorMessage error={errors.email} visible={touched.email} />
             <AppInput
               placeholder="mesage"
+              style={{ width: "100%" }}
               onChangeText={handleChange("mesage")}
             />
             <ErrorMessage error={errors.mesage} visible={touched.mesage} />
@@ -59,7 +75,7 @@ function UserQuery({ navigation }) {
               title="submit"
               onPress={handleSubmit}
               style={{
-                backgroundColor: "green",
+                backgroundColor: "rgb(71,118,172)",
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: 1,
@@ -69,7 +85,7 @@ function UserQuery({ navigation }) {
               }}
               height={60}
               width="100%"
-              textStyle={{ fontSize: 18 }}
+              textStyle={{ fontSize: 18, color: "white" }}
             />
           </>
         )}

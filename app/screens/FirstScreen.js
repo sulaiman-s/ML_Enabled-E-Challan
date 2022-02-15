@@ -77,12 +77,11 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0fff",
+    backgroundColor: "rgb(82,174,211)",
   },
   btn_txt: {
     fontFamily: "Roboto",
-    fontWeight: "bold",
-    color: "black",
+    color: "white",
     fontSize: 18,
   },
 });

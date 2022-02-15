@@ -57,9 +57,11 @@ function UploadChallan({ route, navigation }) {
             value="Challan Info"
             style={{
               // backgroundColor: "#4ecdc4",
-              color: "tomato",
+              color: "black",
               marginTop: "5%",
               elevation: 0,
+              backgroundColor: "rgb(71,118,172)",
+              borderRadius: 5,
             }}
           />
         </View>
@@ -80,9 +82,11 @@ function UploadChallan({ route, navigation }) {
             value="Upload Receipt of Above Challan"
             style={{
               // backgroundColor: "#4ecdc4",
-              color: "tomato",
+              color: "black",
               marginTop: "5%",
               elevation: 0,
+              backgroundColor: "rgb(71,118,172)",
+              borderRadius: 5,
             }}
           />
           <TouchableNativeFeedback onPress={PickImage}>
@@ -93,6 +97,7 @@ function UploadChallan({ route, navigation }) {
                 justifyContent: "center",
                 alignItems: "center",
                 marginTop: 10,
+                borderRadius: 10,
               }}
             >
               {url == null ? (
@@ -136,7 +141,7 @@ const styles = StyleSheet.create({
   // dark: "#0c0c0c",
   // danger: "#ff5252",
   btn: {
-    backgroundColor: "#4ecdc4",
+    backgroundColor: "rgb(82,174,211)",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,

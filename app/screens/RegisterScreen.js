@@ -199,10 +199,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   btn: {
-    backgroundColor: "#4ecdc4",
+    backgroundColor: "rgb(82,174,211)",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 5,
+    borderRadius: 3,
   },
   btn_t: {
     color: "white",

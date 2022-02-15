@@ -16,7 +16,7 @@ function UserSearch({ Search, handleSearch }) {
       <AppInput
         placeholder="Enter Vehicle Number(e.g, 'LHR-203')"
         iconName="search-web"
-        viewStyle={{ borderColor: "tomato", width: "80%" }}
+        viewStyle={{ borderColor: "rgb(82,174,211)", width: "80%" }}
         onChangeText={Search}
       />
       <AppButton
@@ -28,7 +28,7 @@ function UserSearch({ Search, handleSearch }) {
           justifyContent: "center",
           borderWidth: 2,
           borderRadius: 5,
-          borderColor: "tomato",
+          borderColor: "rgb(82,174,211)",
         }}
         onPress={handleSearch}
       />

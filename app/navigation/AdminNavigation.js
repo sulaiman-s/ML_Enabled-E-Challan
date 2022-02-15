@@ -21,6 +21,7 @@ import { useNavigation } from "@react-navigation/core";
 import { Image, View, Text } from "react-native";
 import Legal from "../screens/Legal";
 import Help from "../screens/Help";
+import UserQuery from "../UserScreenComponents/UserQuery";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,7 +33,7 @@ const AdminNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "tomato",
+          backgroundColor: "rgb(71,118,172)",
         },
         headerTintColor: "white",
       }}
@@ -62,7 +63,7 @@ const AdminNavigator = () => {
       <Stack.Screen
         name="entry"
         component={AdminChallanEntries}
-        options={{ title: "Challan Fields " }}
+        options={{ title: "Challan Entries " }}
       />
       <Stack.Screen
         name="verify"
@@ -73,6 +74,16 @@ const AdminNavigator = () => {
         name="Record"
         component={UserChallanList}
         options={{ title: "Check Records" }}
+      />
+      <Stack.Screen
+        name="help"
+        component={Help}
+        options={{ title: "FAQ", headerShown: false }}
+      />
+      <Stack.Screen
+        name="setting"
+        component={Setting}
+        options={{ title: "Settings", headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -101,8 +112,8 @@ const AdminTabNavigator = () => {
           ),
           tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "tomato",
-          tabBarInactiveTintColor: "orange",
+          tabBarActiveBackgroundColor: "rgb(71,118,172)",
+          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
       <Tab.Screen
@@ -114,8 +125,8 @@ const AdminTabNavigator = () => {
           ),
           tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "tomato",
-          tabBarInactiveTintColor: "orange",
+          tabBarActiveBackgroundColor: "rgb(71,118,172)",
+          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
     </Tab.Navigator>
@@ -185,7 +196,7 @@ const AdminDrawer = () => {
       />
       <drawer.Screen
         name="Help"
-        component={Help}
+        component={UserQuery}
         options={{
           drawerIcon: ({ size, color }) => (
             <Ionicons

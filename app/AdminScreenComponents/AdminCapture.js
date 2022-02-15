@@ -38,6 +38,7 @@ function AdminCapture(props) {
             alignItems: "center",
             marginTop: 40,
             marginBottom: 20,
+            borderRadius: 10,
           }}
         >
           {url == null ? (
@@ -48,7 +49,10 @@ function AdminCapture(props) {
           ) : (
             <Image
               source={{ uri: url }}
-              style={{ height: "100%", width: "100%" }}
+              style={{
+                height: "100%",
+                width: "100%",
+              }}
             />
           )}
         </View>
@@ -74,7 +78,7 @@ function AdminCapture(props) {
 }
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: "#4ecdc4",
+    backgroundColor: "rgb(82,174,211)",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,

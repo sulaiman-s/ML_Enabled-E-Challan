@@ -25,7 +25,10 @@ function Setting(props) {
           Go Back
         </Text>
       </View>
-      <Label value="Profile" />
+      <Label
+        value="Profile"
+        style={{ backgroundColor: "rgb(82,174,211)", borderRadius: 5 }}
+      />
     </Screen>
   );
 }

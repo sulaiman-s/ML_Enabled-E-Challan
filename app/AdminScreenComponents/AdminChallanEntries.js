@@ -43,7 +43,14 @@ function AdminChallanEntries(props) {
     <Screen>
       <Label
         value="Enter the remaining fields fo challan"
-        style={{ elevation: 0, fontWeight: "bold", fontSize: 16, color: "red" }}
+        style={{
+          elevation: 0,
+          fontWeight: "bold",
+          fontSize: 16,
+          color: "white",
+          backgroundColor: "rgb(82,174,211)",
+          borderRadius: 5,
+        }}
       />
       <ScrollView>
         <Formik
@@ -166,7 +173,7 @@ function AdminChallanEntries(props) {
 }
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: "#fc5c65",
+    backgroundColor: "rgb(82,174,211)",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,

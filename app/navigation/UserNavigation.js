@@ -30,7 +30,7 @@ const UserNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "tomato",
+          backgroundColor: "rgb(71,118,172)",
         },
         headerTintColor: "white",
       }}
@@ -54,7 +54,21 @@ const UserNavigator = () => {
       />
       <Stack.Screen name="Record" component={UserChallanList} />
       <Stack.Screen name="upload" component={UploadChallan} />
-      <Stack.Screen name="query" component={UserQuery} />
+      <Stack.Screen
+        name="Help"
+        component={UserQuery}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="help"
+        component={Help}
+        options={{ headerShown: false, title: "FAQ" }}
+      />
+      <Stack.Screen
+        name="setting"
+        component={Setting}
+        options={{ title: "Settings", headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
@@ -82,8 +96,8 @@ const UserTabNavigator = () => {
           ),
           tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "tomato",
-          tabBarInactiveTintColor: "orange",
+          tabBarActiveBackgroundColor: "rgb(71,118,172)",
+          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
       <Tab.Screen
@@ -95,8 +109,8 @@ const UserTabNavigator = () => {
           ),
           tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "tomato",
-          tabBarInactiveTintColor: "orange",
+          tabBarActiveBackgroundColor: "rgb(71,118,172)",
+          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
     </Tab.Navigator>
