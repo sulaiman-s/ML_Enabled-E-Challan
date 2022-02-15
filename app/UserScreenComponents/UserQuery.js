@@ -15,11 +15,10 @@ function UserQuery({ navigation }) {
   let schema = Yup.object().shape({
     name: Yup.string()
       .required()
-      .min(8)
       .matches("[^0-9]", "Add minimum one alphabet")
       .label("UserName"),
     email: Yup.string().email().required().label("email"),
-    mesage: Yup.string().required().min(30).label("mesage"),
+    mesage: Yup.string().required().label("mesage"),
   });
 
   const handleUserQuery = async ({ name, email, mesage }) => {

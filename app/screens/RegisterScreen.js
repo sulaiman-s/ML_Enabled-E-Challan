@@ -72,18 +72,19 @@ function RegisterScreen({ navigation }) {
         setEmailError(error.response.data.email);
       });
     if (data) {
-      const { data } = await axios
-        .post(Url + "/user/create/", {
-          username: username,
-          password: password,
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      if (data) {
-        const dat = jwtDecode(data.refresh);
-        authContext.setUser(dat);
-      }
+      // const { data } = await axios
+      //   .post(Url + "/user/create/", {
+      //     username: username,
+      //     password: password,
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+      // if (data) {
+      //   const dat = jwtDecode(data.refresh);
+      //   authContext.setUser(dat);
+      // }
+      navigation.navigate("Login");
     }
   };
 

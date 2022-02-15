@@ -30,7 +30,8 @@ function UserChallanList(props) {
     if (filter_challan.length >= 1) {
       setDat(filter_challan);
     } else {
-      setMessage("not found");
+      setMessage("Not Found");
+      setDat(null);
       setTimeout(() => {
         setMessage(null);
       }, 1500);
