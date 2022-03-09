@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useContext } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import AuthContext from "../Authorization/Context";
 import AdminAlert from "../compnents/AdminAlert";
 import AppButton from "../compnents/AppButton";
@@ -10,53 +10,62 @@ import Screen from "../compnents/Screen";
 function UserMaster(props) {
   const navigation = useNavigation();
   return (
-    <Screen>
+    <Screen style={{ padding: 10, marginTop: 0, backgroundColor: "lightgray" }}>
       <AdminAlert />
       <Label
         value="Select Options"
         style={{
-          marginTop: "15%",
+          marginTop: "10%",
           elevation: 0,
           backgroundColor: "rgb(71,118,172)",
           borderRadius: 5,
+          width: "80%",
+          height: "5.5%",
+          color: "white",
+          fontWeight: "bold",
+          paddingLeft: "28%",
+          paddingTop: 6,
         }}
       />
-      <View style={styles.btn_view}>
-        <AppButton
-          title="Check Record"
-          style={styles.btn}
-          textStyle={styles.btn_txt}
-          height={90}
-          width={166}
-          onPress={() => navigation.navigate("Record")}
-        />
-        <AppButton
-          title="Help"
-          style={styles.btn}
-          textStyle={styles.btn_txt}
-          height={90}
-          width={166}
-          onPress={() => navigation.navigate("Help")}
-        />
-      </View>
-      <View style={styles.btn_view}>
-        <AppButton
-          title="FAQ"
-          style={styles.btn}
-          textStyle={styles.btn_txt}
-          height={90}
-          width={166}
-          onPress={() => navigation.navigate("help")}
-        />
-        <AppButton
-          title="Settings"
-          style={styles.btn}
-          textStyle={styles.btn_txt}
-          height={90}
-          width={166}
-          onPress={() => navigation.navigate("setting")}
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.btn_view}>
+          <AppButton
+            title="Check Record"
+            style={styles.btn}
+            textStyle={styles.btn_txt}
+            height={90}
+            width={166}
+            onPress={() => navigation.navigate("Record")}
+          />
+          <AppButton
+            title="Help"
+            style={styles.btn}
+            textStyle={styles.btn_txt}
+            height={90}
+            width={166}
+            onPress={() => navigation.navigate("Help")}
+          />
+        </View>
+
+        <View style={styles.btn_view}>
+          <AppButton
+            title="FAQ"
+            style={styles.btn}
+            textStyle={styles.btn_txt}
+            height={90}
+            width={166}
+            onPress={() => navigation.navigate("help")}
+          />
+          <AppButton
+            title="Settings"
+            style={styles.btn}
+            textStyle={styles.btn_txt}
+            height={90}
+            width={166}
+            onPress={() => navigation.navigate("setting")}
+          />
+        </View>
+      </ScrollView>
     </Screen>
   );
 }
@@ -75,7 +84,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: "white",
+    elevation: 10,
   },
   btn_view: {
     width: "100%",
@@ -83,11 +93,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginTop: 10,
   },
   btn_txt: {
     fontSize: 16,
-    color: "white",
+    color: "black",
   },
 });
 

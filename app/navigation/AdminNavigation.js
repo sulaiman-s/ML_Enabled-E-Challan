@@ -95,12 +95,6 @@ const AdminTabNavigator = () => {
       screenOptions={{
         tabBarHideOnKeyboard: true,
         headerShown: false,
-        tabBarStyle: {
-          width: "90%",
-          left: "5%",
-          borderRadius: 5,
-          // bottom: "0.5%",
-        },
       }}
     >
       <Tab.Screen
@@ -110,7 +104,6 @@ const AdminTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" size={size} color={color} />
           ),
-          tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
           tabBarActiveBackgroundColor: "rgb(71,118,172)",
           tabBarInactiveTintColor: "rgb(71,118,172)",
@@ -123,7 +116,6 @@ const AdminTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" size={size} color={color} />
           ),
-          tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
           tabBarActiveBackgroundColor: "rgb(71,118,172)",
           tabBarInactiveTintColor: "rgb(71,118,172)",
@@ -141,19 +133,32 @@ const CustomDrawer = (props) => {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView
+      {...props}
+      style={{ backgroundColor: "lightgray" }}
+    >
       <View
         style={{
           width: "100%",
         }}
       >
         <Image
-          source={require("../assets/bck.jpg")}
+          source={require("../assets/db.jpeg")}
           style={{ width: "100%", height: 150 }}
         />
-        <View style={{ position: "absolute", top: 90 }}>
-          <Text style={{ color: "white" }}>@{user.name}</Text>
-          <Text style={{ color: "white" }}>{user.email}</Text>
+        <View
+          style={{
+            position: "absolute",
+            top: 90,
+            width: "100%",
+          }}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            @{user.name}
+          </Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            {user.email}
+          </Text>
         </View>
       </View>
       <DrawerItemList {...props} />

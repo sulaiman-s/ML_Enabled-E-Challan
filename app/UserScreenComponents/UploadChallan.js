@@ -50,7 +50,7 @@ function UploadChallan({ route, navigation }) {
     navigation.navigate("HOME");
   };
   return (
-    <Screen>
+    <Screen style={{ padding: 10, marginTop: 0 }}>
       <View style={{ width: "100%" }}>
         <View>
           <Label
@@ -62,6 +62,9 @@ function UploadChallan({ route, navigation }) {
               elevation: 0,
               backgroundColor: "rgb(71,118,172)",
               borderRadius: 5,
+              color: "white",
+              paddingLeft: 140,
+              fontWeight: "bold",
             }}
           />
         </View>
@@ -81,12 +84,14 @@ function UploadChallan({ route, navigation }) {
           <Label
             value="Upload Receipt of Above Challan"
             style={{
-              // backgroundColor: "#4ecdc4",
               color: "black",
               marginTop: "5%",
               elevation: 0,
               backgroundColor: "rgb(71,118,172)",
               borderRadius: 5,
+              color: "white",
+              paddingLeft: 75,
+              fontWeight: "bold",
             }}
           />
           <TouchableNativeFeedback onPress={PickImage}>
@@ -121,7 +126,7 @@ function UploadChallan({ route, navigation }) {
             title="Upload"
             textStyle={styles.btn_t}
             height={50}
-            width={"100%"}
+            width={"35%"}
             style={styles.btn}
             onPress={handleUserUpload}
           />
@@ -131,24 +136,19 @@ function UploadChallan({ route, navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  //color pallet
-  // primary: "#fc5c65",
-  // secondary: "#4ecdc4",
-  // black: "#000",
-  // white: "#fff",
-  // medium: "#6e6969",
-  // light: "#f8f4f4",
-  // dark: "#0c0c0c",
-  // danger: "#ff5252",
   btn: {
     backgroundColor: "rgb(82,174,211)",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
     marginTop: "5%",
+    borderRadius: 25,
+    alignSelf: "center",
+    backgroundColor: "rgb(71,118,172)",
   },
   btn_t: {
-    color: "black",
+    color: "white",
+    fontWeight: "bold",
   },
   txt: {
     fontSize: 15,

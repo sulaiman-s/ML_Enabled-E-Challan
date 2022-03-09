@@ -50,44 +50,64 @@ function UserQuery({ navigation }) {
         validationSchema={schema}
       >
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-          <>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <AppInput
               style={{ width: "100%" }}
               placeholder="Name"
               onChangeText={handleChange("name")}
               onBlur={() => setFieldTouched("email")}
+              viewStyle={{
+                width: "80%",
+                borderRadius: 25,
+              }}
             />
             <ErrorMessage error={errors.name} visible={touched.name} />
             <AppInput
-              placeholder="email"
+              placeholder="Email"
               style={{ width: "100%" }}
               onChangeText={handleChange("email")}
               onBlur={() => setFieldTouched("email")}
+              viewStyle={{ width: "80%", borderRadius: 25 }}
             />
             <ErrorMessage error={errors.email} visible={touched.email} />
             <AppInput
-              placeholder="mesage"
-              style={{ width: "100%" }}
+              placeholder="Message"
+              style={{ width: "100%", textAlignVertical: "top" }}
               onChangeText={handleChange("mesage")}
+              viewStyle={{
+                width: "80%",
+                height: "30%",
+                justifyContent: "flex-start",
+                paddingRight: 0,
+                paddingTop: 10,
+                paddingBottom: 0,
+                borderRadius: 20,
+              }}
+              numberOfLines={10}
+              multiline
             />
             <ErrorMessage error={errors.mesage} visible={touched.mesage} />
             <AppButton
-              title="submit"
+              title="Submit"
               onPress={handleSubmit}
               style={{
                 backgroundColor: "rgb(71,118,172)",
                 justifyContent: "center",
                 alignItems: "center",
-                borderWidth: 1,
-                borderRadius: 5,
                 alignSelf: "center",
                 marginTop: 5,
+                borderRadius: 25,
               }}
-              height={60}
-              width="100%"
+              height={50}
+              width="35%"
               textStyle={{ fontSize: 18, color: "white" }}
             />
-          </>
+          </View>
         )}
       </Formik>
     </View>

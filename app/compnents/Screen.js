@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     width: "100%",
-    padding: 10,
-    // marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
+    marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
   },
 });
 

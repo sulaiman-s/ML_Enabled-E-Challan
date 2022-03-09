@@ -45,16 +45,18 @@ function AdminVerification({ route }) {
     // navigation.navigate("HOME");
   };
   return (
-    <Screen>
+    <Screen style={{ padding: 10 }}>
       <Label
         value="Challan Verification"
         style={{
           elevation: 5,
           marginTop: 20,
-          fontWeight: "bold",
           fontSize: 17,
           backgroundColor: "rgb(82,174,211)",
           borderRadius: 5,
+          width: "80%",
+          color: "white",
+          paddingLeft: 70,
         }}
       />
       <View style={styles.ch_view}>

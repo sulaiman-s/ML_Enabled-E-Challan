@@ -6,6 +6,7 @@ import {
   Platform,
   StatusBar,
   ScrollView,
+  ImageBackground,
 } from "react-native";
 import AppButton from "../compnents/AppButton";
 import AppInput from "../compnents/AppInput";
@@ -90,96 +91,137 @@ function RegisterScreen({ navigation }) {
 
   return (
     <Screen>
-      <View style={{ width: "100%", marginVertical: 20 }}>
+      {/* <View style={{ width: "100%", marginVertical: 20 }}>
         <Text style={styles.h_style}>Register</Text>
-      </View>
-      <ScrollView style={{ width: "100%" }}>
-        <UserNameError />
-        <EmailError />
-        <Formik
-          initialValues={{
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
+      </View> */}
+      <ImageBackground
+        source={require("../assets/r1bg.jpeg")}
+        resizeMode="cover"
+        style={{ width: "100%", flex: 1 }}
+      >
+        <ScrollView
+          style={{ flex: 1, width: "100%" }}
+          contentContainerStyle={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
           }}
-          onSubmit={(values) => handleRegister(values)}
-          validationSchema={schema}
         >
-          {({
-            handleSubmit,
-            handleChange,
-            errors,
-            setFieldTouched,
-            touched,
-          }) => (
-            <>
-              <AppInput
-                placeholder="User Name"
-                onChangeText={handleChange("username")}
-                style={styles.input}
-                iconName="information"
-                onBlur={() => setFieldTouched("username")}
-              />
-              <ErrorMessage
-                error={errors.username}
-                visible={touched.username}
-              />
-              <AppInput
-                placeholder="Gmail"
-                onChangeText={handleChange("email")}
-                style={styles.input}
-                iconName="gmail"
-                onBlur={() => setFieldTouched("email")}
-              />
-              <ErrorMessage error={errors.email} visible={touched.email} />
-              <AppInput
-                placeholder="Password"
-                onChangeText={handleChange("password")}
-                style={styles.input}
-                iconName="key-variant"
-                onBlur={() => setFieldTouched("password")}
-                secureTextEntry
-              />
-              <ErrorMessage
-                error={errors.password}
-                visible={touched.password}
-              />
-              <AppInput
-                placeholder="Confirm Password"
-                onChangeText={handleChange("confirmPassword")}
-                style={styles.input}
-                iconName="key-star"
-                onBlur={() => setFieldTouched("confirmPassword")}
-                secureTextEntry
-              />
-              <ErrorMessage
-                error={errors.confirmPassword}
-                visible={touched.confirmPassword}
-              />
-              <View style={{ width: "99%", marginVertical: 10 }}>
-                <AppButton
-                  title="Next"
-                  textStyle={styles.btn_t}
-                  height={50}
-                  width={"100%"}
-                  style={styles.btn}
-                  onPress={handleSubmit}
+          <UserNameError />
+          <EmailError />
+          <Formik
+            initialValues={{
+              username: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            }}
+            onSubmit={(values) => handleRegister(values)}
+            validationSchema={schema}
+          >
+            {({
+              handleSubmit,
+              handleChange,
+              errors,
+              setFieldTouched,
+              touched,
+            }) => (
+              <>
+                <AppInput
+                  placeholder="User Name"
+                  onChangeText={handleChange("username")}
+                  style={styles.input}
+                  iconName="information"
+                  onBlur={() => setFieldTouched("username")}
+                  viewStyle={{
+                    width: "80%",
+                    borderColor: "white",
+                    backgroundColor: "white",
+                  }}
                 />
-              </View>
-              <View style={styles.option_view}>
-                <Text style={styles.option_txt}>Already have an account?.</Text>
-                <Text
-                  style={styles.txt}
-                  onPress={() => navigation.navigate("Login")}
+                <ErrorMessage
+                  error={errors.username}
+                  visible={touched.username}
+                />
+                <AppInput
+                  placeholder="Gmail"
+                  onChangeText={handleChange("email")}
+                  style={styles.input}
+                  iconName="gmail"
+                  onBlur={() => setFieldTouched("email")}
+                  viewStyle={{
+                    width: "80%",
+                    borderColor: "white",
+                    backgroundColor: "white",
+                  }}
+                />
+                <ErrorMessage error={errors.email} visible={touched.email} />
+                <AppInput
+                  placeholder="Password"
+                  onChangeText={handleChange("password")}
+                  style={styles.input}
+                  iconName="key-variant"
+                  onBlur={() => setFieldTouched("password")}
+                  secureTextEntry
+                  viewStyle={{
+                    width: "80%",
+                    borderColor: "white",
+                    backgroundColor: "white",
+                  }}
+                />
+                <ErrorMessage
+                  error={errors.password}
+                  visible={touched.password}
+                />
+                <AppInput
+                  placeholder="Confirm Password"
+                  onChangeText={handleChange("confirmPassword")}
+                  style={styles.input}
+                  iconName="key-star"
+                  onBlur={() => setFieldTouched("confirmPassword")}
+                  secureTextEntry
+                  viewStyle={{
+                    width: "80%",
+                    borderColor: "white",
+                    backgroundColor: "white",
+                  }}
+                />
+                <ErrorMessage
+                  error={errors.confirmPassword}
+                  visible={touched.confirmPassword}
+                />
+                <View
+                  style={{
+                    width: "100%",
+                    marginVertical: 10,
+                    alignItems: "center",
+                  }}
                 >
-                  Click To Log In
-                </Text>
-              </View>
-            </>
-          )}
-        </Formik>
-      </ScrollView>
+                  <AppButton
+                    title="Next"
+                    textStyle={styles.btn_t}
+                    height={50}
+                    width={"35%"}
+                    style={styles.btn}
+                    onPress={handleSubmit}
+                  />
+                </View>
+                <View style={styles.option_view}>
+                  <Text style={styles.option_txt}>
+                    Already have an account?.
+                  </Text>
+                  <Text
+                    style={styles.txt}
+                    onPress={() => navigation.navigate("Login")}
+                  >
+                    Click To Log In
+                  </Text>
+                </View>
+              </>
+            )}
+          </Formik>
+        </ScrollView>
+      </ImageBackground>
     </Screen>
   );
 }
@@ -199,13 +241,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   btn: {
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 3,
   },
   btn_t: {
-    color: "white",
+    color: "black",
   },
   h_style: {
     width: "100%",
@@ -218,22 +260,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 1,
-    borderWidth: 2,
     width: "100%",
     height: 70,
-    borderColor: "gray",
     alignSelf: "center",
-    borderStyle: "dashed",
   },
   option_txt: {
-    fontSize: 15,
+    fontSize: 17,
+    color: "white",
     fontFamily: "Roboto",
+    fontWeight: "bold",
   },
   txt: {
-    fontSize: 15,
+    fontSize: 17,
     fontFamily: "Roboto",
-    color: "blue",
+    color: "lightblue",
+    fontWeight: "bold",
   },
 });
 

@@ -9,26 +9,30 @@ import { ScrollView } from "react-native-gesture-handler";
 
 function AdminMaster({ navigation }) {
   return (
-    <Screen>
-      {/* <Label value="Hello Admin!" style={styles.lbl_h} /> */}
-      {/* <Notification style={{ height: 150 }} /> */}
+    <View style={{ padding: 5, backgroundColor: "lightgray", flex: 1 }}>
       <AdminAlert />
       <Label
         value="Select Options"
         style={{
-          marginTop: "15%",
+          marginTop: "10%",
           elevation: 0,
           backgroundColor: "rgb(71,118,172)",
           borderRadius: 5,
+          width: "80%",
+          height: "5.5%",
+          color: "white",
+          fontWeight: "bold",
+          paddingLeft: "28%",
+          paddingTop: 6,
         }}
       />
-      <ScrollView>
+      <ScrollView style={{ marginTop: 15 }}>
         <View style={styles.btn_view}>
           <AppButton
             title="Generate Challan"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={90}
+            height={80}
             width={166}
             onPress={() => navigation.navigate("capture")}
           />
@@ -36,7 +40,7 @@ function AdminMaster({ navigation }) {
             title="Check Records"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={90}
+            height={80}
             width={166}
             onPress={() => navigation.navigate("Record")}
           />
@@ -46,7 +50,7 @@ function AdminMaster({ navigation }) {
             title="FAQ"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={90}
+            height={80}
             width={166}
             onPress={() => navigation.navigate("help")}
           />
@@ -54,13 +58,13 @@ function AdminMaster({ navigation }) {
             title="Settings"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={90}
+            height={80}
             width={166}
             onPress={() => navigation.navigate("setting")}
           />
         </View>
       </ScrollView>
-    </Screen>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -77,7 +81,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: "white",
+    elevation: 10,
   },
   btn_view: {
     width: "100%",
@@ -85,11 +90,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginTop: 10,
+
+    // marginTop: 10,
   },
   btn_txt: {
     fontSize: 16,
-    color: "white",
+    color: "black",
   },
 });
 

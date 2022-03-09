@@ -33,7 +33,7 @@ function AdminCapture(props) {
           style={{
             backgroundColor: "lightslategray",
             height: 300,
-            width: "100%",
+            width: "95%",
             justifyContent: "center",
             alignItems: "center",
             marginTop: 40,
@@ -61,7 +61,7 @@ function AdminCapture(props) {
         title="Open Camera"
         textStyle={styles.btn_t}
         height={50}
-        width={"100%"}
+        width={"50%"}
         style={styles.btn}
         onPress={handleImageFromCamera}
       />
@@ -69,7 +69,7 @@ function AdminCapture(props) {
         title="Next"
         textStyle={styles.btn_t}
         height={50}
-        width={"100%"}
+        width={"50%"}
         style={styles.btn}
         onPress={() => navigation.navigate("entry")}
       />
@@ -78,10 +78,10 @@ function AdminCapture(props) {
 }
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: "rgb(71,118,172)",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 5,
+    borderRadius: 25,
     marginTop: 20,
   },
   btn_t: {

@@ -39,7 +39,7 @@ function UserChallanList(props) {
   };
 
   return (
-    <Screen>
+    <Screen style={{ padding: 10 }}>
       <UserSearch Search={(t) => setSearch(t)} handleSearch={handleSearch} />
       <Label
         value="Related Challans"
@@ -50,6 +50,8 @@ function UserChallanList(props) {
           elevation: 0,
           backgroundColor: "rgb(82,174,211)",
           borderRadius: 5,
+          fontWeight: "bold",
+          paddingLeft: 120,
         }}
       />
       {dat == null ? (

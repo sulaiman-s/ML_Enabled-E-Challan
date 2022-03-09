@@ -12,9 +12,10 @@ function AppInput({
 }) {
   return (
     <View style={[styles.inp, viewStyle]}>
-      <MaterialCommunityIcons name={iconName} size={30} color="gray" />
+      <MaterialCommunityIcons name={iconName} size={30} color="black" />
       <TextInput
         placeholder={placeholder}
+        placeholderTextColor="black"
         style={style}
         onChangeText={onChangeText}
         {...rest}

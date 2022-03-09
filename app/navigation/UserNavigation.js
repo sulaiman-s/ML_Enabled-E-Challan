@@ -78,12 +78,6 @@ const UserTabNavigator = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          width: "90%",
-          left: "5%",
-          borderRadius: 5,
-          bottom: "1%",
-        },
         tabBarHideOnKeyboard: true,
       }}
     >
@@ -94,7 +88,6 @@ const UserTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" size={size} color={color} />
           ),
-          tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
           tabBarActiveBackgroundColor: "rgb(71,118,172)",
           tabBarInactiveTintColor: "rgb(71,118,172)",
@@ -107,7 +100,6 @@ const UserTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" size={size} color={color} />
           ),
-          tabBarItemStyle: { borderRadius: 5 },
           tabBarActiveTintColor: "white",
           tabBarActiveBackgroundColor: "rgb(71,118,172)",
           tabBarInactiveTintColor: "rgb(71,118,172)",
@@ -125,19 +117,26 @@ const CustomDrawer = (props) => {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView
+      {...props}
+      style={{ backgroundColor: "lightgray" }}
+    >
       <View
         style={{
           width: "100%",
         }}
       >
         <Image
-          source={require("../assets/bck.jpg")}
+          source={require("../assets/db.jpeg")}
           style={{ width: "100%", height: 150 }}
         />
         <View style={{ position: "absolute", top: 90 }}>
-          <Text style={{ color: "white" }}>@{user.name}</Text>
-          <Text style={{ color: "white" }}>{user.email}</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            @{user.name}
+          </Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            {user.email}
+          </Text>
         </View>
       </View>
       <DrawerItemList {...props} />
@@ -180,7 +179,7 @@ const UserDrawer = () => {
       />
       <drawer.Screen
         name="Help"
-        component={Help}
+        component={UserQuery}
         options={{
           drawerIcon: ({ size, color }) => (
             <Ionicons

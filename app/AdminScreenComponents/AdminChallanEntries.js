@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Text, TextInput, Picker } from "react-native";
+import { Modal, Text, TextInput, Picker, Image } from "react-native";
 import AppInput from "../compnents/AppInput";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
@@ -41,7 +41,7 @@ function AdminChallanEntries(props) {
   };
   return (
     <Screen>
-      <Label
+      {/* <Label
         value="Enter the remaining fields fo challan"
         style={{
           elevation: 0,
@@ -51,8 +51,8 @@ function AdminChallanEntries(props) {
           backgroundColor: "rgb(82,174,211)",
           borderRadius: 5,
         }}
-      />
-      <ScrollView>
+      /> */}
+      <ScrollView style={{ width: "100%", flex: 1 }}>
         <Formik
           initialValues={{
             vehicle_number: "",
@@ -69,15 +69,25 @@ function AdminChallanEntries(props) {
             handleSubmit,
             errors,
           }) => (
-            <>
+            <View
+              style={{
+                lex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <AppInput
                 viewStyle={{ height: 60 }}
                 placeholder="Vehicle Number"
-                textAlign="center"
                 style={{ width: "100%" }}
                 caretHidden
                 onChangeText={handleChange("vehicle_number")}
                 onBlur={() => setFieldTouched("vehicle_number")}
+                viewStyle={{
+                  width: "80%",
+                  borderRadius: 25,
+                  paddingLeft: 20,
+                }}
               />
               <ErrorMessage
                 error={errors.vehicle_number}
@@ -86,11 +96,15 @@ function AdminChallanEntries(props) {
               <AppInput
                 viewStyle={{ height: 60 }}
                 placeholder="Enter Location"
-                textAlign="center"
                 style={{ width: "100%" }}
                 caretHidden
                 onChangeText={handleChange("vehicle_location")}
                 onBlur={() => setFieldTouched("vehicle_location")}
+                viewStyle={{
+                  width: "80%",
+                  borderRadius: 25,
+                  paddingLeft: 20,
+                }}
               />
               <ErrorMessage
                 error={errors.vehicle_location}
@@ -99,11 +113,15 @@ function AdminChallanEntries(props) {
               <AppInput
                 viewStyle={{ height: 60 }}
                 placeholder="Enter Amount"
-                textAlign="center"
                 style={{ width: "100%" }}
                 caretHidden
                 onChangeText={handleChange("challan_amount")}
                 onBlur={() => setFieldTouched("challan_amount")}
+                viewStyle={{
+                  width: "80%",
+                  borderRadius: 25,
+                  paddingLeft: 20,
+                }}
               />
               <ErrorMessage
                 error={errors.challan_amount}
@@ -113,8 +131,10 @@ function AdminChallanEntries(props) {
                 style={{
                   borderWidth: 2,
                   height: 60,
-                  width: "100%",
+                  width: "80%",
                   marginVertical: 10,
+                  borderRadius: 30,
+                  paddingLeft: 15,
                 }}
               >
                 <Picker
@@ -123,8 +143,8 @@ function AdminChallanEntries(props) {
                     setVehicle_type(itemValue)
                   }
                   style={{
-                    height: 60,
-                    width: "100%",
+                    height: 50,
+                    width: "90%",
                   }}
                 >
                   <Picker.Item label="Bike" value="Bike" />
@@ -136,8 +156,10 @@ function AdminChallanEntries(props) {
                 style={{
                   borderWidth: 2,
                   height: 60,
-                  width: "100%",
+                  width: "80%",
                   marginVertical: 10,
+                  borderRadius: 30,
+                  paddingLeft: 15,
                 }}
               >
                 <Picker
@@ -146,8 +168,8 @@ function AdminChallanEntries(props) {
                     setVehicle_status(itemValue)
                   }
                   style={{
-                    height: 60,
-                    width: "100%",
+                    height: 50,
+                    width: "90%",
                   }}
                   enabled={false}
                 >
@@ -160,23 +182,32 @@ function AdminChallanEntries(props) {
                 title="Next"
                 textStyle={styles.btn_t}
                 height={50}
-                width={"100%"}
+                width={"35%"}
                 style={styles.btn}
                 onPress={handleSubmit}
               />
-            </>
+            </View>
           )}
         </Formik>
+        <Image
+          source={require("../assets/cetf.png")}
+          resizeMode="center"
+          style={{
+            width: 100,
+            height: 130,
+            alignSelf: "center",
+          }}
+        ></Image>
       </ScrollView>
     </Screen>
   );
 }
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: "rgb(71,118,172)",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 5,
+    borderRadius: 25,
     marginTop: 25,
   },
   btn_t: {

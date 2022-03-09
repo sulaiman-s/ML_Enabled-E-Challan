@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
   Text,
-  ImageBackground,
+  Image,
   Platform,
   StatusBar,
 } from "react-native";
@@ -21,14 +21,15 @@ function FirstScreen({ navigation }) {
     navigation.navigate("Register");
   };
   return (
-    <Screen>
-      <ImageBackground
-        source={require("../assets/bg.jpg")}
-        resizeMode="cover"
-        style={styles.bg_img}
-      >
+    <Screen style={{ backgroundColor: "#2dc3d4" }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text style={styles.h_text}>AVND</Text>
-      </ImageBackground>
+        <Image
+          source={require("../assets/fff.png")}
+          resizeMode="contain"
+          style={styles.bg_img}
+        ></Image>
+      </View>
       <View style={styles.btn_view}>
         <AppButton
           title="LOG IN"
@@ -41,8 +42,8 @@ function FirstScreen({ navigation }) {
         <AppButton
           title="REGISTER"
           height={52}
-          width={167}
-          style={styles.btn}
+          width={150}
+          style={[styles.btn, { opacity: 0.8 }]}
           textStyle={styles.btn_txt}
           onPress={handleRegister}
         />
@@ -53,36 +54,38 @@ function FirstScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   bg_img: {
-    width: "100%",
-    flex: 1,
-    justifyContent: "center",
-    opacity: 0.7,
-    alignItems: "center",
-    marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
+    width: 250,
+    height: 250,
   },
   h_text: {
     fontWeight: "bold",
     fontFamily: "Roboto",
     fontSize: 30,
-    marginBottom: "95%",
+    color: "white",
+    paddingBottom: 10,
   },
   btn_view: {
-    flex: 0.2,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flex: 0.7,
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    // backgroundColor: "black",
   },
   btn: {
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgb(82,174,211)",
+    // backgroundColor: "rgb(82,174,211)",
+    backgroundColor: "white",
+    borderRadius: 25,
+    marginVertical: 12,
   },
   btn_txt: {
     fontFamily: "Roboto",
-    color: "white",
+    color: "black",
     fontSize: 18,
+    fontWeight: "bold",
   },
 });
 

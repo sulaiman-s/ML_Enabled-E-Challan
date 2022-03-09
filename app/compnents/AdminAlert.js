@@ -50,9 +50,14 @@ function AdminAlert(props) {
           <Label
             value="Message Alerts"
             style={{
-              backgroundColor: "rgb(82,174,211)",
+              backgroundColor: "#2dc3d4",
               marginTop: "3%",
               borderRadius: 5,
+              width: "80%",
+              color: "white",
+              fontWeight: "bold",
+              paddingLeft: "25%",
+              paddingTop: 15,
             }}
           />
           <Text
@@ -89,9 +94,11 @@ function AdminAlert(props) {
           <Label
             value="Message Alerts"
             style={{
-              backgroundColor: "rgb(82,174,211)",
+              backgroundColor: "#2dc3d4",
               marginTop: "3%",
               borderRadius: 5,
+              color: "white",
+              fontWeight: "bold",
             }}
           />
           <Text
@@ -114,18 +121,25 @@ function AdminAlert(props) {
         <TouchableOpacity
           style={{
             height: "5%",
-            width: "100%",
-            backgroundColor: "rgb(82,174,211)",
+            width: "80%",
+            backgroundColor: "rgb(71,118,172)",
             // alignItems: "center",
             justifyContent: "center",
-            marginTop: "5%",
+            // marginTop: "5%",
             borderRadius: 5,
+            alignSelf: "center",
+            marginTop: 5,
           }}
           onPress={() => setvisi(true)}
         >
           <Text
-            style={{ fontSize: 17, position: "absolute" }}
-            numberOfLines={1}
+            style={{
+              fontSize: 17,
+              position: "absolute",
+              alignSelf: "center",
+              color: "white",
+              fontWeight: "bold",
+            }}
           >
             Notifications
           </Text>
@@ -138,6 +152,7 @@ function AdminAlert(props) {
               borderRadius: 10,
               alignSelf: "flex-end",
               marginBottom: 10,
+              color: "white",
             }}
           >
             1
@@ -154,7 +169,12 @@ function AdminAlert(props) {
         style={{
           elevation: 0,
           backgroundColor: "rgb(71,118,172)",
-          borderRadius: 5,
+          marginTop: "5%",
+          width: "40%",
+          borderRadius: 25,
+          height: 40,
+          color: "white",
+          fontWeight: "bold",
         }}
       />
       <Message />
@@ -166,6 +186,9 @@ function AdminAlert(props) {
           justifyContent: "center",
           alignItems: "center",
           top: "2%",
+          borderRadius: 3,
+          borderWidth: 5,
+          borderColor: "white",
         }}
       >
         {alertImage.Alert_Image ? (
@@ -192,11 +215,7 @@ function AdminAlert(props) {
             }}
             onPress={() => setvisi(false)}
           >
-            <MaterialCommunityIcons
-              name="close"
-              size={30}
-              color="rgb(71,118,172)"
-            />
+            <MaterialCommunityIcons name="close" size={30} color="#2dc3d4" />
           </TouchableOpacity>
           <View
             style={{

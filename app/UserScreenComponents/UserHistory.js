@@ -11,10 +11,16 @@ function UserHistory(props) {
   const userHistory = get_userHistory();
   const auth = useContext(AuthContext);
   return (
-    <Screen style={{ marginTop: 50 }}>
+    <Screen style={{ padding: 10 }}>
       <Label
         value="Upload History"
-        style={{ backgroundColor: "rgb(71,118,172)", borderRadius: 5 }}
+        style={{
+          backgroundColor: "rgb(71,118,172)",
+          borderRadius: 5,
+          color: "white",
+          paddingLeft: 130,
+          fontWeight: "bold",
+        }}
       />
 
       {auth.user.is_admin
@@ -35,7 +41,7 @@ function UserHistory(props) {
                   width: "33%",
                   height: "100%",
                   paddingTop: 15,
-                  backgroundColor: "#4ecdc4",
+                  backgroundColor: "white",
                 }}
               >
                 Vehicle:{v.vehicle_number}
@@ -77,7 +83,7 @@ function UserHistory(props) {
                   width: "33%",
                   height: "100%",
                   paddingTop: 15,
-                  backgroundColor: "rgb(82,174,211)",
+                  backgroundColor: "white",
                 }}
               >
                 Vehicle:{v.number}
