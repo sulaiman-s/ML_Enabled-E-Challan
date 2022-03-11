@@ -28,35 +28,20 @@ function AdminCapture(props) {
   return (
     <Screen>
       <Text>Waiting... </Text>
+
       <TouchableNativeFeedback onPress={handleImageFromLibrary}>
-        <View
-          style={{
-            backgroundColor: "lightslategray",
-            height: 300,
-            width: "95%",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 40,
-            marginBottom: 20,
-            borderRadius: 10,
-          }}
-        >
+        <View style={styles.img_block}>
           {url == null ? (
             <>
               <MaterialCommunityIcons name="camera" size={100} color="white" />
               <Text> Select Image From Library </Text>
             </>
           ) : (
-            <Image
-              source={{ uri: url }}
-              style={{
-                height: "100%",
-                width: "100%",
-              }}
-            />
+            <Image source={{ uri: url }} style={styles.img} />
           )}
         </View>
       </TouchableNativeFeedback>
+
       <AppButton
         title="Open Camera"
         textStyle={styles.btn_t}
@@ -65,6 +50,7 @@ function AdminCapture(props) {
         style={styles.btn}
         onPress={handleImageFromCamera}
       />
+
       <AppButton
         title="Next"
         textStyle={styles.btn_t}
@@ -87,6 +73,20 @@ const styles = StyleSheet.create({
   btn_t: {
     color: "white",
     fontSize: 16,
+  },
+  img_block: {
+    backgroundColor: "lightslategray",
+    height: 300,
+    width: "95%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 40,
+    marginBottom: 20,
+    borderRadius: 10,
+  },
+  img: {
+    height: "100%",
+    width: "100%",
   },
 });
 

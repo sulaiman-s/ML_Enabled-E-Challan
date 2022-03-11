@@ -11,21 +11,7 @@ function AdminMaster({ navigation }) {
   return (
     <View style={{ padding: 5, backgroundColor: "lightgray", flex: 1 }}>
       <AdminAlert />
-      <Label
-        value="Select Options"
-        style={{
-          marginTop: "10%",
-          elevation: 0,
-          backgroundColor: "rgb(71,118,172)",
-          borderRadius: 5,
-          width: "80%",
-          height: "5.5%",
-          color: "white",
-          fontWeight: "bold",
-          paddingLeft: "28%",
-          paddingTop: 6,
-        }}
-      />
+      <Label value="Select Options" style={styles.label1} />
       <ScrollView style={{ marginTop: 15 }}>
         <View style={styles.btn_view}>
           <AppButton
@@ -45,6 +31,7 @@ function AdminMaster({ navigation }) {
             onPress={() => navigation.navigate("Record")}
           />
         </View>
+
         <View style={styles.btn_view}>
           <AppButton
             title="FAQ"
@@ -54,6 +41,7 @@ function AdminMaster({ navigation }) {
             width={166}
             onPress={() => navigation.navigate("help")}
           />
+
           <AppButton
             title="Settings"
             style={styles.btn}
@@ -96,6 +84,18 @@ const styles = StyleSheet.create({
   btn_txt: {
     fontSize: 16,
     color: "black",
+  },
+  label1: {
+    marginTop: "10%",
+    elevation: 0,
+    backgroundColor: "rgb(71,118,172)",
+    borderRadius: 5,
+    width: "80%",
+    height: "5.5%",
+    color: "white",
+    fontWeight: "bold",
+    paddingLeft: "28%",
+    paddingTop: 6,
   },
 });
 

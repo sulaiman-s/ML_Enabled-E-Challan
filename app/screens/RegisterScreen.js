@@ -97,12 +97,17 @@ function RegisterScreen({ navigation }) {
       <ImageBackground
         source={require("../assets/r1bg.jpeg")}
         resizeMode="cover"
-        style={{ width: "100%", flex: 1 }}
+        style={{
+          width: "100%",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <ScrollView
           style={{ flex: 1, width: "100%" }}
           contentContainerStyle={{
-            flex: 1,
+            flexGrow: 1,
             alignItems: "center",
             justifyContent: "center",
           }}

@@ -1,5 +1,4 @@
 import React from "react";
-import AppInput from "../compnents/AppInput";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
 import { StyleSheet, View, Text } from "react-native";
@@ -7,10 +6,11 @@ import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/core";
 import Url from "../Authorization/ApiUrlEndpoints";
 import axios from "axios";
-import get_historyItems, { setHistory } from "../ServerResponseData/History";
+import { setHistory } from "../ServerResponseData/History";
 
 function AdminVerification({ route }) {
   const navigation = useNavigation();
+
   const {
     vehicle_number,
     vehicle_type,
@@ -18,6 +18,7 @@ function AdminVerification({ route }) {
     challan_amount,
     vehicle_location,
   } = route.params.cha;
+
   const handleUpload = async () => {
     const { data } = await axios
       .post(Url + "/challans/allchallans/", {
@@ -28,8 +29,10 @@ function AdminVerification({ route }) {
         challan_location: vehicle_location,
       })
       .catch((error) => console.log(error));
+
     console.log(data);
     alert("submitted successfully");
+
     const d = new Date();
     const year = d.getFullYear();
     const months = d.getMonth();
@@ -38,27 +41,12 @@ function AdminVerification({ route }) {
       ...route.params.cha,
       time: `${year}/${months + 1}/${day}`,
     };
-    console.log(items);
     setHistory(items);
-    const tt = get_historyItems();
-    console.log(tt[0]);
-    // navigation.navigate("HOME");
+    navigation.navigate("HOME");
   };
   return (
     <Screen style={{ padding: 10 }}>
-      <Label
-        value="Challan Verification"
-        style={{
-          elevation: 5,
-          marginTop: 20,
-          fontSize: 17,
-          backgroundColor: "rgb(82,174,211)",
-          borderRadius: 5,
-          width: "80%",
-          color: "white",
-          paddingLeft: 70,
-        }}
-      />
+      <Label value="Challan Verification" style={styles.label1} />
       <View style={styles.ch_view}>
         <View style={styles.ch_h}>
           <Text style={styles.ch_h_txt}>Challan No #</Text>
@@ -139,6 +127,16 @@ const styles = StyleSheet.create({
   btn_txt: {
     fontSize: 16,
     color: "white",
+  },
+  label1: {
+    elevation: 5,
+    marginTop: 20,
+    fontSize: 17,
+    backgroundColor: "rgb(82,174,211)",
+    borderRadius: 5,
+    width: "80%",
+    color: "white",
+    paddingLeft: 70,
   },
 });
 

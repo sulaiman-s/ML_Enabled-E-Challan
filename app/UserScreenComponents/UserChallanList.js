@@ -41,19 +41,7 @@ function UserChallanList(props) {
   return (
     <Screen style={{ padding: 10 }}>
       <UserSearch Search={(t) => setSearch(t)} handleSearch={handleSearch} />
-      <Label
-        value="Related Challans"
-        style={{
-          // backgroundColor: "#ACD1AF",
-          color: "white",
-          marginTop: 5,
-          elevation: 0,
-          backgroundColor: "rgb(82,174,211)",
-          borderRadius: 5,
-          fontWeight: "bold",
-          paddingLeft: 120,
-        }}
-      />
+      <Label value="Related Challans" style={styles.label1} />
       {dat == null ? (
         <View>
           <Text>
@@ -82,5 +70,15 @@ function UserChallanList(props) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  label1: {
+    color: "white",
+    marginTop: 5,
+    elevation: 0,
+    backgroundColor: "rgb(82,174,211)",
+    borderRadius: 5,
+    fontWeight: "bold",
+    paddingLeft: 120,
+  },
+});
 export default UserChallanList;

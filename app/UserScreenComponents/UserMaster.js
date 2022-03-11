@@ -12,21 +12,7 @@ function UserMaster(props) {
   return (
     <Screen style={{ padding: 10, marginTop: 0, backgroundColor: "lightgray" }}>
       <AdminAlert />
-      <Label
-        value="Select Options"
-        style={{
-          marginTop: "10%",
-          elevation: 0,
-          backgroundColor: "rgb(71,118,172)",
-          borderRadius: 5,
-          width: "80%",
-          height: "5.5%",
-          color: "white",
-          fontWeight: "bold",
-          paddingLeft: "28%",
-          paddingTop: 6,
-        }}
-      />
+      <Label value="Select Options" style={styles.label1} />
       <ScrollView>
         <View style={styles.btn_view}>
           <AppButton
@@ -85,7 +71,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     backgroundColor: "white",
-    elevation: 10,
+    elevation: 7,
+    marginHorizontal: 5,
   },
   btn_view: {
     width: "100%",
@@ -97,6 +84,18 @@ const styles = StyleSheet.create({
   btn_txt: {
     fontSize: 16,
     color: "black",
+  },
+  label1: {
+    marginTop: "10%",
+    elevation: 0,
+    backgroundColor: "rgb(71,118,172)",
+    borderRadius: 5,
+    width: "80%",
+    height: "5.5%",
+    color: "white",
+    fontWeight: "bold",
+    paddingLeft: "28%",
+    paddingTop: 6,
   },
 });
 

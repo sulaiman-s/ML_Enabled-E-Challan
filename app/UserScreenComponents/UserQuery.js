@@ -14,10 +14,7 @@ function UserQuery({ navigation }) {
     return <Text style={{ color: "red" }}>{error}</Text>;
   };
   let schema = Yup.object().shape({
-    name: Yup.string()
-      .required()
-      .matches("[^0-9]", "Add minimum one alphabet")
-      .label("UserName"),
+    name: Yup.string().required().label("UserName"),
     email: Yup.string().email().required().label("email"),
     mesage: Yup.string().required().label("mesage"),
   });
@@ -57,37 +54,26 @@ function UserQuery({ navigation }) {
             }}
           >
             <AppInput
-              style={{ width: "100%" }}
+              style={styles.s}
               placeholder="Name"
               onChangeText={handleChange("name")}
               onBlur={() => setFieldTouched("email")}
-              viewStyle={{
-                width: "80%",
-                borderRadius: 25,
-              }}
+              viewStyle={styles.v}
             />
             <ErrorMessage error={errors.name} visible={touched.name} />
             <AppInput
               placeholder="Email"
-              style={{ width: "100%" }}
+              style={styles.s}
               onChangeText={handleChange("email")}
               onBlur={() => setFieldTouched("email")}
-              viewStyle={{ width: "80%", borderRadius: 25 }}
+              viewStyle={styles.v}
             />
             <ErrorMessage error={errors.email} visible={touched.email} />
             <AppInput
               placeholder="Message"
               style={{ width: "100%", textAlignVertical: "top" }}
               onChangeText={handleChange("mesage")}
-              viewStyle={{
-                width: "80%",
-                height: "30%",
-                justifyContent: "flex-start",
-                paddingRight: 0,
-                paddingTop: 10,
-                paddingBottom: 0,
-                borderRadius: 20,
-              }}
+              viewStyle={styles.msg_v}
               numberOfLines={10}
               multiline
             />
@@ -95,17 +81,10 @@ function UserQuery({ navigation }) {
             <AppButton
               title="Submit"
               onPress={handleSubmit}
-              style={{
-                backgroundColor: "rgb(71,118,172)",
-                justifyContent: "center",
-                alignItems: "center",
-                alignSelf: "center",
-                marginTop: 5,
-                borderRadius: 25,
-              }}
+              style={styles.btn_s}
               height={50}
               width="35%"
-              textStyle={{ fontSize: 18, color: "white" }}
+              textStyle={styles.btn_t}
             />
           </View>
         )}
@@ -120,6 +99,29 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
+  btn_s: {
+    backgroundColor: "rgb(71,118,172)",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: 5,
+    borderRadius: 25,
+  },
+  btn_t: {
+    fontSize: 18,
+    color: "white",
+  },
+  msg_v: {
+    width: "80%",
+    height: "30%",
+    justifyContent: "flex-start",
+    paddingRight: 0,
+    paddingTop: 10,
+    paddingBottom: 0,
+    borderRadius: 20,
+  },
+  s: { width: "100%" },
+  v: { width: "80%", borderRadius: 25 },
 });
 
 export default UserQuery;
