@@ -16,7 +16,7 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import AuthContext from "../Authorization/Context";
-import { TouchableNativeFeedback } from "react-native";
+import { AsyncStorage, TouchableNativeFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { Image, View, Text } from "react-native";
 import Legal from "../screens/Legal";
@@ -126,7 +126,9 @@ const AdminTabNavigator = () => {
 };
 
 const Def = () => {
-  return <></>;
+  const authContext = useContext(AuthContext);
+  AsyncStorage.removeItem("JwtToken").catch((error) => console.log(error));
+  return <>{authContext.setUser(null)}</>;
 };
 
 const CustomDrawer = (props) => {
@@ -166,11 +168,6 @@ const CustomDrawer = (props) => {
   );
 };
 
-const handleLogout = () => {
-  const authContext = useContext(AuthContext);
-  authContext.setUser(null);
-  return <Def />;
-};
 const AdminDrawer = () => {
   return (
     <drawer.Navigator
@@ -223,7 +220,7 @@ const AdminDrawer = () => {
       />
       <drawer.Screen
         name="Log Out"
-        component={handleLogout}
+        component={Def}
         options={{
           drawerIcon: ({ size, color }) => (
             <Ionicons name="exit-outline" size={size} color={color} />

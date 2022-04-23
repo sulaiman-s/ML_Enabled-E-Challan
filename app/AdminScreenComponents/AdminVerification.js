@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Modal } from "react-native";
 import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/core";
 import Url from "../Authorization/ApiUrlEndpoints";
 import axios from "axios";
 import { setHistory } from "../ServerResponseData/History";
+import LottiView from "lottie-react-native";
 
 function AdminVerification({ route }) {
   const navigation = useNavigation();
+  const [visi, setvisi] = useState(false);
 
   const {
     vehicle_number,
@@ -20,6 +22,7 @@ function AdminVerification({ route }) {
   } = route.params.cha;
 
   const handleUpload = async () => {
+    setvisi(true);
     const { data } = await axios
       .post(Url + "/challans/allchallans/", {
         vehicle_number: vehicle_number,
@@ -30,9 +33,6 @@ function AdminVerification({ route }) {
       })
       .catch((error) => console.log(error));
 
-    console.log(data);
-    alert("submitted successfully");
-
     const d = new Date();
     const year = d.getFullYear();
     const months = d.getMonth();
@@ -42,7 +42,9 @@ function AdminVerification({ route }) {
       time: `${year}/${months + 1}/${day}`,
     };
     setHistory(items);
-    navigation.navigate("HOME");
+    setTimeout(() => {
+      navigation.navigate("HOME");
+    }, 3000);
   };
   return (
     <Screen style={{ padding: 10 }}>
@@ -78,6 +80,17 @@ function AdminVerification({ route }) {
           onPress={handleUpload}
         />
       </View>
+      <Modal visible={visi}>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <LottiView
+            autoPlay
+            loop={false}
+            source={require("../assets/anim/doneanim.json")}
+          />
+        </View>
+      </Modal>
     </Screen>
   );
 }

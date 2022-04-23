@@ -6,9 +6,9 @@
     "orientation": "portrait",
     "icon": "./app/assets/logo-red.png",
     "splash": {
-      "image": "./app/assets/splash.png",
+      "image": "./app/assets/bill.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2dc3d4"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

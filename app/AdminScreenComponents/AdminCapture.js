@@ -8,10 +8,12 @@ import {
   View,
   Image,
   StyleSheet,
+  Modal,
 } from "react-native";
 import AppButton from "../compnents/AppButton";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/core";
+import axios from "axios";
 
 function AdminCapture(props) {
   const navigation = useNavigation();
@@ -24,6 +26,16 @@ function AdminCapture(props) {
   const handleImageFromLibrary = async () => {
     const result = await ImagePicker.launchImageLibraryAsync();
     if (!result.cancelled) setUrl(result.uri);
+  };
+  const handleNext = async () => {
+    var d = new FormData();
+    d.append("image", { uri: url, name: "modelImage.jpg", type: "image/jpg" });
+    var { data } = await axios
+      .post("http://192.168.2.103:5000/img", d, {
+        onUploadProgress: (p) => console.log(p),
+      })
+      .catch((error) => console.log(error));
+    navigation.navigate("entry", { plate: data });
   };
   return (
     <Screen>
@@ -57,8 +69,12 @@ function AdminCapture(props) {
         height={50}
         width={"50%"}
         style={styles.btn}
-        onPress={() => navigation.navigate("entry")}
+        onPress={handleNext}
       />
+      <Modal
+        visible={false}
+        style={{ height: 30, margin: 0, backgroundColor: "#00000080" }}
+      ></Modal>
     </Screen>
   );
 }

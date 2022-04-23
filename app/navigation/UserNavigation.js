@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -15,7 +15,12 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/core";
-import { Image, TouchableNativeFeedback, View } from "react-native";
+import {
+  Image,
+  TouchableNativeFeedback,
+  View,
+  AsyncStorage,
+} from "react-native";
 import { Text } from "react-native";
 import Legal from "../screens/Legal";
 import Help from "../screens/Help";
@@ -110,7 +115,9 @@ const UserTabNavigator = () => {
 };
 
 const Def = () => {
-  return <></>;
+  const authContext = useContext(AuthContext);
+  AsyncStorage.removeItem("JwtToken").catch((error) => console.log(error));
+  return <>{authContext.setUser(null)}</>;
 };
 
 const CustomDrawer = (props) => {
@@ -144,11 +151,6 @@ const CustomDrawer = (props) => {
   );
 };
 
-const handleLogout = () => {
-  const authContext = useContext(AuthContext);
-  authContext.setUser(null);
-  return <Def />;
-};
 const UserDrawer = () => {
   return (
     <drawer.Navigator
@@ -201,7 +203,7 @@ const UserDrawer = () => {
       />
       <drawer.Screen
         name="Log Out"
-        component={handleLogout}
+        component={Def}
         options={{
           drawerIcon: ({ size, color }) => (
             <Ionicons name="exit-outline" size={size} color={color} />

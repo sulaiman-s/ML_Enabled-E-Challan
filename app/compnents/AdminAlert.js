@@ -15,7 +15,7 @@ import Label from "./label";
 
 function AdminAlert(props) {
   const [alertImage, setAlertImage] = useState({});
-  const [alertMessage, setAlertMessage] = useState({});
+  const [alertMessage, setAlertMessage] = useState([]);
   const [visi, setvisi] = useState(false);
   const getAlertImage = async () => {
     const { data } = await axios
@@ -39,7 +39,7 @@ function AdminAlert(props) {
   }, []);
 
   const getAlertsModal = () => {
-    if (alertImage.Alert_Image && alertMessage.Alert_Message) {
+    if (alertImage.Alert_Image && alertMessage) {
       return (
         <>
           <Image
@@ -60,20 +60,23 @@ function AdminAlert(props) {
               paddingTop: 15,
             }}
           />
-          <Text
-            style={{
-              fontSize: 16,
-              height: "30%",
-              width: "100%",
-              marginTop: 10,
-            }}
-          >
-            {alertMessage.Alert_Message}
-          </Text>
+          {alertMessage.map((item) => (
+            <Text
+              key={item.id}
+              style={{
+                fontSize: 16,
+                // height: "30%",
+                width: "100%",
+                marginTop: 10,
+              }}
+            >
+              {item.Alert_Message}
+            </Text>
+          ))}
         </>
       );
     }
-    if (alertImage.Alert_Image && !alertMessage.Alert_Message) {
+    if (alertImage.Alert_Image && !alertMessage) {
       return (
         <Image
           source={{ uri: Url + alertImage.Alert_Image }}
@@ -82,7 +85,7 @@ function AdminAlert(props) {
         />
       );
     }
-    if (alertMessage.Alert_Message && !alertImage.Alert_Image) {
+    if (alertMessage && !alertImage.Alert_Image) {
       return (
         <View
           style={{
@@ -101,70 +104,70 @@ function AdminAlert(props) {
               fontWeight: "bold",
             }}
           />
-          <Text
-            style={{
-              fontSize: 17,
-              // height: "100%",
-              // width: "100%",
-              alignSelf: "center",
-            }}
-          >
-            {alertMessage.Alert_Message}
-          </Text>
+          {alertMessage.map((item) => (
+            <Text
+              key={item.id}
+              style={{
+                fontSize: 16,
+                // height: "30%",
+                width: "100%",
+                marginTop: 10,
+              }}
+            >
+              {item.Alert_Message}
+            </Text>
+          ))}
         </View>
       );
     }
   };
   const Message = () => {
-    if (alertMessage.Alert_Message) {
-      return (
-        <TouchableOpacity
+    return (
+      <TouchableOpacity
+        style={{
+          height: "5%",
+          width: "80%",
+          backgroundColor: "rgb(71,118,172)",
+          // alignItems: "center",
+          justifyContent: "center",
+          // marginTop: "5%",
+          borderRadius: 5,
+          alignSelf: "center",
+          marginTop: 5,
+        }}
+        onPress={() => setvisi(true)}
+      >
+        <Text
           style={{
-            height: "5%",
-            width: "80%",
-            backgroundColor: "rgb(71,118,172)",
-            // alignItems: "center",
-            justifyContent: "center",
-            // marginTop: "5%",
-            borderRadius: 5,
+            fontSize: 17,
+            position: "absolute",
             alignSelf: "center",
-            marginTop: 5,
+            color: "white",
+            fontWeight: "bold",
           }}
-          onPress={() => setvisi(true)}
         >
-          <Text
-            style={{
-              fontSize: 17,
-              position: "absolute",
-              alignSelf: "center",
-              color: "white",
-              fontWeight: "bold",
-            }}
-          >
-            Notifications
-          </Text>
-          <Text
-            style={{
-              backgroundColor: "rgb(71,118,172)",
-              position: "relative",
-              paddingLeft: 6,
-              width: 20,
-              borderRadius: 10,
-              alignSelf: "flex-end",
-              marginBottom: 10,
-              color: "white",
-            }}
-          >
-            1
-          </Text>
-        </TouchableOpacity>
-      );
-    }
-    return <></>;
+          Notifications
+        </Text>
+        <Text
+          style={{
+            backgroundColor: "rgb(71,118,172)",
+            position: "relative",
+            paddingLeft: 6,
+            width: 20,
+            borderRadius: 10,
+            alignSelf: "flex-end",
+            marginBottom: 10,
+            color: "white",
+          }}
+        >
+          {alertMessage.length}
+        </Text>
+      </TouchableOpacity>
+    );
   };
   return (
     <>
-      <Label
+      {/* <Label
         value="Alerts"
         style={{
           elevation: 0,
@@ -176,7 +179,7 @@ function AdminAlert(props) {
           color: "white",
           fontWeight: "bold",
         }}
-      />
+      /> */}
       <Message />
       <View
         style={{

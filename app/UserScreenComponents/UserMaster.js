@@ -22,6 +22,8 @@ function UserMaster(props) {
             height={90}
             width={166}
             onPress={() => navigation.navigate("Record")}
+            image={require("../assets/cr.png")}
+            image_style={{ height: 40, width: 40 }}
           />
           <AppButton
             title="Help"
@@ -30,6 +32,8 @@ function UserMaster(props) {
             height={90}
             width={166}
             onPress={() => navigation.navigate("Help")}
+            image={require("../assets/help.png")}
+            image_style={{ height: 40, width: 40 }}
           />
         </View>
 
@@ -41,6 +45,8 @@ function UserMaster(props) {
             height={90}
             width={166}
             onPress={() => navigation.navigate("help")}
+            image={require("../assets/faqs.png")}
+            image_style={{ height: 40, width: 40 }}
           />
           <AppButton
             title="Settings"
@@ -49,6 +55,8 @@ function UserMaster(props) {
             height={90}
             width={166}
             onPress={() => navigation.navigate("setting")}
+            image={require("../assets/settings.png")}
+            image_style={{ height: 40, width: 40 }}
           />
         </View>
       </ScrollView>
@@ -80,6 +88,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    marginVertical: 5,
   },
   btn_txt: {
     fontSize: 16,

@@ -23,7 +23,6 @@ import LottiView from "lottie-react-native";
 function UploadChallan({ route, navigation }) {
   const [url, setUrl] = useState();
   const [visi, setvisi] = useState(false);
-  const [prog, setProg] = useState();
 
   const PickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync();
@@ -42,8 +41,6 @@ function UploadChallan({ route, navigation }) {
       headers: { Authorization: "JWT" + Token.refresh },
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
-      onUploadProgress: (ProgressEvent) =>
-        setProg(ProgressEvent.loaded / ProgressEvent.total),
     });
     const d = new Date();
     const year = d.getFullYear();
@@ -55,7 +52,7 @@ function UploadChallan({ route, navigation }) {
       time: `${year}/${months + 1}/${day}`,
     });
     setTimeout(() => {
-      setvisi(false);
+      // setvisi(false);
       navigation.navigate("HOME");
     }, 3000);
   };

@@ -18,17 +18,21 @@ function AdminMaster({ navigation }) {
             title="Generate Challan"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={80}
+            height={90}
             width={166}
             onPress={() => navigation.navigate("capture")}
+            image={require("../assets/bill.png")}
+            image_style={{ height: 40, width: 40 }}
           />
           <AppButton
             title="Check Records"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={80}
+            height={90}
             width={166}
             onPress={() => navigation.navigate("Record")}
+            image={require("../assets/cr.png")}
+            image_style={{ height: 40, width: 40 }}
           />
         </View>
 
@@ -37,18 +41,22 @@ function AdminMaster({ navigation }) {
             title="FAQ"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={80}
+            height={90}
             width={166}
             onPress={() => navigation.navigate("help")}
+            image={require("../assets/faqs.png")}
+            image_style={{ height: 40, width: 40 }}
           />
 
           <AppButton
             title="Settings"
             style={styles.btn}
             textStyle={styles.btn_txt}
-            height={80}
+            height={90}
             width={166}
             onPress={() => navigation.navigate("setting")}
+            image={require("../assets/settings.png")}
+            image_style={{ height: 40, width: 40 }}
           />
         </View>
       </ScrollView>
@@ -78,6 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    marginVertical: 5,
 
     // marginTop: 10,
   },

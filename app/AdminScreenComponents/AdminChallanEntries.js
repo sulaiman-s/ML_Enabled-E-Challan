@@ -9,10 +9,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-function AdminChallanEntries(props) {
+function AdminChallanEntries({ route }) {
   const navigation = useNavigation();
   const [vehicle_type, setVehicle_type] = useState("Bike");
   const [vehicle_status, setVehicle_status] = useState("NotPaid");
+  const plate = route.params.plate;
+
+  console.log(plate);
 
   const ErrorMessage = ({ error, visible }) => {
     if (!visible || !error) return null;
@@ -20,11 +23,7 @@ function AdminChallanEntries(props) {
   };
 
   const schema = Yup.object().shape({
-    vehicle_number: Yup.string()
-      .required()
-      .max(8)
-      .min(2)
-      .label("Vehicle Number"),
+    vehicle_number: Yup.string().required().label("Vehicle Number"),
     vehicle_location: Yup.string().max(15).required(),
     challan_amount: Yup.string()
       .required()
@@ -68,10 +67,10 @@ function AdminChallanEntries(props) {
               <AppInput
                 placeholder="Vehicle Number"
                 style={styles.inp_s}
-                caretHidden
                 onChangeText={handleChange("vehicle_number")}
                 onBlur={() => setFieldTouched("vehicle_number")}
                 viewStyle={styles.inp_v}
+                value={plate}
               />
               <ErrorMessage
                 error={errors.vehicle_number}
@@ -81,7 +80,6 @@ function AdminChallanEntries(props) {
               <AppInput
                 placeholder="Enter Location"
                 style={styles.inp_s}
-                caretHidden
                 onChangeText={handleChange("vehicle_location")}
                 onBlur={() => setFieldTouched("vehicle_location")}
                 viewStyle={styles.inp_v}
@@ -94,7 +92,6 @@ function AdminChallanEntries(props) {
               <AppInput
                 placeholder="Enter Amount"
                 style={styles.inp_s}
-                caretHidden
                 onChangeText={handleChange("challan_amount")}
                 onBlur={() => setFieldTouched("challan_amount")}
                 viewStyle={styles.inp_v}
