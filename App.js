@@ -7,11 +7,12 @@ import { SavedToken } from "./app/Authorization/JwtToken";
 import AdminDrawer from "./app/navigation/AdminNavigation";
 import AuthNavigator from "./app/navigation/AuthNavigation";
 import UserDrawer from "./app/navigation/UserNavigation";
-
+import AppLoading from "expo-app-loading";
 export default function App() {
   const [user, setUser] = useState();
+  const [ready, setReady] = useState(false);
 
-  const checker = () => {
+  const Check_user_InMemory = () => {
     if (!user) {
       AsyncStorage.getItem("JwtToken")
         .then((t) => {
@@ -19,8 +20,8 @@ export default function App() {
           return JSON.parse(t);
         })
         .then((tk) => {
-          SavedToken(tk.refresh);
           if (tk != null || tk != undefined) {
+            SavedToken(tk.refresh);
             const u = jwtDecode(tk.refresh);
             if (u.exp < Date.now()) {
               setUser(u);
@@ -29,6 +30,9 @@ export default function App() {
         })
         .catch((error) => console.log(error));
     }
+  };
+
+  const checker = () => {
     if (user) {
       if (!user.is_admin) {
         return <UserDrawer />;
@@ -37,6 +41,12 @@ export default function App() {
       }
     } else return <AuthNavigator />;
   };
+  if (!ready) {
+    <AppLoading
+      startAsync={Check_user_InMemory()}
+      onFinish={() => setReady(true)}
+    />;
+  }
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <NavigationContainer>{checker()}</NavigationContainer>

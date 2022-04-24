@@ -1,19 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import Screen from "../compnents/Screen";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Label from "../compnents/label";
+import { useFocusEffect } from "@react-navigation/native";
+
 import get_historyItems, {
   get_userHistory,
 } from "../ServerResponseData/History";
 import AuthContext from "../Authorization/Context";
 function UserHistory(props) {
   const [history, sethistory] = useState([]);
-  const userHistory = get_userHistory();
+  const [userHistory, setUserHistory] = useState([]);
   const auth = useContext(AuthContext);
-  useEffect(() => {
-    const hist = get_historyItems();
-    sethistory(hist);
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const hist = get_historyItems();
+      const uhist = get_userHistory();
+      sethistory(hist);
+      setUserHistory(uhist);
+    }, [])
+  );
   return (
     <Screen style={{ padding: 10 }}>
       <Label value="Upload History" style={styles.label1} />

@@ -52,7 +52,7 @@ function UploadChallan({ route, navigation }) {
       time: `${year}/${months + 1}/${day}`,
     });
     setTimeout(() => {
-      // setvisi(false);
+      setvisi(false);
       navigation.navigate("HOME");
     }, 3000);
   };
@@ -116,6 +116,7 @@ function UploadChallan({ route, navigation }) {
             autoPlay
             loop={false}
             source={require("../assets/anim/doneanim.json")}
+            style={{ flex: 1 }}
           />
         </View>
       </Modal>

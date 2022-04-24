@@ -9,6 +9,7 @@ import {
   Image,
   StyleSheet,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import AppButton from "../compnents/AppButton";
 import * as ImagePicker from "expo-image-picker";
@@ -18,28 +19,58 @@ import axios from "axios";
 function AdminCapture(props) {
   const navigation = useNavigation();
   const [url, setUrl] = useState();
+  const [picError, setPicError] = useState(false);
+  const [log, setlog] = useState(false);
+  const [progress, setProgress] = useState();
+
+  const ErrorMessage = () => {
+    if (picError) {
+      return <Text>"Must Enter Picture To Proceed"</Text>;
+    }
+    return null;
+  };
 
   const handleImageFromCamera = async () => {
     const result = await ImagePicker.launchCameraAsync();
-    if (!result.cancelled) setUrl(result.uri);
+    if (!result.cancelled) {
+      setUrl(result.uri);
+      setPicError(false);
+    }
   };
   const handleImageFromLibrary = async () => {
     const result = await ImagePicker.launchImageLibraryAsync();
-    if (!result.cancelled) setUrl(result.uri);
+    if (!result.cancelled) {
+      setUrl(result.uri);
+      setPicError(false);
+    }
   };
   const handleNext = async () => {
+    if (url == null) {
+      setPicError(true);
+      return;
+    }
+    setlog(true);
     var d = new FormData();
     d.append("image", { uri: url, name: "modelImage.jpg", type: "image/jpg" });
     var { data } = await axios
       .post("http://192.168.2.103:5000/img", d, {
-        onUploadProgress: (p) => console.log(p),
+        onUploadProgress: (p) => {
+          setProgress(p.loaded / p.total);
+          console.log(p);
+        },
       })
       .catch((error) => console.log(error));
+    setlog(false);
     navigation.navigate("entry", { plate: data });
   };
   return (
     <Screen>
-      <Text>Waiting... </Text>
+      {url == null ? (
+        <>
+          <ActivityIndicator size="large" color="#00ff00" />
+          <Text>Waiting for upload </Text>
+        </>
+      ) : undefined}
 
       <TouchableNativeFeedback onPress={handleImageFromLibrary}>
         <View style={styles.img_block}>
@@ -53,6 +84,7 @@ function AdminCapture(props) {
           )}
         </View>
       </TouchableNativeFeedback>
+      <ErrorMessage />
 
       <AppButton
         title="Open Camera"
@@ -71,10 +103,18 @@ function AdminCapture(props) {
         style={styles.btn}
         onPress={handleNext}
       />
-      <Modal
-        visible={false}
-        style={{ height: 30, margin: 0, backgroundColor: "#00000080" }}
-      ></Modal>
+      <Modal visible={log}>
+        <Text>Progress:{progress}</Text>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" color="#00ff00" />
+          <Text>Adjusting Light Intensity...</Text>
+          <Text>Detecting Number Plate...</Text>
+          <Text>Rectification...</Text>
+          <Text>Extracting Number...</Text>
+        </View>
+      </Modal>
     </Screen>
   );
 }

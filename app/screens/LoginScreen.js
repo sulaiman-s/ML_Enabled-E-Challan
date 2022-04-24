@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View, Modal } from "react-native";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
@@ -7,12 +7,14 @@ import AuthContext from "../Authorization/Context";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Url from "../Authorization/ApiUrlEndpoints";
+import { Ionicons } from "@expo/vector-icons";
 import Token, { SetToken } from "../Authorization/JwtToken";
-
+import { WebView } from "react-native-webview";
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [forgot, setforgot] = useState(false);
   const authContext = useContext(AuthContext);
   const handleLogin = async () => {
     const { data } = await axios
@@ -87,8 +89,26 @@ function LoginScreen({ navigation }) {
               Click To Create
             </Text>
           </View>
+          <Text onPress={() => setforgot(true)} style={{ color: "blue" }}>
+            Forgot Password?
+          </Text>
         </View>
       </ImageBackground>
+      <Modal visible={forgot}>
+        <View
+          style={{
+            alignSelf: "flex-start",
+            marginBottom: 20,
+            flexDirection: "row",
+          }}
+        >
+          <Ionicons name="chevron-back" size={20} color="blue" />
+          <Text style={{ color: "blue" }} onPress={() => setforgot(false)}>
+            Go Back
+          </Text>
+        </View>
+        <WebView source={{ uri: Url + "/user/account/password_reset/" }} />
+      </Modal>
     </Screen>
   );
 }
