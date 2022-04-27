@@ -8,7 +8,7 @@
     "splash": {
       "image": "./app/assets/bill.png",
       "resizeMode": "contain",
-      "backgroundColor": "#2dc3d4"
+      "backgroundColor": "#141523"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

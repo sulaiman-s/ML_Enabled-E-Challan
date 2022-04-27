@@ -8,14 +8,14 @@ import { useNavigation } from "@react-navigation/core";
 import { ScrollView } from "react-native-gesture-handler";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { Color } from "../assets/colors";
 
 function AdminChallanEntries({ route }) {
   const navigation = useNavigation();
+  const [veh_number, setVehicle_number] = useState(route.params.plate);
   const [vehicle_type, setVehicle_type] = useState("Bike");
   const [vehicle_status, setVehicle_status] = useState("NotPaid");
-  const plate = route.params.plate;
-
-  console.log(plate);
+  // const plate = route.params.plate;
 
   const ErrorMessage = ({ error, visible }) => {
     if (!visible || !error) return null;
@@ -23,7 +23,6 @@ function AdminChallanEntries({ route }) {
   };
 
   const schema = Yup.object().shape({
-    vehicle_number: Yup.string().required().label("Vehicle Number"),
     vehicle_location: Yup.string().max(15).required(),
     challan_amount: Yup.string()
       .required()
@@ -35,11 +34,19 @@ function AdminChallanEntries({ route }) {
 
   const handleChallan = (ch) => {
     if (!vehicle_type) return;
-    const cha = { ...ch, vehicle_status, vehicle_type };
+    const cha = {
+      vehicle_number: veh_number,
+      vehicle_location: ch.vehicle_location,
+      vehicle_status,
+      vehicle_type,
+      challan_amount: ch.challan_amount,
+    };
     navigation.navigate("verify", { cha });
   };
   return (
-    <Screen>
+    <Screen
+      style={{ backgroundColor: Color.DuoBlack, marginTop: 0, paddingTop: 10 }}
+    >
       <ScrollView style={{ width: "100%", flex: 1 }}>
         <Formik
           initialValues={{
@@ -66,12 +73,19 @@ function AdminChallanEntries({ route }) {
             >
               <AppInput
                 placeholder="Vehicle Number"
+                placeholderTextColor={Color.DuoGray}
                 style={styles.inp_s}
-                onChangeText={handleChange("vehicle_number")}
+                onChangeText={(t) => {
+                  handleChange("vehicle_number");
+                  setVehicle_number(t);
+                }}
                 onBlur={() => setFieldTouched("vehicle_number")}
                 viewStyle={styles.inp_v}
-                value={plate}
+                value={veh_number}
               />
+              {veh_number.length < 1 ? (
+                <Text style={{ color: "red" }}>Vehicle Number is required</Text>
+              ) : undefined}
               <ErrorMessage
                 error={errors.vehicle_number}
                 visible={touched.vehicle_number}
@@ -79,6 +93,7 @@ function AdminChallanEntries({ route }) {
 
               <AppInput
                 placeholder="Enter Location"
+                placeholderTextColor={Color.DuoGray}
                 style={styles.inp_s}
                 onChangeText={handleChange("vehicle_location")}
                 onBlur={() => setFieldTouched("vehicle_location")}
@@ -91,6 +106,7 @@ function AdminChallanEntries({ route }) {
 
               <AppInput
                 placeholder="Enter Amount"
+                placeholderTextColor={Color.DuoGray}
                 style={styles.inp_s}
                 onChangeText={handleChange("challan_amount")}
                 onBlur={() => setFieldTouched("challan_amount")}
@@ -160,11 +176,15 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingLeft: 20,
     height: 60,
+    backgroundColor: Color.DuoBackGray,
+    borderColor: Color.DuoGray,
   },
-  inp_s: { width: "100%" },
+  inp_s: { width: "100%", backgroundColor: Color.DuoBackGray, color: "white" },
   picker_s: {
     height: 50,
     width: "90%",
+    color: Color.DuoGray,
+    backgroundColor: Color.DuoBackGray,
   },
   picker_v: {
     borderWidth: 2,
@@ -173,6 +193,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 30,
     paddingLeft: 15,
+    backgroundColor: Color.DuoBackGray,
+    borderColor: Color.DuoGray,
   },
 });
 

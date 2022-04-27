@@ -9,6 +9,7 @@ import {
   ScrollView,
   Modal,
 } from "react-native";
+import * as Print from "expo-print";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppButton from "../compnents/AppButton";
 import UserListItem from "../compnents/UserListItem";
@@ -19,16 +20,65 @@ import Url from "../Authorization/ApiUrlEndpoints";
 import Token from "../Authorization/JwtToken";
 import { setUserHistory } from "../ServerResponseData/History";
 import LottiView from "lottie-react-native";
+import * as MediaLibrary from "expo-media-library";
+import { Color } from "../assets/colors";
 
 function UploadChallan({ route, navigation }) {
   const [url, setUrl] = useState();
   const [visi, setvisi] = useState(false);
+  const [picError, setPicError] = useState(false);
+  const ErrorMessage = () => {
+    if (picError) {
+      return <Text>"Must Enter Challan Reciept Picture To Proceed"</Text>;
+    }
+    return null;
+  };
+  const html = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Pdf Content</title>
+      <style>
+          body {
+              font-size: 16px;
+              
+          }
 
+          h1 {
+              text-align: center;
+              color: rgb(0, 72, 255);
+          }
+      </style>
+  </head>
+  <body>
+      <h1>Challan</h1>
+      <div style="width: 100%;
+      display:flex;justify-content: center;">
+      <div style="border:2px dashed black; width: fit-content; align-self: center;">
+          <h1>Vehicle Type:${route.params.type}</h1>
+          <h1>Vehicle Number:${route.params.number}</h1>
+          <h1>Challan Location:${route.params.location}</h1>
+          <h1>Challan Amount:${route.params.price}</h1>
+      </div>
+  </div>
+  </body>
+  </html>
+`;
+  const handleGenerate = async () => {
+    return await Print.printAsync({ html });
+  };
   const PickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync();
     setUrl(result.uri);
+    setPicError(false);
   };
   const handleUserUpload = async () => {
+    if (url == null) {
+      setPicError(true);
+      return;
+    }
     let Data = new FormData();
     Data.append("vehicle_number", route.params.number);
     Data.append("challan_image", {
@@ -57,7 +107,9 @@ function UploadChallan({ route, navigation }) {
     }, 3000);
   };
   return (
-    <Screen style={{ padding: 10, marginTop: 0 }}>
+    <Screen
+      style={{ padding: 10, marginTop: 0, backgroundColor: Color.DuoBlack }}
+    >
       <View style={{ width: "100%" }}>
         <View>
           <Label value="Challan Info" style={styles.label1} />
@@ -74,6 +126,14 @@ function UploadChallan({ route, navigation }) {
                 number={route.params.number}
               />
             )}
+            <AppButton
+              title="Generate"
+              textStyle={styles.btn_t}
+              height={50}
+              width={"60%"}
+              style={styles.btn}
+              onPress={handleGenerate}
+            />
           </View>
           <Label
             value="Upload Receipt of Above Challan"
@@ -98,11 +158,12 @@ function UploadChallan({ route, navigation }) {
               )}
             </View>
           </TouchableNativeFeedback>
+          <ErrorMessage />
           <AppButton
             title="Upload"
             textStyle={styles.btn_t}
             height={50}
-            width={"35%"}
+            width={"60%"}
             style={styles.btn}
             onPress={handleUserUpload}
           />
@@ -110,7 +171,12 @@ function UploadChallan({ route, navigation }) {
       </View>
       <Modal visible={visi}>
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: Color.DuoBlack,
+          }}
         >
           <LottiView
             autoPlay
@@ -125,17 +191,17 @@ function UploadChallan({ route, navigation }) {
 }
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: "rgb(82,174,211)",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
     marginTop: "5%",
     borderRadius: 25,
     alignSelf: "center",
-    backgroundColor: "rgb(71,118,172)",
+    backgroundColor: Color.Duolightb,
   },
   btn_t: {
-    color: "white",
+    color: Color.DuoBlack,
+    fontSize: 15,
     fontWeight: "bold",
   },
   txt: {
@@ -152,8 +218,10 @@ const styles = StyleSheet.create({
     color: "black",
     marginTop: "5%",
     elevation: 0,
-    backgroundColor: "rgb(71,118,172)",
+    backgroundColor: Color.DuoBlack,
     borderRadius: 5,
+    borderWidth: 3,
+    borderColor: Color.DuoGray,
     color: "white",
     paddingLeft: 140,
     fontWeight: "bold",
@@ -162,14 +230,16 @@ const styles = StyleSheet.create({
     color: "black",
     marginTop: "5%",
     elevation: 0,
-    backgroundColor: "rgb(71,118,172)",
+    backgroundColor: Color.DuoBlack,
     borderRadius: 5,
+    borderWidth: 3,
+    borderColor: Color.DuoGray,
     color: "white",
     paddingLeft: 75,
     fontWeight: "bold",
   },
   img_pick_block: {
-    backgroundColor: "lightslategray",
+    backgroundColor: Color.DuoBackGray,
     height: 170,
     justifyContent: "center",
     alignItems: "center",

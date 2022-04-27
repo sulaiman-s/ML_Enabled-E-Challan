@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
+import { Color } from "../assets/colors";
 
-function UserListItem({ ch_Number, number, type, stetus, price }) {
+function UserListItem({ ch_Number, number, type, stetus, price, location }) {
   const navigation = useNavigation();
   const handlePress = () => {
     if (stetus != "Paid") {
@@ -11,6 +12,7 @@ function UserListItem({ ch_Number, number, type, stetus, price }) {
         type,
         stetus,
         price,
+        location,
       });
     } else {
       alert("Status Paid");
@@ -40,8 +42,10 @@ const styles = StyleSheet.create({
     height: 160,
     borderWidth: 2,
     borderRadius: 1,
-    borderStyle: "dotted",
+    borderStyle: "dashed",
+    borderColor: Color.DuoGray,
     marginRight: 20,
+    backgroundColor: Color.DuoBackGray,
   },
   ch_h: {
     width: "100%",
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
   ch_h_txt: {
     fontSize: 25,
     fontFamily: "Roboto",
+    color: Color.DuoGray,
   },
   ch_itm: {
     marginVertical: 15,
@@ -61,6 +66,7 @@ const styles = StyleSheet.create({
   ch_itm_txt: {
     fontSize: 20,
     fontFamily: "Roboto",
+    color: "black",
   },
 });
 

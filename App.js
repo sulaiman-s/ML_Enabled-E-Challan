@@ -1,7 +1,7 @@
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import jwtDecode from "jwt-decode";
 import React, { useState } from "react";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, SectionList } from "react-native";
 import AuthContext from "./app/Authorization/Context";
 import { SavedToken } from "./app/Authorization/JwtToken";
 import AdminDrawer from "./app/navigation/AdminNavigation";
@@ -11,6 +11,7 @@ import AppLoading from "expo-app-loading";
 export default function App() {
   const [user, setUser] = useState();
   const [ready, setReady] = useState(false);
+  const [check, seCheck] = useState(false);
 
   const Check_user_InMemory = () => {
     if (!user) {
@@ -26,6 +27,9 @@ export default function App() {
             if (u.exp < Date.now()) {
               setUser(u);
             }
+            seCheck(true);
+          } else {
+            seCheck(true);
           }
         })
         .catch((error) => console.log(error));
@@ -33,14 +37,17 @@ export default function App() {
   };
 
   const checker = () => {
-    if (user) {
-      if (!user.is_admin) {
-        return <UserDrawer />;
-      } else if (user.is_admin) {
-        return <AdminDrawer />;
-      }
-    } else return <AuthNavigator />;
+    if (check) {
+      if (user) {
+        if (!user.is_admin) {
+          return <UserDrawer />;
+        } else if (user.is_admin) {
+          return <AdminDrawer />;
+        }
+      } else return <AuthNavigator />;
+    }
   };
+
   if (!ready) {
     <AppLoading
       startAsync={Check_user_InMemory()}

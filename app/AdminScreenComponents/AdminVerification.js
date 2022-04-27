@@ -8,6 +8,8 @@ import Url from "../Authorization/ApiUrlEndpoints";
 import axios from "axios";
 import { setHistory } from "../ServerResponseData/History";
 import LottiView from "lottie-react-native";
+import { Color } from "../assets/colors";
+import UserListItem from "../compnents/UserListItem";
 
 function AdminVerification({ route }) {
   const navigation = useNavigation();
@@ -47,20 +49,21 @@ function AdminVerification({ route }) {
     }, 3000);
   };
   return (
-    <Screen style={{ padding: 10 }}>
+    <Screen
+      style={{
+        backgroundColor: Color.DuoBlack,
+        marginTop: 0,
+        alignItems: "center",
+      }}
+    >
       <Label value="Challan Verification" style={styles.label1} />
-      <View style={styles.ch_view}>
-        <View style={styles.ch_h}>
-          <Text style={styles.ch_h_txt}>Challan No #</Text>
-        </View>
-        <View style={styles.ch_itm}>
-          <Text style={styles.ch_itm_txt}>Number:{vehicle_number}</Text>
-          <Text style={styles.ch_itm_txt}>Type:{vehicle_type}</Text>
-        </View>
-        <View style={styles.ch_itm}>
-          <Text style={styles.ch_itm_txt}>status:{vehicle_status}</Text>
-          <Text style={styles.ch_itm_txt}>Amount:{challan_amount}</Text>
-        </View>
+      <View style={{ width: "100%", marginTop: 10 }}>
+        <UserListItem
+          number={vehicle_number}
+          type={vehicle_type}
+          stetus={vehicle_status}
+          price={challan_amount}
+        />
       </View>
       <View style={styles.btn_view}>
         <AppButton
@@ -82,7 +85,12 @@ function AdminVerification({ route }) {
       </View>
       <Modal visible={visi}>
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: Color.DuoBlack,
+          }}
         >
           <LottiView
             autoPlay
@@ -95,39 +103,11 @@ function AdminVerification({ route }) {
   );
 }
 const styles = StyleSheet.create({
-  ch_view: {
-    width: "100%",
-    height: 160,
-    borderWidth: 2,
-    borderRadius: 1,
-    borderStyle: "dashed",
-    marginTop: 30,
-    marginBottom: 40,
-  },
-  ch_h: {
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  ch_h_txt: {
-    fontSize: 25,
-    fontFamily: "Roboto",
-  },
-  ch_itm: {
-    marginVertical: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  ch_itm_txt: {
-    fontSize: 20,
-    fontFamily: "Roboto",
-  },
   btn: {
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: Color.Duolightb,
   },
   btn_view: {
     width: "100%",
@@ -139,13 +119,16 @@ const styles = StyleSheet.create({
   },
   btn_txt: {
     fontSize: 16,
-    color: "white",
+    color: Color.DuoBlack,
+    fontWeight: "bold",
   },
   label1: {
     elevation: 5,
     marginTop: 20,
     fontSize: 17,
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: Color.DuoBlack,
+    borderColor: Color.DuoGray,
+    borderWidth: 3,
     borderRadius: 5,
     width: "80%",
     color: "white",

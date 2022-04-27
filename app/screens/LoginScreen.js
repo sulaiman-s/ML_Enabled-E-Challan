@@ -8,8 +8,10 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Url from "../Authorization/ApiUrlEndpoints";
 import { Ionicons } from "@expo/vector-icons";
-import Token, { SetToken } from "../Authorization/JwtToken";
+import Token, { SetToken, SetAccess } from "../Authorization/JwtToken";
 import { WebView } from "react-native-webview";
+import { Color } from "../assets/colors";
+
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,71 +31,72 @@ function LoginScreen({ navigation }) {
       const dat = jwtDecode(data.refresh);
       authContext.setUser(dat);
       SetToken(data.refresh);
+      SetAccess(data.access);
     }
+    console.log(data);
   };
 
   return (
-    <Screen>
-      <ImageBackground
-        source={require("../assets/lbg.jpeg")}
-        resizeMode="cover"
-        style={{
-          width: "100%",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {/* <View style={{ width: "100%", marginVertical: 25 }}>
+    <Screen
+      style={{
+        backgroundColor: Color.DuoBlack,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {/* <View style={{ width: "100%", marginVertical: 25 }}>
         <Text style={styles.h_style}>Log in</Text>
       </View> */}
-        <AppInput
-          placeholder="Username"
-          style={styles.t_inp}
-          onChangeText={(text) => setUsername(text)}
-          iconName="security"
-          viewStyle={{
-            width: "80%",
-            borderColor: "white",
-            backgroundColor: "white",
-          }}
+      <AppInput
+        placeholder="Username"
+        placeholderTextColor={Color.DuoGray}
+        style={styles.t_inp}
+        onChangeText={(text) => setUsername(text)}
+        iconName="security"
+        iconColor={Color.DuoDarkb}
+        viewStyle={{
+          width: "80%",
+          borderWidth: 0,
+          backgroundColor: Color.DuoBackGray,
+        }}
+      />
+      <AppInput
+        placeholder="Password"
+        placeholderTextColor={Color.DuoGray}
+        style={styles.t_inp}
+        onChangeText={(text) => setPassword(text)}
+        iconName="key"
+        iconColor={Color.DuoDarkb}
+        secureTextEntry
+        viewStyle={{
+          width: "80%",
+          borderWidth: 0,
+          backgroundColor: Color.DuoBackGray,
+        }}
+      />
+      {error != null ? <Text style={{ color: "red" }}>{error}</Text> : null}
+      <View style={styles.btn}>
+        <AppButton
+          title="Login"
+          style={styles.btn_style}
+          textStyle={styles.btn_text_Style}
+          height={50}
+          width={"80%"}
+          onPress={handleLogin}
         />
-        <AppInput
-          placeholder="Password"
-          style={styles.t_inp}
-          onChangeText={(text) => setPassword(text)}
-          iconName="key"
-          secureTextEntry
-          viewStyle={{
-            width: "80%",
-            borderColor: "white",
-            backgroundColor: "white",
-          }}
-        />
-        {error != null ? <Text style={{ color: "red" }}>{error}</Text> : null}
-        <View style={styles.btn}>
-          <AppButton
-            title="Login"
-            style={styles.btn_style}
-            textStyle={styles.btn_text_Style}
-            height={50}
-            width={"80%"}
-            onPress={handleLogin}
-          />
-          <View style={styles.option_view}>
-            <Text style={styles.option_txt}>Dont have an account?.</Text>
-            <Text
-              style={styles.txt}
-              onPress={() => navigation.navigate("Register")}
-            >
-              Click To Create
-            </Text>
-          </View>
-          <Text onPress={() => setforgot(true)} style={{ color: "blue" }}>
-            Forgot Password?
+        <View style={styles.option_view}>
+          <Text style={styles.option_txt}>Dont have an account?.</Text>
+          <Text
+            style={styles.txt}
+            onPress={() => navigation.navigate("Register")}
+          >
+            Click To Create
           </Text>
         </View>
-      </ImageBackground>
+        <Text onPress={() => setforgot(true)} style={{ color: Color.DuoDarkb }}>
+          Forgot Password?
+        </Text>
+      </View>
       <Modal visible={forgot}>
         <View
           style={{
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingBottom: 25,
     marginLeft: 10,
+    color: "white",
   },
   btn: {
     justifyContent: "center",
@@ -136,13 +140,13 @@ const styles = StyleSheet.create({
     width: "35%",
   },
   btn_style: {
-    backgroundColor: "#2dc3d4",
+    backgroundColor: Color.DuoDarkb,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
   },
   btn_text_Style: {
-    color: "white",
+    color: Color.DuoBlack,
     fontWeight: "bold",
     fontSize: 17,
   },
@@ -158,12 +162,13 @@ const styles = StyleSheet.create({
   option_txt: {
     fontSize: 17,
     fontFamily: "Roboto",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    color: Color.DuoGray,
   },
   txt: {
     fontSize: 17,
     fontFamily: "Roboto",
-    color: "blue",
+    color: Color.DuoDarkb,
     fontWeight: "bold",
   },
 });

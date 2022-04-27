@@ -15,6 +15,7 @@ import AppButton from "../compnents/AppButton";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/core";
 import axios from "axios";
+import { Color } from "../assets/colors";
 
 function AdminCapture(props) {
   const navigation = useNavigation();
@@ -53,7 +54,7 @@ function AdminCapture(props) {
     var d = new FormData();
     d.append("image", { uri: url, name: "modelImage.jpg", type: "image/jpg" });
     var { data } = await axios
-      .post("http://192.168.2.103:5000/img", d, {
+      .post("http://192.168.2.100:5000/img", d, {
         onUploadProgress: (p) => {
           setProgress(p.loaded / p.total);
           console.log(p);
@@ -64,11 +65,11 @@ function AdminCapture(props) {
     navigation.navigate("entry", { plate: data });
   };
   return (
-    <Screen>
+    <Screen style={{ backgroundColor: Color.DuoBlack, marginTop: 0 }}>
       {url == null ? (
         <>
           <ActivityIndicator size="large" color="#00ff00" />
-          <Text>Waiting for upload </Text>
+          <Text style={{ color: Color.DuoGray }}>Waiting for upload </Text>
         </>
       ) : undefined}
 
@@ -76,7 +77,11 @@ function AdminCapture(props) {
         <View style={styles.img_block}>
           {url == null ? (
             <>
-              <MaterialCommunityIcons name="camera" size={100} color="white" />
+              <MaterialCommunityIcons
+                name="camera"
+                size={100}
+                color={Color.DuoBackGray}
+              />
               <Text> Select Image From Library </Text>
             </>
           ) : (
@@ -106,7 +111,12 @@ function AdminCapture(props) {
       <Modal visible={log}>
         <Text>Progress:{progress}</Text>
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: Color.DuoBlack,
+          }}
         >
           <ActivityIndicator size="large" color="#00ff00" />
           <Text>Adjusting Light Intensity...</Text>
@@ -120,18 +130,19 @@ function AdminCapture(props) {
 }
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: "rgb(71,118,172)",
+    backgroundColor: Color.Duolightb,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 25,
     marginTop: 20,
   },
   btn_t: {
-    color: "white",
+    color: Color.DuoBlack,
     fontSize: 16,
+    fontWeight: "bold",
   },
   img_block: {
-    backgroundColor: "lightslategray",
+    backgroundColor: Color.DuoGray,
     height: 300,
     width: "95%",
     justifyContent: "center",

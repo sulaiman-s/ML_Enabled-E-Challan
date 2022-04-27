@@ -24,6 +24,7 @@ import {
 import { Text } from "react-native";
 import Legal from "../screens/Legal";
 import Help from "../screens/Help";
+import { Color } from "../assets/colors";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,9 +36,9 @@ const UserNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "rgb(71,118,172)",
+          backgroundColor: Color.DuoBlack,
         },
-        headerTintColor: "white",
+        headerTintColor: Color.DuoGray,
       }}
     >
       <Stack.Screen
@@ -84,6 +85,13 @@ const UserTabNavigator = () => {
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          backgroundColor: Color.DuoBlack,
+          borderTopColor: Color.DuoGray,
+          borderTopWidth: 2,
+        },
+        tabBarActiveTintColor: Color.Duolightb,
+        tabBarInactiveTintColor: Color.DuoGray,
       }}
     >
       <Tab.Screen
@@ -93,9 +101,6 @@ const UserTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" size={size} color={color} />
           ),
-          tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "rgb(71,118,172)",
-          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
       <Tab.Screen
@@ -105,9 +110,6 @@ const UserTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" size={size} color={color} />
           ),
-          tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "rgb(71,118,172)",
-          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
     </Tab.Navigator>
@@ -126,7 +128,7 @@ const CustomDrawer = (props) => {
   return (
     <DrawerContentScrollView
       {...props}
-      style={{ backgroundColor: "lightgray" }}
+      style={{ backgroundColor: Color.DuoBackGray }}
     >
       <View
         style={{
@@ -156,6 +158,9 @@ const UserDrawer = () => {
     <drawer.Navigator
       screenOptions={{
         headerShown: false,
+        drawerLabelStyle: {
+          color: Color.DuoGray,
+        },
       }}
       initialRouteName="HoMe"
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -165,7 +170,7 @@ const UserDrawer = () => {
         component={UserTabNavigator}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="home" size={size} color={Color.DuoDarkb} />
           ),
         }}
       />
@@ -175,7 +180,7 @@ const UserDrawer = () => {
         component={Legal}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="leaf" size={size} color={color} />
+            <Ionicons name="leaf" size={size} color={Color.DuoDarkb} />
           ),
         }}
       />
@@ -187,7 +192,7 @@ const UserDrawer = () => {
             <Ionicons
               name="information-circle-outline"
               size={size}
-              color={color}
+              color={Color.DuoDarkb}
             />
           ),
         }}
@@ -197,7 +202,11 @@ const UserDrawer = () => {
         component={Setting}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
+            <Ionicons
+              name="settings-outline"
+              size={size}
+              color={Color.DuoDarkb}
+            />
           ),
         }}
       />
@@ -206,7 +215,7 @@ const UserDrawer = () => {
         component={Def}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="exit-outline" size={size} color={color} />
+            <Ionicons name="exit-outline" size={size} color={Color.DuoDarkb} />
           ),
         }}
       />

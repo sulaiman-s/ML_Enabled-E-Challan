@@ -10,6 +10,7 @@ import UserChallanList from "../UserScreenComponents/UserChallanList";
 import AdminChallanEntries from "../AdminScreenComponents/AdminChallanEntries";
 import AdminVerification from "../AdminScreenComponents/AdminVerification";
 import Setting from "../screens/Setting";
+import { Color } from "../assets/colors";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -33,9 +34,9 @@ const AdminNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "rgb(71,118,172)",
+          backgroundColor: Color.DuoBlack,
         },
-        headerTintColor: "white",
+        headerTintColor: Color.DuoGray,
       }}
     >
       <Stack.Screen
@@ -93,8 +94,15 @@ const AdminTabNavigator = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarHideOnKeyboard: true,
         headerShown: false,
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          backgroundColor: Color.DuoBlack,
+          borderTopColor: Color.DuoGray,
+          borderTopWidth: 2,
+        },
+        tabBarActiveTintColor: Color.Duolightb,
+        tabBarInactiveTintColor: Color.DuoGray,
       }}
     >
       <Tab.Screen
@@ -104,9 +112,6 @@ const AdminTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" size={size} color={color} />
           ),
-          tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "rgb(71,118,172)",
-          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
       <Tab.Screen
@@ -116,9 +121,6 @@ const AdminTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" size={size} color={color} />
           ),
-          tabBarActiveTintColor: "white",
-          tabBarActiveBackgroundColor: "rgb(71,118,172)",
-          tabBarInactiveTintColor: "rgb(71,118,172)",
         }}
       />
     </Tab.Navigator>
@@ -137,7 +139,7 @@ const CustomDrawer = (props) => {
   return (
     <DrawerContentScrollView
       {...props}
-      style={{ backgroundColor: "lightgray" }}
+      style={{ backgroundColor: Color.DuoBackGray }}
     >
       <View
         style={{
@@ -173,6 +175,9 @@ const AdminDrawer = () => {
     <drawer.Navigator
       screenOptions={{
         headerShown: false,
+        drawerLabelStyle: {
+          color: Color.DuoGray,
+        },
       }}
       initialRouteName="HoMe"
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -182,7 +187,7 @@ const AdminDrawer = () => {
         component={AdminTabNavigator}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="home" size={size} color={Color.DuoDarkb} />
           ),
         }}
       />
@@ -192,7 +197,7 @@ const AdminDrawer = () => {
         component={Legal}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="leaf" size={size} color={color} />
+            <Ionicons name="leaf" size={size} color={Color.DuoDarkb} />
           ),
         }}
       />
@@ -204,7 +209,7 @@ const AdminDrawer = () => {
             <Ionicons
               name="information-circle-outline"
               size={size}
-              color={color}
+              color={Color.DuoDarkb}
             />
           ),
         }}
@@ -214,7 +219,11 @@ const AdminDrawer = () => {
         component={Setting}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
+            <Ionicons
+              name="settings-outline"
+              size={size}
+              color={Color.DuoDarkb}
+            />
           ),
         }}
       />
@@ -223,7 +232,7 @@ const AdminDrawer = () => {
         component={Def}
         options={{
           drawerIcon: ({ size, color }) => (
-            <Ionicons name="exit-outline" size={size} color={color} />
+            <Ionicons name="exit-outline" size={size} color={Color.DuoDarkb} />
           ),
         }}
       />

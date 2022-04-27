@@ -12,6 +12,7 @@ import Url from "../Authorization/ApiUrlEndpoints";
 import Token from "../Authorization/JwtToken";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Label from "./label";
+import { Color } from "../assets/colors";
 
 function AdminAlert(props) {
   const [alertImage, setAlertImage] = useState({});
@@ -50,7 +51,9 @@ function AdminAlert(props) {
           <Label
             value="Message Alerts"
             style={{
-              backgroundColor: "#2dc3d4",
+              backgroundColor: Color.DuoBlack,
+              borderWidth: 3,
+              borderColor: Color.DuoGray,
               marginTop: "3%",
               borderRadius: 5,
               width: "80%",
@@ -65,9 +68,10 @@ function AdminAlert(props) {
               key={item.id}
               style={{
                 fontSize: 16,
-                // height: "30%",
-                width: "100%",
                 marginTop: 10,
+                fontWeight: "bold",
+                color: "white",
+                paddingLeft: 5,
               }}
             >
               {item.Alert_Message}
@@ -127,13 +131,15 @@ function AdminAlert(props) {
         style={{
           height: "5%",
           width: "80%",
-          backgroundColor: "rgb(71,118,172)",
+          // backgroundColor: Color.Duolightb,
           // alignItems: "center",
           justifyContent: "center",
           // marginTop: "5%",
           borderRadius: 5,
           alignSelf: "center",
           marginTop: 5,
+          borderWidth: 3,
+          borderColor: Color.DuoGray,
         }}
         onPress={() => setvisi(true)}
       >
@@ -150,10 +156,11 @@ function AdminAlert(props) {
         </Text>
         <Text
           style={{
-            backgroundColor: "rgb(71,118,172)",
+            // backgroundColor: Color.RoyalBlue,
             position: "relative",
             paddingLeft: 6,
             width: 20,
+            height: 20,
             borderRadius: 10,
             alignSelf: "flex-end",
             marginBottom: 10,
@@ -183,15 +190,15 @@ function AdminAlert(props) {
       <Message />
       <View
         style={{
-          backgroundColor: "lightgray",
+          backgroundColor: Color.DuoBlack,
           height: "30%",
           width: "100%",
           justifyContent: "center",
           alignItems: "center",
           top: "2%",
           borderRadius: 3,
-          borderWidth: 5,
-          borderColor: "white",
+          borderWidth: 3,
+          borderColor: Color.DuoGray,
         }}
       >
         {alertImage.Alert_Image ? (
@@ -214,18 +221,22 @@ function AdminAlert(props) {
               height: "5%",
               flexDirection: "row",
               justifyContent: "flex-end",
-              right: 3,
+              backgroundColor: Color.DuoBlack,
             }}
             onPress={() => setvisi(false)}
           >
-            <MaterialCommunityIcons name="close" size={30} color="#2dc3d4" />
+            <MaterialCommunityIcons
+              name="close"
+              size={30}
+              color={Color.DuoGray}
+            />
           </TouchableOpacity>
           <View
             style={{
               flex: 1,
-              margin: 5,
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: Color.DuoBlack,
             }}
           >
             {getAlertsModal()}

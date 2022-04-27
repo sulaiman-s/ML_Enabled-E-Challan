@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 const Token = { refresh: "" };
-
+export const TokenAccess = { access: "" };
 export const SetToken = async (token) => {
   Token.refresh = token;
   await AsyncStorage.setItem("JwtToken", JSON.stringify(Token)).catch((error) =>
@@ -9,8 +9,13 @@ export const SetToken = async (token) => {
   console.log("saved");
 };
 
+export const SetAccess = (token) => {
+  TokenAccess.access = token;
+};
 export const SavedToken = (token) => {
   Token.refresh = token;
+  console.log(Token);
+  console.log(TokenAccess);
 };
 
 export default Token;

@@ -8,6 +8,7 @@ import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
 import Token from "../Authorization/JwtToken";
 import get_challans, { set_challans } from "../ServerResponseData/Challans";
+import { Color } from "../assets/colors";
 
 function UserChallanList(props) {
   const [dat, setDat] = useState();
@@ -39,12 +40,14 @@ function UserChallanList(props) {
   };
 
   return (
-    <Screen style={{ padding: 10 }}>
+    <Screen
+      style={{ padding: 10, backgroundColor: Color.DuoBlack, marginTop: 0 }}
+    >
       <UserSearch Search={(t) => setSearch(t)} handleSearch={handleSearch} />
       <Label value="Related Challans" style={styles.label1} />
       {dat == null ? (
         <View>
-          <Text>
+          <Text style={{ color: "red" }}>
             {!search.length >= 1 ? "Enter a Valid Search Value" : message}
           </Text>
         </View>
@@ -61,6 +64,7 @@ function UserChallanList(props) {
               stetus={item.challan_status}
               type={item.vehicle_type}
               price={item.challan_amount}
+              location={item.challan_location}
             />
           )}
           ItemSeparatorComponent={() => <View style={{ height: 5 }}></View>}
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
     color: "white",
     marginTop: 5,
     elevation: 0,
-    backgroundColor: "rgb(82,174,211)",
+    backgroundColor: Color.DuoBackGray,
     borderRadius: 5,
     fontWeight: "bold",
     paddingLeft: 120,

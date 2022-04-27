@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
 import { Ionicons } from "@expo/vector-icons";
+import { Color } from "../assets/colors";
 
 function UserQuery({ navigation }) {
   const ErrorMessage = ({ error, visible }) => {
@@ -36,8 +37,11 @@ function UserQuery({ navigation }) {
           flexDirection: "row",
         }}
       >
-        <Ionicons name="chevron-back" size={20} color="blue" />
-        <Text style={{ color: "blue" }} onPress={() => navigation.goBack()}>
+        <Ionicons name="chevron-back" size={20} color={Color.DuoGray} />
+        <Text
+          style={{ color: Color.DuoGray }}
+          onPress={() => navigation.goBack()}
+        >
           Go Back
         </Text>
       </View>
@@ -56,6 +60,7 @@ function UserQuery({ navigation }) {
             <AppInput
               style={styles.s}
               placeholder="Name"
+              placeholderTextColor={Color.DuoGray}
               onChangeText={handleChange("name")}
               onBlur={() => setFieldTouched("email")}
               viewStyle={styles.v}
@@ -63,6 +68,7 @@ function UserQuery({ navigation }) {
             <ErrorMessage error={errors.name} visible={touched.name} />
             <AppInput
               placeholder="Email"
+              placeholderTextColor={Color.DuoGray}
               style={styles.s}
               onChangeText={handleChange("email")}
               onBlur={() => setFieldTouched("email")}
@@ -71,7 +77,12 @@ function UserQuery({ navigation }) {
             <ErrorMessage error={errors.email} visible={touched.email} />
             <AppInput
               placeholder="Message"
-              style={{ width: "100%", textAlignVertical: "top" }}
+              placeholderTextColor={Color.DuoGray}
+              style={{
+                width: "100%",
+                textAlignVertical: "top",
+                color: "white",
+              }}
               onChangeText={handleChange("mesage")}
               viewStyle={styles.msg_v}
               numberOfLines={10}
@@ -83,7 +94,7 @@ function UserQuery({ navigation }) {
               onPress={handleSubmit}
               style={styles.btn_s}
               height={50}
-              width="35%"
+              width="50%"
               textStyle={styles.btn_t}
             />
           </View>
@@ -98,9 +109,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flex: 1,
     padding: 10,
+    backgroundColor: Color.DuoBlack,
   },
   btn_s: {
-    backgroundColor: "rgb(71,118,172)",
+    backgroundColor: Color.Duolightb,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
@@ -108,8 +120,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   btn_t: {
-    fontSize: 18,
-    color: "white",
+    fontSize: 17,
+    fontWeight: "bold",
+    color: Color.DuoBlack,
   },
   msg_v: {
     width: "80%",
@@ -119,9 +132,22 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 0,
     borderRadius: 20,
+    backgroundColor: Color.DuoBackGray,
+    borderColor: Color.DuoGray,
   },
-  s: { width: "100%" },
-  v: { width: "80%", borderRadius: 25 },
+  s: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: Color.DuoBackGray,
+    borderColor: Color.DuoGray,
+    color: "white",
+  },
+  v: {
+    width: "80%",
+    borderRadius: 25,
+    backgroundColor: Color.DuoBackGray,
+    borderColor: Color.DuoGray,
+  },
 });
 
 export default UserQuery;

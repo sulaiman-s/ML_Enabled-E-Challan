@@ -4,6 +4,7 @@ import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
 import { useNavigation } from "@react-navigation/core";
 import { Ionicons } from "@expo/vector-icons";
+import { Color } from "../assets/colors";
 
 function Help(props) {
   const navigation = useNavigation();
@@ -13,6 +14,7 @@ function Help(props) {
     <Screen
       style={{
         marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
+        backgroundColor: Color.DuoBlack,
       }}
     >
       <View
@@ -22,19 +24,38 @@ function Help(props) {
           flexDirection: "row",
         }}
       >
-        <Ionicons name="chevron-back" size={20} color="blue" />
-        <Text style={{ color: "blue" }} onPress={() => navigation.goBack()}>
+        <Ionicons name="chevron-back" size={20} color={Color.DuoGray} />
+        <Text
+          style={{ color: Color.DuoGray }}
+          onPress={() => navigation.goBack()}
+        >
           Go Back
         </Text>
       </View>
       <Label
         value="Features"
-        style={{ alignSelf: "center", paddingLeft: 10, borderRadius: 10 }}
+        style={{
+          alignSelf: "center",
+          paddingLeft: 10,
+          borderRadius: 10,
+          backgroundColor: Color.DuoBackGray,
+          color: "white",
+          fontWeight: "bold",
+          fontSize: 16,
+        }}
         onPress={() => setFeature(true)}
       />
       <Label
         value="Frequently Ask Questions"
-        style={{ alignSelf: "center", paddingLeft: 10, borderRadius: 10 }}
+        style={{
+          alignSelf: "center",
+          paddingLeft: 10,
+          borderRadius: 10,
+          backgroundColor: Color.DuoBackGray,
+          color: "white",
+          fontWeight: "bold",
+          fontSize: 16,
+        }}
         onPress={() => setFaq(true)}
       />
       <Modal visible={feature}>

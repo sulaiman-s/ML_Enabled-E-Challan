@@ -32,7 +32,9 @@
     "react-native-web": "0.17.1",
     "yup": "^0.32.11",
     "react-native-webview": "11.13.0",
-    "expo-app-loading": "~1.2.1"
+    "expo-app-loading": "~1.2.1",
+    "expo-print": "~11.0.4",
+    "expo-media-library": "~13.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

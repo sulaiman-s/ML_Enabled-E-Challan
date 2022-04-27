@@ -17,6 +17,7 @@ import jwtDecode from "jwt-decode";
 import Url from "../Authorization/ApiUrlEndpoints";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import { Color } from "../assets/colors";
 
 function RegisterScreen({ navigation }) {
   const [usernameError, setUsernameError] = useState();
@@ -90,143 +91,138 @@ function RegisterScreen({ navigation }) {
   };
 
   return (
-    <Screen>
+    <Screen style={{ backgroundColor: Color.DuoBlack }}>
       {/* <View style={{ width: "100%", marginVertical: 20 }}>
         <Text style={styles.h_style}>Register</Text>
       </View> */}
-      <ImageBackground
-        source={require("../assets/r1bg.jpeg")}
-        resizeMode="cover"
-        style={{
-          width: "100%",
-          flex: 1,
-          justifyContent: "center",
+      <ScrollView
+        style={{ flex: 1, width: "100%" }}
+        contentContainerStyle={{
+          flexGrow: 1,
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <ScrollView
-          style={{ flex: 1, width: "100%" }}
-          contentContainerStyle={{
-            flexGrow: 1,
-            alignItems: "center",
-            justifyContent: "center",
+        <UserNameError />
+        <EmailError />
+        <Formik
+          initialValues={{
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
           }}
+          onSubmit={(values) => handleRegister(values)}
+          validationSchema={schema}
         >
-          <UserNameError />
-          <EmailError />
-          <Formik
-            initialValues={{
-              username: "",
-              email: "",
-              password: "",
-              confirmPassword: "",
-            }}
-            onSubmit={(values) => handleRegister(values)}
-            validationSchema={schema}
-          >
-            {({
-              handleSubmit,
-              handleChange,
-              errors,
-              setFieldTouched,
-              touched,
-            }) => (
-              <>
-                <AppInput
-                  placeholder="User Name"
-                  onChangeText={handleChange("username")}
-                  style={styles.input}
-                  iconName="information"
-                  onBlur={() => setFieldTouched("username")}
-                  viewStyle={{
-                    width: "80%",
-                    borderColor: "white",
-                    backgroundColor: "white",
-                  }}
+          {({
+            handleSubmit,
+            handleChange,
+            errors,
+            setFieldTouched,
+            touched,
+          }) => (
+            <>
+              <AppInput
+                placeholder="User Name"
+                placeholderTextColor={Color.DuoGray}
+                onChangeText={handleChange("username")}
+                style={styles.input}
+                iconName="information"
+                iconColor={Color.DuoDarkb}
+                onBlur={() => setFieldTouched("username")}
+                viewStyle={{
+                  width: "80%",
+                  borderWidth: 0,
+                  backgroundColor: Color.DuoBackGray,
+                }}
+              />
+              <ErrorMessage
+                error={errors.username}
+                visible={touched.username}
+              />
+              <AppInput
+                placeholder="Gmail"
+                placeholderTextColor={Color.DuoGray}
+                onChangeText={handleChange("email")}
+                style={styles.input}
+                iconName="gmail"
+                iconColor={Color.DuoDarkb}
+                onBlur={() => setFieldTouched("email")}
+                viewStyle={{
+                  width: "80%",
+                  borderWidth: 0,
+                  backgroundColor: Color.DuoBackGray,
+                }}
+              />
+              <ErrorMessage error={errors.email} visible={touched.email} />
+              <AppInput
+                placeholder="Password"
+                placeholderTextColor={Color.DuoGray}
+                onChangeText={handleChange("password")}
+                style={styles.input}
+                iconName="key-variant"
+                iconColor={Color.DuoDarkb}
+                onBlur={() => setFieldTouched("password")}
+                secureTextEntry
+                viewStyle={{
+                  width: "80%",
+                  borderWidth: 0,
+                  backgroundColor: Color.DuoBackGray,
+                }}
+              />
+              <ErrorMessage
+                error={errors.password}
+                visible={touched.password}
+              />
+              <AppInput
+                placeholder="Confirm Password"
+                placeholderTextColor={Color.DuoGray}
+                onChangeText={handleChange("confirmPassword")}
+                style={styles.input}
+                iconName="key-star"
+                iconColor={Color.DuoDarkb}
+                onBlur={() => setFieldTouched("confirmPassword")}
+                secureTextEntry
+                viewStyle={{
+                  width: "80%",
+                  borderWidth: 0,
+                  backgroundColor: Color.DuoBackGray,
+                }}
+              />
+              <ErrorMessage
+                error={errors.confirmPassword}
+                visible={touched.confirmPassword}
+              />
+              <View
+                style={{
+                  width: "100%",
+                  marginVertical: 10,
+                  alignItems: "center",
+                }}
+              >
+                <AppButton
+                  title="Next"
+                  textStyle={styles.btn_t}
+                  height={50}
+                  width={"35%"}
+                  style={styles.btn}
+                  onPress={handleSubmit}
                 />
-                <ErrorMessage
-                  error={errors.username}
-                  visible={touched.username}
-                />
-                <AppInput
-                  placeholder="Gmail"
-                  onChangeText={handleChange("email")}
-                  style={styles.input}
-                  iconName="gmail"
-                  onBlur={() => setFieldTouched("email")}
-                  viewStyle={{
-                    width: "80%",
-                    borderColor: "white",
-                    backgroundColor: "white",
-                  }}
-                />
-                <ErrorMessage error={errors.email} visible={touched.email} />
-                <AppInput
-                  placeholder="Password"
-                  onChangeText={handleChange("password")}
-                  style={styles.input}
-                  iconName="key-variant"
-                  onBlur={() => setFieldTouched("password")}
-                  secureTextEntry
-                  viewStyle={{
-                    width: "80%",
-                    borderColor: "white",
-                    backgroundColor: "white",
-                  }}
-                />
-                <ErrorMessage
-                  error={errors.password}
-                  visible={touched.password}
-                />
-                <AppInput
-                  placeholder="Confirm Password"
-                  onChangeText={handleChange("confirmPassword")}
-                  style={styles.input}
-                  iconName="key-star"
-                  onBlur={() => setFieldTouched("confirmPassword")}
-                  secureTextEntry
-                  viewStyle={{
-                    width: "80%",
-                    borderColor: "white",
-                    backgroundColor: "white",
-                  }}
-                />
-                <ErrorMessage
-                  error={errors.confirmPassword}
-                  visible={touched.confirmPassword}
-                />
-                <View
-                  style={{
-                    width: "100%",
-                    marginVertical: 10,
-                    alignItems: "center",
-                  }}
+              </View>
+              <View style={styles.option_view}>
+                <Text style={styles.option_txt}>Already have an account?.</Text>
+                <Text
+                  style={styles.txt}
+                  onPress={() => navigation.navigate("Login")}
                 >
-                  <AppButton
-                    title="Next"
-                    textStyle={styles.btn_t}
-                    height={50}
-                    width={"35%"}
-                    style={styles.btn}
-                    onPress={handleSubmit}
-                  />
-                </View>
-                <View style={styles.option_view}>
-                  <Text style={styles.option_txt}>
-                    Already have an account?.
-                  </Text>
-                  <Text
-                    style={styles.txt}
-                    onPress={() => navigation.navigate("Login")}
-                  >
-                    Click To Log In
-                  </Text>
-                </View>
-              </>
-            )}
-          </Formik>
-        </ScrollView>
-      </ImageBackground>
+                  Click To Log In
+                </Text>
+              </View>
+            </>
+          )}
+        </Formik>
+      </ScrollView>
     </Screen>
   );
 }
@@ -246,13 +242,15 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   btn: {
-    backgroundColor: "white",
+    backgroundColor: Color.Duolightb,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 3,
+    borderRadius: 5,
   },
   btn_t: {
-    color: "black",
+    color: Color.DuoBlack,
+    fontWeight: "bold",
+    fontSize: 17,
   },
   h_style: {
     width: "100%",
@@ -271,14 +269,14 @@ const styles = StyleSheet.create({
   },
   option_txt: {
     fontSize: 17,
-    color: "white",
+    color: Color.DuoGray,
     fontFamily: "Roboto",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   txt: {
     fontSize: 17,
     fontFamily: "Roboto",
-    color: "lightblue",
+    color: Color.DuoDarkb,
     fontWeight: "bold",
   },
 });

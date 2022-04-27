@@ -6,58 +6,76 @@ import AdminAlert from "../compnents/AdminAlert";
 import AppButton from "../compnents/AppButton";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
+import { Color } from "../assets/colors";
 
 function UserMaster(props) {
   const navigation = useNavigation();
   return (
-    <Screen style={{ padding: 10, marginTop: 0, backgroundColor: "lightgray" }}>
+    <Screen
+      style={{
+        padding: 10,
+        marginTop: 0,
+        backgroundColor: Color.DuoBlack,
+      }}
+    >
       <AdminAlert />
       <Label value="Select Options" style={styles.label1} />
       <ScrollView>
-        <View style={styles.btn_view}>
-          <AppButton
-            title="Check Record"
-            style={styles.btn}
-            textStyle={styles.btn_txt}
-            height={90}
-            width={166}
-            onPress={() => navigation.navigate("Record")}
-            image={require("../assets/cr.png")}
-            image_style={{ height: 40, width: 40 }}
-          />
-          <AppButton
-            title="Help"
-            style={styles.btn}
-            textStyle={styles.btn_txt}
-            height={90}
-            width={166}
-            onPress={() => navigation.navigate("Help")}
-            image={require("../assets/help.png")}
-            image_style={{ height: 40, width: 40 }}
-          />
-        </View>
+        <View
+          style={{
+            // borderColor: Color.DuoGray,
+            // borderWidth: 3,
+            marginTop: 5,
+            borderRadius: 15,
+            height: 300,
+            justifyContent: "space-evenly",
+          }}
+        >
+          <View style={styles.btn_view}>
+            <AppButton
+              title="Check Record"
+              style={styles.btn}
+              textStyle={styles.btn_txt}
+              height={90}
+              width={166}
+              onPress={() => navigation.navigate("Record")}
+              image={require("../assets/cr.png")}
+              image_style={{ height: 40, width: 40 }}
+            />
+            <AppButton
+              title="Help"
+              style={styles.btn}
+              textStyle={styles.btn_txt}
+              height={90}
+              width={166}
+              onPress={() => navigation.navigate("Help")}
+              image={require("../assets/help.png")}
+              image_style={{ height: 40, width: 40 }}
+            />
+          </View>
 
-        <View style={styles.btn_view}>
-          <AppButton
-            title="FAQ"
-            style={styles.btn}
-            textStyle={styles.btn_txt}
-            height={90}
-            width={166}
-            onPress={() => navigation.navigate("help")}
-            image={require("../assets/faqs.png")}
-            image_style={{ height: 40, width: 40 }}
-          />
-          <AppButton
-            title="Settings"
-            style={styles.btn}
-            textStyle={styles.btn_txt}
-            height={90}
-            width={166}
-            onPress={() => navigation.navigate("setting")}
-            image={require("../assets/settings.png")}
-            image_style={{ height: 40, width: 40 }}
-          />
+          <View style={styles.btn_view}>
+            <AppButton
+              title="FAQ"
+              style={styles.btn}
+              textStyle={styles.btn_txt}
+              height={90}
+              width={166}
+              onPress={() => navigation.navigate("help")}
+              image={require("../assets/faqs.png")}
+              image_style={{ height: 40, width: 40 }}
+            />
+            <AppButton
+              title="Settings"
+              style={styles.btn}
+              textStyle={styles.btn_txt}
+              height={90}
+              width={166}
+              onPress={() => navigation.navigate("setting")}
+              image={require("../assets/settings.png")}
+              image_style={{ height: 40, width: 40 }}
+            />
+          </View>
         </View>
       </ScrollView>
     </Screen>
@@ -78,9 +96,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    backgroundColor: "white",
+    backgroundColor: Color.DuoBlack,
+    shadowColor: Color.DuoGray,
     elevation: 7,
     marginHorizontal: 5,
+    // borderColor: Color.DuoGray,
+    // borderWidth: 2,
   },
   btn_view: {
     width: "100%",
@@ -89,15 +110,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     marginVertical: 5,
+    // backgroundColor: Color.Duolightb,
   },
   btn_txt: {
     fontSize: 16,
-    color: "black",
+    color: "white",
   },
   label1: {
     marginTop: "10%",
     elevation: 0,
-    backgroundColor: "rgb(71,118,172)",
+    backgroundColor: Color.DuoBlack,
     borderRadius: 5,
     width: "80%",
     height: "5.5%",
@@ -105,6 +127,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingLeft: "28%",
     paddingTop: 6,
+    borderWidth: 3,
+    borderColor: Color.DuoGray,
   },
 });
 
