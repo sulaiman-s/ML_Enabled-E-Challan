@@ -29,11 +29,10 @@ function LoginScreen({ navigation }) {
       });
     if (data.refresh) {
       const dat = jwtDecode(data.refresh);
-      authContext.setUser(dat);
       SetToken(data.refresh);
       SetAccess(data.access);
+      authContext.setUser(dat);
     }
-    console.log(data);
   };
 
   return (

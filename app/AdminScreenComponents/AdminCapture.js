@@ -54,7 +54,7 @@ function AdminCapture(props) {
     var d = new FormData();
     d.append("image", { uri: url, name: "modelImage.jpg", type: "image/jpg" });
     var { data } = await axios
-      .post("http://192.168.2.100:5000/img", d, {
+      .post("http://192.168.2.103:5000/img", d, {
         onUploadProgress: (p) => {
           setProgress(p.loaded / p.total);
           console.log(p);
@@ -109,7 +109,6 @@ function AdminCapture(props) {
         onPress={handleNext}
       />
       <Modal visible={log}>
-        <Text>Progress:{progress}</Text>
         <View
           style={{
             flex: 1,
@@ -119,10 +118,14 @@ function AdminCapture(props) {
           }}
         >
           <ActivityIndicator size="large" color="#00ff00" />
-          <Text>Adjusting Light Intensity...</Text>
-          <Text>Detecting Number Plate...</Text>
-          <Text>Rectification...</Text>
-          <Text>Extracting Number...</Text>
+          <Text style={{ color: Color.DuoGray }}>
+            Adjusting Light Intensity...
+          </Text>
+          <Text style={{ color: Color.DuoGray }}>
+            Detecting Number Plate...
+          </Text>
+          <Text style={{ color: Color.DuoGray }}>Rectification...</Text>
+          <Text style={{ color: Color.DuoGray }}>Extracting Number...</Text>
         </View>
       </Modal>
     </Screen>

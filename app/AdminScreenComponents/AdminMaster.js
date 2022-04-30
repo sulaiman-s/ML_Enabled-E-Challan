@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     shadowColor: Color.DuoGray,
     backgroundColor: Color.DuoBlack,
     elevation: 7,
+    marginHorizontal: 5,
   },
   btn_view: {
     width: "100%",
@@ -88,13 +89,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginVertical: 5,
-
-    // marginTop: 10,
+    marginVertical: 10,
   },
   btn_txt: {
     fontSize: 16,
-    color: Color.DuoGray,
+    color: "white",
   },
   label1: {
     marginTop: "10%",

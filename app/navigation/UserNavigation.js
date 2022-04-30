@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,6 +9,7 @@ import UserHistory from "../UserScreenComponents/UserHistory";
 import Setting from "../screens/Setting";
 import AuthContext from "../Authorization/Context";
 import UserQuery from "../UserScreenComponents/UserQuery";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -32,6 +33,7 @@ const drawer = createDrawerNavigator();
 
 const UserNavigator = () => {
   const navigation = useNavigation();
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -125,6 +127,8 @@ const Def = () => {
 const CustomDrawer = (props) => {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
+  const Profile = authContext.profilePic;
+
   return (
     <DrawerContentScrollView
       {...props}
@@ -135,11 +139,25 @@ const CustomDrawer = (props) => {
           width: "100%",
         }}
       >
-        <Image
-          source={require("../assets/db.jpeg")}
-          style={{ width: "100%", height: 150 }}
-        />
-        <View style={{ position: "absolute", top: 90 }}>
+        {Profile ? (
+          <Image
+            source={{ uri: Profile }}
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 100,
+              alignSelf: "center",
+            }}
+          />
+        ) : (
+          <Ionicons
+            name="person"
+            color={Color.DuoGray}
+            size={90}
+            style={{ alignSelf: "center", height: 150 }}
+          />
+        )}
+        <View style={{ left: 10 }}>
           <Text style={{ color: "white", fontWeight: "bold" }}>
             @{user.name}
           </Text>

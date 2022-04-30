@@ -23,8 +23,6 @@ function UserMaster(props) {
       <ScrollView>
         <View
           style={{
-            // borderColor: Color.DuoGray,
-            // borderWidth: 3,
             marginTop: 5,
             borderRadius: 15,
             height: 300,
@@ -100,8 +98,6 @@ const styles = StyleSheet.create({
     shadowColor: Color.DuoGray,
     elevation: 7,
     marginHorizontal: 5,
-    // borderColor: Color.DuoGray,
-    // borderWidth: 2,
   },
   btn_view: {
     width: "100%",
@@ -110,7 +106,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     marginVertical: 5,
-    // backgroundColor: Color.Duolightb,
   },
   btn_txt: {
     fontSize: 16,

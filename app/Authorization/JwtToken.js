@@ -14,8 +14,6 @@ export const SetAccess = (token) => {
 };
 export const SavedToken = (token) => {
   Token.refresh = token;
-  console.log(Token);
-  console.log(TokenAccess);
 };
 
 export default Token;

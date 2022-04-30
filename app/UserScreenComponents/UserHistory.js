@@ -11,15 +11,26 @@ import {
 import Label from "../compnents/label";
 import { useFocusEffect } from "@react-navigation/native";
 
-import get_historyItems, {
-  get_userHistory,
-} from "../ServerResponseData/History";
+import { Ionicons } from "@expo/vector-icons";
 import AuthContext from "../Authorization/Context";
 import { Color } from "../assets/colors";
 function UserHistory(props) {
   const [history, sethistory] = useState([]);
   const [userHistory, setUserHistory] = useState([]);
   const auth = useContext(AuthContext);
+
+  const handleDelete = () => {
+    if (auth.user.is_admin) {
+      AsyncStorage.removeItem("History").catch((error) => console.log(error));
+      sethistory([]);
+    } else {
+      AsyncStorage.removeItem("userHistory").catch((error) =>
+        console.log(error)
+      );
+      setUserHistory([]);
+    }
+  };
+
   useFocusEffect(
     useCallback(() => {
       AsyncStorage.getItem("History")
@@ -43,7 +54,24 @@ function UserHistory(props) {
   );
   return (
     <Screen style={{ padding: 10, backgroundColor: Color.DuoBlack }}>
-      <Label value="Upload History" style={styles.label1} />
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          backgroundColor: Color.DuoBackGray,
+          borderRadius: 5,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Label value="Upload History" style={styles.label1} />
+        <Ionicons
+          name="trash-outline"
+          size={35}
+          color="red"
+          onPress={handleDelete}
+        />
+      </View>
       <ScrollView>
         {auth.user.is_admin
           ? history.map((v) => (
@@ -75,6 +103,7 @@ const styles = StyleSheet.create({
     color: "white",
     paddingLeft: 130,
     fontWeight: "bold",
+    width: "90%",
   },
   adm_v: {
     height: 50,

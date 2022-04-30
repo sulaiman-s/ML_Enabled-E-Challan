@@ -10,6 +10,7 @@ import UserDrawer from "./app/navigation/UserNavigation";
 import AppLoading from "expo-app-loading";
 export default function App() {
   const [user, setUser] = useState();
+  const [profilePic, setProfilePic] = useState();
   const [ready, setReady] = useState(false);
   const [check, seCheck] = useState(false);
 
@@ -40,8 +41,23 @@ export default function App() {
     if (check) {
       if (user) {
         if (!user.is_admin) {
+          AsyncStorage.getItem("ProfilePic")
+            .then((res) => JSON.parse(res))
+            .then((p) => {
+              if (p != null) {
+                setProfilePic(p.pic);
+              }
+            });
           return <UserDrawer />;
         } else if (user.is_admin) {
+          AsyncStorage.getItem("AdminProfilePic")
+            .then((res) => JSON.parse(res))
+            .then((p) => {
+              if (p != null) {
+                setProfilePic(p.pic);
+              }
+            });
+
           return <AdminDrawer />;
         }
       } else return <AuthNavigator />;
@@ -52,10 +68,11 @@ export default function App() {
     <AppLoading
       startAsync={Check_user_InMemory()}
       onFinish={() => setReady(true)}
+      onError={(error) => console.log(error)}
     />;
   }
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, profilePic, setProfilePic }}>
       <NavigationContainer>{checker()}</NavigationContainer>
     </AuthContext.Provider>
   );

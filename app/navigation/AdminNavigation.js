@@ -136,6 +136,8 @@ const Def = () => {
 const CustomDrawer = (props) => {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
+  const Profile = authContext.profilePic;
+
   return (
     <DrawerContentScrollView
       {...props}
@@ -146,15 +148,30 @@ const CustomDrawer = (props) => {
           width: "100%",
         }}
       >
-        <Image
-          source={require("../assets/db.jpeg")}
-          style={{ width: "100%", height: 150 }}
-        />
+        {Profile ? (
+          <Image
+            source={{ uri: Profile }}
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 100,
+              alignSelf: "center",
+            }}
+          />
+        ) : (
+          <Ionicons
+            name="person"
+            color={Color.DuoGray}
+            size={90}
+            style={{
+              alignSelf: "center",
+              height: 150,
+            }}
+          />
+        )}
         <View
           style={{
-            position: "absolute",
-            top: 90,
-            width: "100%",
+            left: 10,
           }}
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>

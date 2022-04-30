@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Platform,
   StatusBar,
@@ -7,19 +7,21 @@ import {
   Image,
   Modal,
   AsyncStorage,
+  TouchableOpacity,
 } from "react-native";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
 import { useNavigation } from "@react-navigation/core";
 import { Ionicons } from "@expo/vector-icons";
 import AuthContext from "../Authorization/Context";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import AppInput from "../compnents/AppInput";
 import AppButton from "../compnents/AppButton";
 import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
 import Token, { TokenAccess } from "../Authorization/JwtToken";
 import { Color } from "../assets/colors";
+import * as ImagePicker from "expo-image-picker";
+import { useFocusEffect } from "@react-navigation/native";
 
 function Setting(props) {
   const navigation = useNavigation();
@@ -30,6 +32,7 @@ function Setting(props) {
   const [error, setError] = useState({});
   const auth = useContext(AuthContext);
   const user = auth.user;
+  const [url, setUrl] = useState(auth.profilePic);
   const handleChange = () => {
     const { data } = axios
       .post(
@@ -48,6 +51,34 @@ function Setting(props) {
       .catch((error) =>
         error ? setError(error.response.data) : console.log("no error")
       );
+  };
+
+  const handleDelete = () => {
+    setUrl(null);
+    auth.setProfilePic(null);
+    AsyncStorage.removeItem("ProfilePic").catch((error) => console.log(error));
+  };
+
+  const handleProfile = async () => {
+    const res = await ImagePicker.launchImageLibraryAsync();
+    if (res.cancelled) {
+      url = auth.profilePic;
+    } else {
+      setUrl(res.uri);
+      auth.setProfilePic(res.uri);
+      console.log(res.uri);
+      if (!user.is_admin) {
+        AsyncStorage.setItem(
+          "ProfilePic",
+          JSON.stringify({ pic: res.uri })
+        ).catch((error) => console.log(error));
+      } else if (user.is_admin) {
+        AsyncStorage.setItem(
+          "AdminProfilePic",
+          JSON.stringify({ pic: res.uri })
+        ).catch((error) => console.log(error));
+      }
+    }
   };
 
   return (
@@ -107,11 +138,15 @@ function Setting(props) {
           onPress={() => setProfileModal(true)}
         >
           <View style={{ marginHorizontal: 5, borderRadius: 25 }}>
-            <Image
-              source={require("../assets/db.jpeg")}
-              resizeMode="cover"
-              style={{ height: 50, width: 50, borderRadius: 25 }}
-            />
+            {url ? (
+              <Image
+                source={{ uri: url }}
+                resizeMode="cover"
+                style={{ height: 50, width: 50, borderRadius: 25 }}
+              />
+            ) : (
+              <Ionicons name="person" color={Color.DuoBackGray} size={25} />
+            )}
           </View>
           <View>
             <Text style={{ color: "white", fontWeight: "bold" }}>
@@ -241,7 +276,73 @@ function Setting(props) {
         </View>
       </Modal>
       <Modal visible={profileModal}>
-        <Text onPress={() => setProfileModal(false)}>close</Text>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: Color.DuoBlack,
+            width: "100%",
+          }}
+        >
+          <View
+            style={{
+              alignSelf: "flex-start",
+              marginBottom: 20,
+              flexDirection: "row",
+            }}
+          >
+            <Ionicons name="chevron-back" size={20} color={Color.DuoGray} />
+            <Text
+              style={{ color: Color.DuoGray }}
+              onPress={() => setProfileModal(false)}
+            >
+              Go Back
+            </Text>
+          </View>
+
+          <TouchableOpacity
+            style={{
+              alignSelf: "center",
+              height: 200,
+              width: 200,
+              borderColor: Color.Duolightb,
+              borderWidth: 2,
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: Color.DuoBackGray,
+              borderRadius: 25,
+              marginTop: 100,
+            }}
+            onPress={handleProfile}
+          >
+            {url ? (
+              <Image
+                source={{ uri: url }}
+                resizeMode="cover"
+                style={{ height: 200, width: 200, borderRadius: 25 }}
+              />
+            ) : (
+              <>
+                <Ionicons name="person" size={80} color={Color.DuoGray} />
+                <Text style={{ color: Color.DuoGray }}>
+                  Change Profile Picture
+                </Text>
+              </>
+            )}
+          </TouchableOpacity>
+          <Label
+            value="Delete Profile Picture"
+            style={{
+              backgroundColor: Color.DuoBlack,
+              color: "red",
+              paddingLeft: 10,
+              marginTop: 20,
+              borderWidth: 3,
+              borderColor: Color.DuoGray,
+              borderRadius: 15,
+            }}
+            onPress={handleDelete}
+          />
+        </View>
       </Modal>
     </Screen>
   );
