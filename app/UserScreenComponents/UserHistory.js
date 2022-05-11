@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import Screen from "../compnents/Screen";
+import Token from "../Authorization/JwtToken";
+
 import {
   View,
   Text,
@@ -7,6 +9,8 @@ import {
   Image,
   ScrollView,
   AsyncStorage,
+  Alert,
+  FlatList,
 } from "react-native";
 import Label from "../compnents/label";
 import { useFocusEffect } from "@react-navigation/native";
@@ -14,42 +18,68 @@ import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import AuthContext from "../Authorization/Context";
 import { Color } from "../assets/colors";
+import axios from "axios";
+import Url from "../Authorization/ApiUrlEndpoints";
+
 function UserHistory(props) {
   const [history, sethistory] = useState([]);
-  const [userHistory, setUserHistory] = useState([]);
+  const [userHist, setUserHistory] = useState([]);
   const auth = useContext(AuthContext);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
+    Alert.alert("Warning", "It will delete all your history", [
+      {
+        text: "ok",
+        onPress: async () => {
+          if (auth.user.is_admin) {
+            await axios.delete(
+              Url + "/history/wardenhistory/" + auth.user.name,
+              {
+                headers: { Authorization: "JWT" + Token.refresh },
+              }
+            );
+            sethistory([]);
+          } else {
+            await axios.delete(Url + "/history/userhistory/" + auth.user.name, {
+              headers: { Authorization: "JWT" + Token.refresh },
+            });
+            setUserHistory([]);
+          }
+        },
+      },
+      { text: "cancel", style: "destructive" },
+    ]);
+  };
+
+  const gethis = async () => {
     if (auth.user.is_admin) {
-      AsyncStorage.removeItem("History").catch((error) => console.log(error));
-      sethistory([]);
+      const { data } = await axios
+        .get(Url + "/history/wardenhistory/" + auth.user.name, {
+          headers: { Authorization: "JWT" + Token.refresh },
+        })
+        .catch((error) => console.log(error));
+      if (data) {
+        sethistory(data);
+      } else {
+        sethistory([]);
+      }
     } else {
-      AsyncStorage.removeItem("userHistory").catch((error) =>
-        console.log(error)
-      );
-      setUserHistory([]);
+      const { data } = await axios
+        .get(Url + "/history/userhistory/" + auth.user.name, {
+          headers: { Authorization: "JWT" + Token.refresh },
+        })
+        .catch((error) => console.log(error));
+      if (data) {
+        setUserHistory(data);
+      } else {
+        setUserHistory([]);
+      }
     }
   };
 
   useFocusEffect(
     useCallback(() => {
-      AsyncStorage.getItem("History")
-        .then((uh) => JSON.parse(uh))
-        .then((pd) => {
-          if (pd != null || pd != undefined) {
-            sethistory(pd);
-          }
-        })
-        .catch((error) => console.log(error));
-
-      AsyncStorage.getItem("userHistory")
-        .then((uh) => JSON.parse(uh))
-        .then((pd) => {
-          if (pd != null || pd != undefined) {
-            setUserHistory(pd);
-          }
-        })
-        .catch((error) => console.log(error));
+      gethis();
     }, [])
   );
   return (
@@ -72,26 +102,38 @@ function UserHistory(props) {
           onPress={handleDelete}
         />
       </View>
-      <ScrollView>
-        {auth.user.is_admin
-          ? history.map((v) => (
-              <View style={styles.adm_v} key={v.challan_id}>
-                <Text style={styles.adm_text}>Vehicle:{v.vehicle_number}</Text>
-                <Text style={styles.adm_text}>Type:{v.vehicle_type}</Text>
-                <Text style={styles.adm_text}>Date:{v.time}</Text>
-              </View>
-            ))
-          : userHistory.map((v) => (
-              <View style={styles.user_v}>
-                <Text style={styles.user_text}>
-                  Vehicle:{v.number}
-                  {"\n"}
-                  Date:{v.time}
-                </Text>
-                <Image style={styles.user_img} source={{ uri: v.url }} />
-              </View>
-            ))}
-      </ScrollView>
+      {auth.user.is_admin ? (
+        <FlatList
+          data={history}
+          keyExtractor={(d) => d.id}
+          renderItem={({ item }) => (
+            <View style={styles.adm_v}>
+              <Text style={styles.adm_text}>Vehicle:{item.number}</Text>
+              <Text style={styles.adm_text}>Type:{item.type}</Text>
+              <Text style={styles.adm_text}>Date:{item.time}</Text>
+            </View>
+          )}
+        />
+      ) : (
+        <FlatList
+          data={userHist}
+          keyExtractor={(d) => d.id}
+          renderItem={({ item }) => (
+            <View style={styles.user_v}>
+              <Text style={styles.user_text}>
+                Vehicle:{item.number}
+                {"\n"}
+                Date:{item.time}
+              </Text>
+              <Image
+                style={styles.user_img}
+                source={{ uri: item.image }}
+                resizeMode="cover"
+              />
+            </View>
+          )}
+        />
+      )}
     </Screen>
   );
 }

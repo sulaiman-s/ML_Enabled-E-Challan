@@ -12,7 +12,7 @@ function AdminMaster({ navigation }) {
   return (
     <View style={{ padding: 5, backgroundColor: Color.DuoBlack, flex: 1 }}>
       <AdminAlert />
-      <Label value="Select Options" style={styles.label1} />
+      <Label value="Select Option" style={styles.label1} />
       <ScrollView style={{ marginTop: 15 }}>
         <View style={styles.btn_view}>
           <AppButton

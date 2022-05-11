@@ -56,7 +56,9 @@ function Setting(props) {
   const handleDelete = () => {
     setUrl(null);
     auth.setProfilePic(null);
-    AsyncStorage.removeItem("ProfilePic").catch((error) => console.log(error));
+    AsyncStorage.removeItem(`@${auth.user.name}`).catch((error) =>
+      console.log(error)
+    );
   };
 
   const handleProfile = async () => {
@@ -67,17 +69,18 @@ function Setting(props) {
       setUrl(res.uri);
       auth.setProfilePic(res.uri);
       console.log(res.uri);
-      if (!user.is_admin) {
-        AsyncStorage.setItem(
-          "ProfilePic",
-          JSON.stringify({ pic: res.uri })
-        ).catch((error) => console.log(error));
-      } else if (user.is_admin) {
-        AsyncStorage.setItem(
-          "AdminProfilePic",
-          JSON.stringify({ pic: res.uri })
-        ).catch((error) => console.log(error));
-      }
+      AsyncStorage.setItem(
+        `@${auth.user.name}`,
+        JSON.stringify({ pic: res.uri })
+      ).catch((error) => console.log(error));
+      // if (!user.is_admin) {
+      //}
+      // else if (user.is_admin) {
+      //   AsyncStorage.setItem(
+      //     "AdminProf,
+      //     JSON.stringify({ pic: res.uri })
+      //   ).catch((error) => console.log(error));
+      // }
     }
   };
 

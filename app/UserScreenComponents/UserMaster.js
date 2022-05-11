@@ -19,7 +19,7 @@ function UserMaster(props) {
       }}
     >
       <AdminAlert />
-      <Label value="Select Options" style={styles.label1} />
+      <Label value="Select Option" style={styles.label1} />
       <ScrollView>
         <View
           style={{

@@ -44,7 +44,7 @@ function AdminAlert(props) {
       return (
         <>
           <Image
-            source={{ uri: Url + alertImage.Alert_Image }}
+            source={{ uri: alertImage.Alert_Image }}
             style={{ height: "50%", width: "100%" }}
             resizeMode="cover"
           />
@@ -83,7 +83,7 @@ function AdminAlert(props) {
     if (alertImage.Alert_Image && !alertMessage) {
       return (
         <Image
-          source={{ uri: Url + alertImage.Alert_Image }}
+          source={{ uri: alertImage.Alert_Image }}
           style={{ height: "100%", width: "100%", marginTop: "1%" }}
           resizeMode="contain"
         />
@@ -207,7 +207,7 @@ function AdminAlert(props) {
             onPress={() => setvisi(true)}
           >
             <Image
-              source={{ uri: Url + alertImage.Alert_Image }}
+              source={{ uri: alertImage.Alert_Image }}
               style={{ width: "100%", height: "100%" }}
               resizeMode="cover"
             />

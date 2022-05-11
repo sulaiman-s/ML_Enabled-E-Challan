@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as ImagePicker from "expo-image-picker";
 import {
   View,
@@ -18,15 +18,15 @@ import Screen from "../compnents/Screen";
 import axios from "axios";
 import Url from "../Authorization/ApiUrlEndpoints";
 import Token from "../Authorization/JwtToken";
-import { setUserHistory } from "../ServerResponseData/History";
 import LottiView from "lottie-react-native";
-import * as MediaLibrary from "expo-media-library";
 import { Color } from "../assets/colors";
+import AuthContext from "../Authorization/Context";
 
 function UploadChallan({ route, navigation }) {
   const [url, setUrl] = useState();
   const [visi, setvisi] = useState(false);
   const [picError, setPicError] = useState(false);
+  const { user } = useContext(AuthContext);
   const ErrorMessage = () => {
     if (picError) {
       return <Text>"Must Enter Challan Reciept Picture To Proceed"</Text>;
@@ -96,11 +96,19 @@ function UploadChallan({ route, navigation }) {
     const year = d.getFullYear();
     const months = d.getMonth();
     const day = d.getDate();
-    setUserHistory({
-      url,
-      number: route.params.number,
-      time: `${year}/${months + 1}/${day}`,
+
+    const dat = new FormData();
+    dat.append("number", route.params.number);
+    dat.append("time", `${year}/${months + 1}/${day}`);
+    dat.append("image", { uri: url, name: "history.jpg", type: "image/jpg" });
+    dat.append("name", user.name);
+
+    await axios.post(Url + "/history/userhistory/", dat, {
+      headers: { Authorization: "JWT" + Token.refresh },
+      Accept: "application/json",
+      "Content-Type": "multipart/form-data",
     });
+
     setTimeout(() => {
       setvisi(false);
       navigation.navigate("HOME");
@@ -110,11 +118,11 @@ function UploadChallan({ route, navigation }) {
     <Screen
       style={{ padding: 10, marginTop: 0, backgroundColor: Color.DuoBlack }}
     >
-      <View style={{ width: "100%" }}>
-        <View>
-          <Label value="Challan Info" style={styles.label1} />
-        </View>
-        <ScrollView>
+      <ScrollView style={{ width: "100%" }}>
+        <View style={{ width: "100%" }}>
+          <View>
+            <Label value="Challan Info" style={styles.label1} />
+          </View>
           <View style={{ marginTop: 10 }}>
             {route.params == null ? (
               <UserListItem />
@@ -167,8 +175,8 @@ function UploadChallan({ route, navigation }) {
             style={styles.btn}
             onPress={handleUserUpload}
           />
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
       <Modal visible={visi}>
         <View
           style={{

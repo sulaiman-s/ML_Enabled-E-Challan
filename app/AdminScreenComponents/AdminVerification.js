@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
 import { StyleSheet, View, Text, Modal } from "react-native";
@@ -6,14 +6,16 @@ import AppButton from "../compnents/AppButton";
 import { useNavigation } from "@react-navigation/core";
 import Url from "../Authorization/ApiUrlEndpoints";
 import axios from "axios";
-import { setHistory } from "../ServerResponseData/History";
 import LottiView from "lottie-react-native";
 import { Color } from "../assets/colors";
 import UserListItem from "../compnents/UserListItem";
 
+import AuthContext from "../Authorization/Context";
+
 function AdminVerification({ route }) {
   const navigation = useNavigation();
   const [visi, setvisi] = useState(false);
+  const auth = useContext(AuthContext);
 
   const {
     vehicle_number,
@@ -39,11 +41,16 @@ function AdminVerification({ route }) {
     const year = d.getFullYear();
     const months = d.getMonth();
     const day = d.getDate();
-    const items = {
-      ...route.params.cha,
+    const item = {
+      number: vehicle_number,
+      type: vehicle_type,
       time: `${year}/${months + 1}/${day}`,
+      name: auth.user.name,
     };
-    setHistory(items);
+    // setHistory(items);
+    await axios
+      .post(Url + "history/wardenhistory/", item)
+      .catch((error) => console.log(error));
     setTimeout(() => {
       navigation.navigate("HOME");
     }, 3000);

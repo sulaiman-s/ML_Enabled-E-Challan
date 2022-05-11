@@ -27,11 +27,11 @@ function LoginScreen({ navigation }) {
       .catch((error) => {
         if (error) setError("Account not found");
       });
-    if (data.refresh) {
+    if (data != undefined || data != null) {
       const dat = jwtDecode(data.refresh);
+      authContext.setUser(dat);
       SetToken(data.refresh);
       SetAccess(data.access);
-      authContext.setUser(dat);
     }
   };
 
@@ -109,7 +109,7 @@ function LoginScreen({ navigation }) {
             Go Back
           </Text>
         </View>
-        <WebView source={{ uri: Url + "/user/account/password_reset/" }} />
+        <WebView source={{ uri: Url + "/user/password_reset/" }} />
       </Modal>
     </Screen>
   );

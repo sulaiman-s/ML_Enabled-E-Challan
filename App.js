@@ -18,7 +18,6 @@ export default function App() {
     if (!user) {
       AsyncStorage.getItem("JwtToken")
         .then((t) => {
-          console.log("parsing");
           return JSON.parse(t);
         })
         .then((tk) => {
@@ -41,20 +40,24 @@ export default function App() {
     if (check) {
       if (user) {
         if (!user.is_admin) {
-          AsyncStorage.getItem("ProfilePic")
+          AsyncStorage.getItem(`@${user.name}`)
             .then((res) => JSON.parse(res))
             .then((p) => {
               if (p != null) {
                 setProfilePic(p.pic);
+              } else {
+                setProfilePic(null);
               }
             });
           return <UserDrawer />;
         } else if (user.is_admin) {
-          AsyncStorage.getItem("AdminProfilePic")
+          AsyncStorage.getItem(`@${user.name}`)
             .then((res) => JSON.parse(res))
             .then((p) => {
               if (p != null) {
                 setProfilePic(p.pic);
+              } else {
+                setProfilePic(null);
               }
             });
 

@@ -38,7 +38,7 @@ function RegisterScreen({ navigation }) {
     email: Yup.string().required().email().label("Email"),
     username: Yup.string()
       .required()
-      .min(8)
+      .min(4)
       .matches("[^0-9]", "Add minimum one alphabet")
       .label("UserName"),
     password: Yup.string()
@@ -240,6 +240,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingBottom: 20,
     marginLeft: 10,
+    color: "white",
   },
   btn: {
     backgroundColor: Color.Duolightb,
