@@ -54,7 +54,7 @@ function AdminCapture(props) {
     var d = new FormData();
     d.append("image", { uri: url, name: "modelImage.jpg", type: "image/jpg" });
     var { data } = await axios
-      .post("http://192.168.2.103:5000/img", d, {
+      .post("http://192.168.225.182:5000/img", d, {
         onUploadProgress: (p) => {
           setProgress(p.loaded / p.total);
           console.log(p);

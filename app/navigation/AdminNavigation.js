@@ -150,7 +150,7 @@ const CustomDrawer = (props) => {
       >
         {Profile ? (
           <Image
-            source={{ uri: Profile }}
+            source={{ uri: Profile.profile_img }}
             style={{
               width: 150,
               height: 150,

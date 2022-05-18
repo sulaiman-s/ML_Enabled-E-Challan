@@ -32,8 +32,10 @@ function Setting(props) {
   const [error, setError] = useState({});
   const auth = useContext(AuthContext);
   const user = auth.user;
-  const [url, setUrl] = useState(auth.profilePic);
+  const pi = auth.profilePic ? auth.profilePic.profile_img : "";
+  const [url, setUrl] = useState(pi);
   const handleChange = () => {
+    console.log("working");
     const { data } = axios
       .post(
         Url + "/auth/users/set_password/",
@@ -53,34 +55,40 @@ function Setting(props) {
       );
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     setUrl(null);
     auth.setProfilePic(null);
-    AsyncStorage.removeItem(`@${auth.user.name}`).catch((error) =>
-      console.log(error)
-    );
+    const id = auth.profilePic ? auth.profilePic.id : undefined;
+    await axios
+      .delete(Url + "/user/profile/uid/" + id)
+      .catch((err) => console.log(err));
   };
 
   const handleProfile = async () => {
     const res = await ImagePicker.launchImageLibraryAsync();
     if (res.cancelled) {
-      url = auth.profilePic;
+      url = pi;
     } else {
       setUrl(res.uri);
-      auth.setProfilePic(res.uri);
-      console.log(res.uri);
-      AsyncStorage.setItem(
-        `@${auth.user.name}`,
-        JSON.stringify({ pic: res.uri })
-      ).catch((error) => console.log(error));
-      // if (!user.is_admin) {
-      //}
-      // else if (user.is_admin) {
-      //   AsyncStorage.setItem(
-      //     "AdminProf,
-      //     JSON.stringify({ pic: res.uri })
-      //   ).catch((error) => console.log(error));
-      // }
+
+      const prof = new FormData();
+      prof.append("profile_img", {
+        uri: res.uri,
+        name: "profilepicture.jpg",
+        type: "image/jpg",
+      });
+
+      if (auth.profilePic !== null) {
+        const { data } = await axios.patch(
+          Url + "/user/profile/uid/" + auth.profilePic.id,
+          prof
+        );
+        auth.setProfilePic(data);
+      } else {
+        prof.append("name", user.name);
+        const { data } = await axios.post(Url + "/user/profile/", prof);
+        auth.setProfilePic(data);
+      }
     }
   };
 

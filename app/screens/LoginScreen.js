@@ -30,6 +30,16 @@ function LoginScreen({ navigation }) {
     if (data != undefined || data != null) {
       const dat = jwtDecode(data.refresh);
       authContext.setUser(dat);
+      axios
+        .get(Url + "/user/profile/" + dat.name)
+        .then((res) => {
+          if (res.data.length > 0) {
+            authContext.setProfilePic(res.data[0]);
+          } else {
+            authContext.setProfilePic(null);
+          }
+        })
+        .catch((error) => console.log(error));
       SetToken(data.refresh);
       SetAccess(data.access);
     }

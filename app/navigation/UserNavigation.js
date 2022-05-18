@@ -10,6 +10,8 @@ import Setting from "../screens/Setting";
 import AuthContext from "../Authorization/Context";
 import UserQuery from "../UserScreenComponents/UserQuery";
 import { useFocusEffect } from "@react-navigation/native";
+import axios from "axios";
+import Url from "../Authorization/ApiUrlEndpoints";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -128,7 +130,6 @@ const CustomDrawer = (props) => {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
   const Profile = authContext.profilePic;
-
   return (
     <DrawerContentScrollView
       {...props}
@@ -141,7 +142,7 @@ const CustomDrawer = (props) => {
       >
         {Profile ? (
           <Image
-            source={{ uri: Profile }}
+            source={{ uri: Profile.profile_img }}
             style={{
               width: 150,
               height: 150,
