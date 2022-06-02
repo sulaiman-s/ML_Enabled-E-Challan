@@ -107,19 +107,25 @@ function LoginScreen({ navigation }) {
         </Text>
       </View>
       <Modal visible={forgot}>
-        <View
-          style={{
-            alignSelf: "flex-start",
-            marginBottom: 20,
-            flexDirection: "row",
-          }}
-        >
-          <Ionicons name="chevron-back" size={20} color="blue" />
-          <Text style={{ color: "blue" }} onPress={() => setforgot(false)}>
-            Go Back
-          </Text>
+        <View style={{ flex: 1, backgroundColor: Color.DuoBlack }}>
+          <View
+            style={{
+              alignSelf: "flex-start",
+              flexDirection: "row",
+              backgroundColor: Color.DuoBlack,
+              width: "100%",
+            }}
+          >
+            <Ionicons name="chevron-back" size={20} color={Color.DuoGray} />
+            <Text
+              style={{ color: Color.DuoGray }}
+              onPress={() => setforgot(false)}
+            >
+              Go Back
+            </Text>
+          </View>
+          <WebView source={{ uri: Url + "/user/password_reset/" }} />
         </View>
-        <WebView source={{ uri: Url + "/user/password_reset/" }} />
       </Modal>
     </Screen>
   );

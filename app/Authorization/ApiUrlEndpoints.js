@@ -1,4 +1,4 @@
-// const Url = "https://avnd.herokuapp.com";
-const Url = "http://192.168.2.102:8000";
+const Url = "https://avnd.herokuapp.com";
+// const Url = "http://192.168.2.102:8000";
 
 export default Url;
