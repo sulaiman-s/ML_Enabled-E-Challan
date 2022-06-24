@@ -8,6 +8,7 @@ function UserListItem({ ch_Number, number, type, stetus, price, location }) {
   const handlePress = () => {
     if (stetus != "Paid") {
       navigation.navigate("upload", {
+        ch_Number,
         number,
         type,
         stetus,

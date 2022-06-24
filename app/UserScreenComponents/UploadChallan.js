@@ -35,36 +35,79 @@ function UploadChallan({ route, navigation }) {
   };
   const html = `
   <!DOCTYPE html>
-  <html lang="en">
+<html lang="en">
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Pdf Content</title>
-      <style>
-          body {
-              font-size: 16px;
-              
-          }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challan Report</title>
+    <style>
+      body {
+        font-size: 16px;
+      }
 
-          h1 {
-              text-align: center;
-              color: rgb(0, 72, 255);
-          }
-      </style>
+      h1 {
+        text-align: center;
+        color: rgb(0, 72, 255);
+      }
+      ul li {
+        list-style-type: none;
+        font-weight: bold;
+      }
+      table thead td {
+        font-weight: bold;
+        width: 150px;
+        border: 1px solid black;
+        text-align: center;
+      }
+      table {
+        border: 1.5px dashed black;
+      }
+      table tbody tr > td {
+        height: 30px;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-      <h1>Challan</h1>
-      <div style="width: 100%;
-      display:flex;justify-content: center;">
-      <div style="border:2px dashed black; width: fit-content; align-self: center;">
-          <h1>Vehicle Type:${route.params.type}</h1>
-          <h1>Vehicle Number:${route.params.number}</h1>
-          <h1>Challan Location:${route.params.location}</h1>
-          <h1>Challan Amount:${route.params.price}</h1>
+    <h1>Challan</h1>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div style="display: flex; flex-direction: row">
+        <ul>
+          <li>Challan Id:#${route.params.ch_Number}</li>
+          <li>PhoneNumber: Not provided</li>
+        </ul>
+        <ul>
+          <li>Name:${user.name}</li>
+          <li>Cnic:Not provided</li>
+        </ul>
       </div>
-  </div>
+      <table>
+        <thead>
+          <td>Vehicle Type</td>
+          <td>Number Plate</td>
+          <td>Location</td>
+          <td>Amount</td>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${route.params.type}</td>
+            <td>${route.params.number}</td>
+            <td>${route.params.location}</td>
+            <td>${route.params.price}</ pkr</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5>Challan Generated date:${new Date()}</h5>
+    </div>
   </body>
-  </html>
+</html>
 `;
   const handleGenerate = async () => {
     return await Print.printAsync({ html });

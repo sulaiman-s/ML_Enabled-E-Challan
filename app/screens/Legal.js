@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Platform, StatusBar, View, Text, Modal } from "react-native";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
+import { WebView } from "react-native-webview";
 import { useNavigation } from "@react-navigation/core";
 import { Ionicons } from "@expo/vector-icons";
+import Url from "../Authorization/ApiUrlEndpoints";
+import { Color } from "../assets/colors";
 function Legal(props) {
   const navigation = useNavigation();
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
@@ -42,17 +45,20 @@ function Legal(props) {
             alignSelf: "flex-start",
             marginBottom: 20,
             flexDirection: "row",
+            backgroundColor: Color.DuoBlack,
+            width: "100%",
+            marginBottom: 0,
           }}
         >
-          <Ionicons name="chevron-back" size={20} color="blue" />
+          <Ionicons name="chevron-back" size={20} color={Color.DuoDarkb} />
           <Text
-            style={{ color: "blue" }}
+            style={{ color: Color.DuoDarkb }}
             onPress={() => setPrivacyPolicy(false)}
           >
             Go Back
           </Text>
         </View>
-        <Text style={{ alignSelf: "center" }}>privacy</Text>
+        <WebView source={{ uri: Url + "/user/privacy/" }} />
       </Modal>
       <Modal visible={termService}>
         <View

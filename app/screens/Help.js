@@ -13,7 +13,6 @@ function Help(props) {
   return (
     <Screen
       style={{
-        marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
         backgroundColor: Color.DuoBlack,
       }}
     >

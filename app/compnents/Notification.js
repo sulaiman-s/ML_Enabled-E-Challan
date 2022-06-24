@@ -16,7 +16,7 @@ function Notification({ style }) {
         style,
       ]}
     >
-      <Text>Notifications</Text>
+      <Text>Alert Notifications</Text>
     </View>
   );
 }

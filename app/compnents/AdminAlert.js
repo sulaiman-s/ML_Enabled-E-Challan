@@ -68,7 +68,7 @@ function AdminAlert(props) {
               key={item.id}
               style={{
                 fontSize: 16,
-                marginTop: 10,
+                margin: 10,
                 fontWeight: "bold",
                 color: "white",
                 paddingLeft: 5,
@@ -95,7 +95,7 @@ function AdminAlert(props) {
           style={{
             height: "100%",
             width: "100%",
-            backgroundColor: "lightgray",
+            backgroundColor: Color.DuoBlack,
           }}
         >
           <Label
@@ -106,6 +106,7 @@ function AdminAlert(props) {
               borderRadius: 5,
               color: "white",
               fontWeight: "bold",
+              paddingLeft: 130,
             }}
           />
           {alertMessage.map((item) => (
@@ -115,7 +116,8 @@ function AdminAlert(props) {
                 fontSize: 16,
                 // height: "30%",
                 width: "100%",
-                marginTop: 10,
+                margin: 10,
+                color: Color.DuoGray,
               }}
             >
               {item.Alert_Message}
@@ -152,7 +154,7 @@ function AdminAlert(props) {
             fontWeight: "bold",
           }}
         >
-          Notifications
+          Alert Notifications
         </Text>
         <Text
           style={{
