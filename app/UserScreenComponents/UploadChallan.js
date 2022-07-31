@@ -21,7 +21,7 @@ import Token from "../Authorization/JwtToken";
 import LottiView from "lottie-react-native";
 import { Color } from "../assets/colors";
 import AuthContext from "../Authorization/Context";
-
+import img from "../assets/qr-code.png";
 function UploadChallan({ route, navigation }) {
   const [url, setUrl] = useState();
   const [visi, setvisi] = useState(false);
@@ -94,6 +94,7 @@ function UploadChallan({ route, navigation }) {
           <td>Number Plate</td>
           <td>Location</td>
           <td>Amount</td>
+          <td>Violation</td>
         </thead>
         <tbody>
           <tr>
@@ -101,9 +102,13 @@ function UploadChallan({ route, navigation }) {
             <td>${route.params.number}</td>
             <td>${route.params.location}</td>
             <td>${route.params.price}</ pkr</td>
+            <td>${route.params.violation}</ pkr</td>
           </tr>
         </tbody>
       </table>
+      <h5></h5>
+      <img src="https://res.cloudinary.com/sulaimancloud/image/upload/v1658451908/samples/ecommerce/qr-code_n6qcem.png" height="300px" width="300px" />
+      <h6>Scan to open application</h6>
       <h5>Challan Generated date:${new Date()}</h5>
     </div>
   </body>
@@ -175,6 +180,9 @@ function UploadChallan({ route, navigation }) {
                 type={route.params.type}
                 price={route.params.price}
                 number={route.params.number}
+                location={route.params.location}
+                violation={route.params.violation}
+                time={route.params.time}
               />
             )}
             <AppButton
@@ -251,7 +259,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.Duolightb,
   },
   btn_t: {
-    color: Color.DuoBlack,
+    color: "white",
     fontSize: 15,
     fontWeight: "bold",
   },

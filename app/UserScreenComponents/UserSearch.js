@@ -21,7 +21,7 @@ function UserSearch({ Search, handleSearch }) {
         height={52}
         width="20%"
         style={styles.search_btn}
-        textStyle={{ color: Color.DuoBlack, fontWeight: "bold" }}
+        textStyle={{ color: "white", fontWeight: "bold" }}
         onPress={handleSearch}
       />
     </View>

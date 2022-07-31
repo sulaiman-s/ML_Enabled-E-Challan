@@ -34,7 +34,9 @@
     "react-native-webview": "11.13.0",
     "expo-app-loading": "~1.2.1",
     "expo-print": "~11.0.4",
-    "expo-media-library": "~13.0.3"
+    "expo-media-library": "~13.0.3",
+    "expo-location": "~13.0.4",
+    "react-native-maps": "0.28.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

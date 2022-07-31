@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   btn_t: {
-    color: Color.DuoBlack,
+    color: "white",
     fontWeight: "bold",
     fontSize: 17,
   },

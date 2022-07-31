@@ -1,5 +1,12 @@
 import React, { useContext, useState } from "react";
-import { ImageBackground, StyleSheet, Text, View, Modal } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  ScrollView,
+} from "react-native";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
 import AppButton from "../compnents/AppButton";
@@ -19,6 +26,7 @@ function LoginScreen({ navigation }) {
   const [forgot, setforgot] = useState(false);
   const authContext = useContext(AuthContext);
   const handleLogin = async () => {
+    console.log("ww");
     const { data } = await axios
       .post(Url + "/user/create/", {
         username: username,
@@ -53,80 +61,94 @@ function LoginScreen({ navigation }) {
         alignItems: "center",
       }}
     >
-      {/* <View style={{ width: "100%", marginVertical: 25 }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* <View style={{ width: "100%", marginVertical: 25 }}>
         <Text style={styles.h_style}>Log in</Text>
       </View> */}
-      <AppInput
-        placeholder="Username"
-        placeholderTextColor={Color.DuoGray}
-        style={styles.t_inp}
-        onChangeText={(text) => setUsername(text)}
-        iconName="security"
-        iconColor={Color.DuoDarkb}
-        viewStyle={{
-          width: "80%",
-          borderWidth: 0,
-          backgroundColor: Color.DuoBackGray,
-        }}
-      />
-      <AppInput
-        placeholder="Password"
-        placeholderTextColor={Color.DuoGray}
-        style={styles.t_inp}
-        onChangeText={(text) => setPassword(text)}
-        iconName="key"
-        iconColor={Color.DuoDarkb}
-        secureTextEntry
-        viewStyle={{
-          width: "80%",
-          borderWidth: 0,
-          backgroundColor: Color.DuoBackGray,
-        }}
-      />
-      {error != null ? <Text style={{ color: "red" }}>{error}</Text> : null}
-      <View style={styles.btn}>
-        <AppButton
-          title="Login"
-          style={styles.btn_style}
-          textStyle={styles.btn_text_Style}
-          height={50}
-          width={"80%"}
-          onPress={handleLogin}
-        />
-        <View style={styles.option_view}>
-          <Text style={styles.option_txt}>Dont have an account?.</Text>
-          <Text
-            style={styles.txt}
-            onPress={() => navigation.navigate("Register")}
-          >
-            Click To Create
-          </Text>
-        </View>
-        <Text onPress={() => setforgot(true)} style={{ color: Color.DuoDarkb }}>
-          Forgot Password?
-        </Text>
-      </View>
-      <Modal visible={forgot}>
-        <View style={{ flex: 1, backgroundColor: Color.DuoBlack }}>
-          <View
-            style={{
-              alignSelf: "flex-start",
-              flexDirection: "row",
-              backgroundColor: Color.DuoBlack,
-              width: "100%",
+          <AppInput
+            placeholder="Username"
+            placeholderTextColor={Color.DuoGray}
+            style={styles.t_inp}
+            onChangeText={(text) => setUsername(text)}
+            iconName="security"
+            iconColor={Color.DuoDarkb}
+            viewStyle={{
+              width: "80%",
+              borderWidth: 0,
+              backgroundColor: Color.DuoBackGray,
             }}
-          >
-            <Ionicons name="chevron-back" size={20} color={Color.DuoGray} />
+          />
+          <AppInput
+            placeholder="Password"
+            placeholderTextColor={Color.DuoGray}
+            style={styles.t_inp}
+            onChangeText={(text) => setPassword(text)}
+            iconName="key"
+            iconColor={Color.DuoDarkb}
+            secureTextEntry
+            viewStyle={{
+              width: "80%",
+              borderWidth: 0,
+              backgroundColor: Color.DuoBackGray,
+            }}
+          />
+          {error != null ? <Text style={{ color: "red" }}>{error}</Text> : null}
+          <View style={styles.btn}>
+            <AppButton
+              title="Login"
+              style={styles.btn_style}
+              textStyle={styles.btn_text_Style}
+              height={50}
+              width={"80%"}
+              onPress={handleLogin}
+            />
+            <View style={styles.option_view}>
+              <Text style={styles.option_txt}>Dont have an account?.</Text>
+              <Text
+                style={styles.txt}
+                onPress={() => navigation.navigate("Register")}
+              >
+                Click To Create
+              </Text>
+            </View>
             <Text
-              style={{ color: Color.DuoGray }}
-              onPress={() => setforgot(false)}
+              onPress={() => setforgot(true)}
+              style={{ color: Color.DuoDarkb }}
             >
-              Go Back
+              Forgot Password?
             </Text>
           </View>
-          <WebView source={{ uri: Url + "/user/password_reset/" }} />
-        </View>
-      </Modal>
+        </ScrollView>
+        <Modal visible={forgot}>
+          <View style={{ flex: 1, backgroundColor: Color.DuoBlack }}>
+            <View
+              style={{
+                alignSelf: "flex-start",
+                flexDirection: "row",
+                backgroundColor: Color.DuoBlack,
+                width: "100%",
+              }}
+            >
+              <Ionicons name="chevron-back" size={20} color={Color.DuoGray} />
+              <Text
+                style={{ color: Color.DuoGray }}
+                onPress={() => setforgot(false)}
+              >
+                Go Back
+              </Text>
+            </View>
+            <WebView source={{ uri: Url + "/user/password_reset/" }} />
+          </View>
+        </Modal>
+      </View>
     </Screen>
   );
 }
@@ -161,7 +183,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   btn_text_Style: {
-    color: Color.DuoBlack,
+    color: "white",
     fontWeight: "bold",
     fontSize: 17,
   },

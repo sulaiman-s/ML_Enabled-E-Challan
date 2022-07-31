@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { StyleSheet, FlatList, View, Text } from "react-native";
 import Label from "../compnents/label";
 import Screen from "../compnents/Screen";
@@ -21,10 +22,14 @@ function UserChallanList(props) {
       })
       .catch((error) => console.log(error));
     set_challans(data);
+    console.log(data);
   };
-  useEffect(() => {
-    get_challanData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      get_challanData();
+    }, [])
+  );
+
   const handleSearch = () => {
     const challans = get_challans();
     const filter_challan = challans.filter((x) => x.vehicle_number == search);
@@ -65,6 +70,8 @@ function UserChallanList(props) {
               type={item.vehicle_type}
               price={item.challan_amount}
               location={item.challan_location}
+              violation={item.violation_type}
+              time={item.challan_time}
             />
           )}
           ItemSeparatorComponent={() => <View style={{ height: 5 }}></View>}

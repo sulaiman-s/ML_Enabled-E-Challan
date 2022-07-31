@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   View,
   Text,
@@ -34,10 +35,13 @@ function AdminAlert(props) {
       .catch((err) => console.log(err));
     setAlertMessage(data);
   };
-  useEffect(() => {
-    getAlertImage();
-    getAlertMessage();
-  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getAlertImage();
+      getAlertMessage();
+    }, [])
+  );
 
   const getAlertsModal = () => {
     if (alertImage.Alert_Image && alertMessage) {
@@ -46,7 +50,7 @@ function AdminAlert(props) {
           <Image
             source={{ uri: alertImage.Alert_Image }}
             style={{ height: "50%", width: "100%" }}
-            resizeMode="cover"
+            resizeMode="contain"
           />
           <Label
             value="Message Alerts"

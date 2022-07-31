@@ -23,6 +23,7 @@ function AdminVerification({ route }) {
     vehicle_status,
     challan_amount,
     vehicle_location,
+    violation_type,
   } = route.params.cha;
 
   const handleUpload = async () => {
@@ -34,8 +35,12 @@ function AdminVerification({ route }) {
         challan_amount: challan_amount,
         challan_status: vehicle_status,
         challan_location: vehicle_location,
+        violation_type: violation_type,
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setvisi(false);
+      });
 
     const d = new Date();
     const year = d.getFullYear();
@@ -48,10 +53,12 @@ function AdminVerification({ route }) {
       name: auth.user.name,
     };
     // setHistory(items);
-    await axios
-      .post(Url + "history/wardenhistory/", item)
-      .catch((error) => console.log(error));
+    await axios.post(Url + "/history/wardenhistory/", item).catch((error) => {
+      console.log(error);
+      alert("data upload failed");
+    });
     setTimeout(() => {
+      setvisi(false);
       navigation.navigate("HOME");
     }, 3000);
   };
@@ -70,6 +77,8 @@ function AdminVerification({ route }) {
           type={vehicle_type}
           stetus={vehicle_status}
           price={challan_amount}
+          location={vehicle_location}
+          violation={violation_type}
         />
       </View>
       <View style={styles.btn_view}>
@@ -126,7 +135,7 @@ const styles = StyleSheet.create({
   },
   btn_txt: {
     fontSize: 16,
-    color: Color.DuoBlack,
+    color: "white",
     fontWeight: "bold",
   },
   label1: {

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Label from "../compnents/label";
+import { useFocusEffect } from "@react-navigation/native";
+import * as Location from "expo-location";
 import Screen from "../compnents/Screen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
@@ -10,6 +12,7 @@ import {
   StyleSheet,
   Modal,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import AppButton from "../compnents/AppButton";
 import * as ImagePicker from "expo-image-picker";
@@ -23,7 +26,22 @@ function AdminCapture(props) {
   const [picError, setPicError] = useState(false);
   const [log, setlog] = useState(false);
   const [progress, setProgress] = useState();
+  const [long, setlong] = useState();
+  const [lat, setlat] = useState();
 
+  const get_prm = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      alert("Permission to access location was denied");
+      return;
+    }
+  };
+
+  const get_location = async () => {
+    let location = await Location.getCurrentPositionAsync({});
+    setlong(location.coords.longitude);
+    setlat(location.coords.latitude);
+  };
   const ErrorMessage = () => {
     if (picError) {
       return <Text>"Must Enter Picture To Proceed"</Text>;
@@ -54,7 +72,7 @@ function AdminCapture(props) {
     var d = new FormData();
     d.append("image", { uri: url, name: "modelImage.jpg", type: "image/jpg" });
     var { data } = await axios
-      .post("http://192.168.137.235:3000/img", d, {
+      .post("http://192.168.43.169:3000/img", d, {
         onUploadProgress: (p) => {
           setProgress(p.loaded / p.total);
           console.log(p);
@@ -64,6 +82,13 @@ function AdminCapture(props) {
     setlog(false);
     navigation.navigate("entry", { plate: data });
   };
+  useFocusEffect(
+    useCallback(() => {
+      get_prm();
+      get_location();
+    }, [])
+  );
+
   return (
     <Screen style={{ backgroundColor: Color.DuoBlack, marginTop: 0 }}>
       {url == null ? (
@@ -72,42 +97,65 @@ function AdminCapture(props) {
           <Text style={{ color: Color.DuoGray }}>Waiting for upload </Text>
         </>
       ) : undefined}
+      <ScrollView style={{ width: "100%" }}>
+        <View
+          style={{
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TouchableNativeFeedback onPress={handleImageFromLibrary}>
+            <View style={styles.img_block}>
+              {url == null ? (
+                <>
+                  <MaterialCommunityIcons
+                    name="camera"
+                    size={100}
+                    color={Color.DuoBackGray}
+                  />
+                  <Text> Select Image From Library </Text>
+                </>
+              ) : (
+                <Image source={{ uri: url }} style={styles.img} />
+              )}
+            </View>
+          </TouchableNativeFeedback>
+          <ErrorMessage />
 
-      <TouchableNativeFeedback onPress={handleImageFromLibrary}>
-        <View style={styles.img_block}>
-          {url == null ? (
-            <>
-              <MaterialCommunityIcons
-                name="camera"
-                size={100}
-                color={Color.DuoBackGray}
-              />
-              <Text> Select Image From Library </Text>
-            </>
-          ) : (
-            <Image source={{ uri: url }} style={styles.img} />
-          )}
+          <AppButton
+            title="Open Camera"
+            textStyle={styles.btn_t}
+            height={50}
+            width={"50%"}
+            style={styles.btn}
+            onPress={handleImageFromCamera}
+          />
+          <View style={{ flexDirection: "row" }}>
+            <AppButton
+              title="Auto Detect"
+              textStyle={styles.btn_t}
+              height={50}
+              width={"50%"}
+              style={styles.btn}
+              onPress={handleNext}
+            />
+            <AppButton
+              title="Manual"
+              textStyle={styles.btn_t}
+              height={50}
+              width={"50%"}
+              style={styles.btn}
+              onPress={() =>
+                navigation.navigate("entry", {
+                  plate: "",
+                  location: `${lat},${long}`,
+                })
+              }
+            />
+          </View>
         </View>
-      </TouchableNativeFeedback>
-      <ErrorMessage />
-
-      <AppButton
-        title="Open Camera"
-        textStyle={styles.btn_t}
-        height={50}
-        width={"50%"}
-        style={styles.btn}
-        onPress={handleImageFromCamera}
-      />
-
-      <AppButton
-        title="Next"
-        textStyle={styles.btn_t}
-        height={50}
-        width={"50%"}
-        style={styles.btn}
-        onPress={handleNext}
-      />
+      </ScrollView>
       <Modal visible={log}>
         <View
           style={{
@@ -140,7 +188,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   btn_t: {
-    color: Color.DuoBlack,
+    color: "white",
     fontSize: 16,
     fontWeight: "bold",
   },
@@ -150,7 +198,7 @@ const styles = StyleSheet.create({
     width: "95%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    // marginTop: 40,
     marginBottom: 20,
     borderRadius: 10,
   },

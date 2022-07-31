@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Platform, StatusBar } from "react-native";
 import AppInput from "../compnents/AppInput";
 import { Formik } from "formik";
 import AppButton from "../compnents/AppButton";
@@ -106,7 +106,7 @@ function UserQuery({ navigation }) {
 
 const styles = StyleSheet.create({
   cont: {
-    marginTop: 30,
+    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
     padding: 10,
     backgroundColor: Color.DuoBlack,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   btn_t: {
     fontSize: 17,
     fontWeight: "bold",
-    color: Color.DuoBlack,
+    color: "white",
   },
   msg_v: {
     width: "80%",
