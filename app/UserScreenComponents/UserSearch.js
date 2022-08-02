@@ -9,7 +9,7 @@ function UserSearch({ Search, handleSearch }) {
     <View style={styles.search_view}>
       <AppInput
         placeholder="Enter Vehicle Number(e.g, 'LHR-203')"
-        placeholderTextColor={Color.DuoGray}
+        placeholderTextColor="white"
         iconName="search-web"
         iconColor={Color.DuoGray}
         viewStyle={styles.search_bar}

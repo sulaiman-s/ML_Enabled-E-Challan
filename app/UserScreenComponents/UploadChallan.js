@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: Color.DuoGray,
     color: "white",
-    paddingLeft: 140,
+    paddingLeft: 135,
     fontWeight: "bold",
   },
   label2: {

@@ -6,6 +6,8 @@ import {
   Platform,
   StatusBar,
   ScrollView,
+  Modal,
+  ActivityIndicator,
   ImageBackground,
 } from "react-native";
 import AppButton from "../compnents/AppButton";
@@ -22,6 +24,8 @@ import { Color } from "../assets/colors";
 function RegisterScreen({ navigation }) {
   const [usernameError, setUsernameError] = useState();
   const [emailError, setEmailError] = useState();
+  const [visible, setvisible] = useState(false);
+
   const ErrorMessage = ({ error, visible }) => {
     if (!visible || !error) return null;
     return <Text style={{ color: "red" }}>{error}</Text>;
@@ -62,6 +66,7 @@ function RegisterScreen({ navigation }) {
     password,
     confirmPassword,
   }) => {
+    setvisible(true);
     const { data } = await axios
       .post(Url + "/auth/users/", {
         email: email,
@@ -72,6 +77,7 @@ function RegisterScreen({ navigation }) {
         console.log(error);
         setUsernameError(error.response.data.username);
         setEmailError(error.response.data.email);
+        setvisible(false);
       });
     if (data) {
       // const { data } = await axios
@@ -86,8 +92,10 @@ function RegisterScreen({ navigation }) {
       //   const dat = jwtDecode(data.refresh);
       //   authContext.setUser(dat);
       // }
+      setvisible(false);
       navigation.navigate("Login");
     }
+    setvisible(false);
   };
 
   return (
@@ -125,7 +133,7 @@ function RegisterScreen({ navigation }) {
             <>
               <AppInput
                 placeholder="User Name"
-                placeholderTextColor={Color.DuoGray}
+                placeholderTextColor="white"
                 onChangeText={handleChange("username")}
                 style={styles.input}
                 iconName="information"
@@ -143,7 +151,7 @@ function RegisterScreen({ navigation }) {
               />
               <AppInput
                 placeholder="Gmail"
-                placeholderTextColor={Color.DuoGray}
+                placeholderTextColor="white"
                 onChangeText={handleChange("email")}
                 style={styles.input}
                 iconName="gmail"
@@ -158,7 +166,7 @@ function RegisterScreen({ navigation }) {
               <ErrorMessage error={errors.email} visible={touched.email} />
               <AppInput
                 placeholder="Password"
-                placeholderTextColor={Color.DuoGray}
+                placeholderTextColor="white"
                 onChangeText={handleChange("password")}
                 style={styles.input}
                 iconName="key-variant"
@@ -177,7 +185,7 @@ function RegisterScreen({ navigation }) {
               />
               <AppInput
                 placeholder="Confirm Password"
-                placeholderTextColor={Color.DuoGray}
+                placeholderTextColor="white"
                 onChangeText={handleChange("confirmPassword")}
                 style={styles.input}
                 iconName="key-star"
@@ -223,6 +231,13 @@ function RegisterScreen({ navigation }) {
           )}
         </Formik>
       </ScrollView>
+      <Modal visible={visible}>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" color="blue" />
+        </View>
+      </Modal>
     </Screen>
   );
 }
@@ -270,7 +285,7 @@ const styles = StyleSheet.create({
   },
   option_txt: {
     fontSize: 17,
-    color: Color.DuoGray,
+    color: "white",
     fontFamily: "Roboto",
     // fontWeight: "bold",
   },

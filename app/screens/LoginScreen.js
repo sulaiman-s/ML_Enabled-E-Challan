@@ -6,6 +6,8 @@ import {
   View,
   Modal,
   ScrollView,
+  ActivityIndicator,
+  Image,
 } from "react-native";
 import AppInput from "../compnents/AppInput";
 import Screen from "../compnents/Screen";
@@ -22,10 +24,12 @@ import { Color } from "../assets/colors";
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [visible, setvisible] = useState(false);
   const [error, setError] = useState("");
   const [forgot, setforgot] = useState(false);
   const authContext = useContext(AuthContext);
   const handleLogin = async () => {
+    setvisible(true);
     console.log("ww");
     const { data } = await axios
       .post(Url + "/user/create/", {
@@ -34,6 +38,7 @@ function LoginScreen({ navigation }) {
       })
       .catch((error) => {
         if (error) setError("Account not found");
+        setvisible(false);
       });
     if (data != undefined || data != null) {
       const dat = jwtDecode(data.refresh);
@@ -51,6 +56,7 @@ function LoginScreen({ navigation }) {
       SetToken(data.refresh);
       SetAccess(data.access);
     }
+    setvisible(false);
   };
 
   return (
@@ -70,12 +76,19 @@ function LoginScreen({ navigation }) {
             alignItems: "center",
           }}
         >
+          <View style={{ marginBottom: 50 }}>
+            <Image
+              source={require("../assets/log.png")}
+              resizeMode="contain"
+              style={{ height: 200, width: 200 }}
+            />
+          </View>
           {/* <View style={{ width: "100%", marginVertical: 25 }}>
         <Text style={styles.h_style}>Log in</Text>
       </View> */}
           <AppInput
             placeholder="Username"
-            placeholderTextColor={Color.DuoGray}
+            placeholderTextColor="white"
             style={styles.t_inp}
             onChangeText={(text) => setUsername(text)}
             iconName="security"
@@ -88,7 +101,7 @@ function LoginScreen({ navigation }) {
           />
           <AppInput
             placeholder="Password"
-            placeholderTextColor={Color.DuoGray}
+            placeholderTextColor="white"
             style={styles.t_inp}
             onChangeText={(text) => setPassword(text)}
             iconName="key"
@@ -148,6 +161,13 @@ function LoginScreen({ navigation }) {
             <WebView source={{ uri: Url + "/user/password_reset/" }} />
           </View>
         </Modal>
+        <Modal visible={visible}>
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <ActivityIndicator size="large" color="blue" />
+          </View>
+        </Modal>
       </View>
     </Screen>
   );
@@ -200,7 +220,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: "Roboto",
     // fontWeight: "bold",
-    color: Color.DuoGray,
+    color: "white",
   },
   txt: {
     fontSize: 17,

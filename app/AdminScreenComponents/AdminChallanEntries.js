@@ -150,7 +150,7 @@ function AdminChallanEntries({ route, navigation }) {
             >
               <AppInput
                 placeholder="Vehicle Number"
-                placeholderTextColor={Color.DuoGray}
+                placeholderTextColor="white"
                 style={styles.inp_s}
                 onChangeText={(t) => {
                   handleChange("vehicle_number");
@@ -169,7 +169,7 @@ function AdminChallanEntries({ route, navigation }) {
               />
               <AppInput
                 placeholder="Enter Amount"
-                placeholderTextColor={Color.DuoGray}
+                placeholderTextColor="white"
                 style={styles.inp_s}
                 onChangeText={handleChange("challan_amount")}
                 onBlur={() => setFieldTouched("challan_amount")}
@@ -205,11 +205,27 @@ function AdminChallanEntries({ route, navigation }) {
                   mode="dropdown"
                 >
                   <Picker.Item
-                    label="Traffic Violation"
+                    label="Red Light Violation"
                     value="Traffic Violation"
                   />
                   <Picker.Item label="Over Speeding" value="Over Speeding" />
                   <Picker.Item label="Wrong Way" value="Wrong Way" />
+                  <Picker.Item
+                    label="Violation of parking rules"
+                    value="Violation of parking rules"
+                  />
+                  <Picker.Item
+                    label="Overloading a goods vehicle"
+                    value="Overloading a goods vehicle"
+                  />
+                  <Picker.Item
+                    label="Reckless and negligent driving"
+                    value="Reckless and negligent driving"
+                  />
+                  <Picker.Item
+                    label="Emitting excessive smoke"
+                    value="Emitting excessive smoke"
+                  />
                 </Picker>
               </View>
 
@@ -256,7 +272,7 @@ const styles = StyleSheet.create({
   picker_s: {
     height: 45,
     width: "100%",
-    color: Color.DuoGray,
+    color: "white",
     borderRadius: 25,
     marginLeft: 15,
     backgroundColor: Color.DuoBackGray,

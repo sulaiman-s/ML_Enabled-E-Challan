@@ -131,12 +131,18 @@ function AdminCapture(props) {
             style={styles.btn}
             onPress={handleImageFromCamera}
           />
-          <View style={{ flexDirection: "row" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              width: "100%",
+            }}
+          >
             <AppButton
               title="Auto Detect"
               textStyle={styles.btn_t}
               height={50}
-              width={"50%"}
+              width={"40%"}
               style={styles.btn}
               onPress={handleNext}
             />
@@ -144,7 +150,7 @@ function AdminCapture(props) {
               title="Manual"
               textStyle={styles.btn_t}
               height={50}
-              width={"50%"}
+              width={"40%"}
               style={styles.btn}
               onPress={() =>
                 navigation.navigate("entry", {

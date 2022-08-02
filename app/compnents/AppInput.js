@@ -20,7 +20,7 @@ function AppInput({
       />
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor="black"
+        placeholderTextColor="white"
         style={style}
         onChangeText={onChangeText}
         {...rest}

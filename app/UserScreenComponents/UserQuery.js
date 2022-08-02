@@ -37,11 +37,8 @@ function UserQuery({ navigation }) {
           flexDirection: "row",
         }}
       >
-        <Ionicons name="chevron-back" size={20} color={Color.DuoGray} />
-        <Text
-          style={{ color: Color.DuoGray }}
-          onPress={() => navigation.goBack()}
-        >
+        <Ionicons name="chevron-back" size={20} color="white" />
+        <Text style={{ color: "white" }} onPress={() => navigation.goBack()}>
           Go Back
         </Text>
       </View>
@@ -60,7 +57,7 @@ function UserQuery({ navigation }) {
             <AppInput
               style={styles.s}
               placeholder="Name"
-              placeholderTextColor={Color.DuoGray}
+              placeholderTextColor="white"
               onChangeText={handleChange("name")}
               onBlur={() => setFieldTouched("email")}
               viewStyle={styles.v}
@@ -68,7 +65,7 @@ function UserQuery({ navigation }) {
             <ErrorMessage error={errors.name} visible={touched.name} />
             <AppInput
               placeholder="Email"
-              placeholderTextColor={Color.DuoGray}
+              placeholderTextColor="white"
               style={styles.s}
               onChangeText={handleChange("email")}
               onBlur={() => setFieldTouched("email")}
@@ -77,7 +74,7 @@ function UserQuery({ navigation }) {
             <ErrorMessage error={errors.email} visible={touched.email} />
             <AppInput
               placeholder="Message"
-              placeholderTextColor={Color.DuoGray}
+              placeholderTextColor="white"
               style={{
                 width: "100%",
                 textAlignVertical: "top",

@@ -15,6 +15,7 @@ function Legal(props) {
     <Screen
       style={{
         marginTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
+        backgroundColor: Color.DuoBlack,
       }}
     >
       <View
@@ -24,19 +25,31 @@ function Legal(props) {
           flexDirection: "row",
         }}
       >
-        <Ionicons name="chevron-back" size={20} color="blue" />
-        <Text style={{ color: "blue" }} onPress={() => navigation.goBack()}>
+        <Ionicons name="chevron-back" size={20} color="gray" />
+        <Text style={{ color: "gray" }} onPress={() => navigation.goBack()}>
           Go Back
         </Text>
       </View>
       <Label
         value="Privacy Policy"
-        style={{ alignSelf: "center", paddingLeft: 10, borderRadius: 10 }}
+        style={{
+          alignSelf: "center",
+          paddingLeft: 10,
+          borderRadius: 10,
+          backgroundColor: Color.DuoBackGray,
+          color: "white",
+        }}
         onPress={() => setPrivacyPolicy(true)}
       />
       <Label
         value="Terms & Services"
-        style={{ alignSelf: "center", paddingLeft: 10, borderRadius: 10 }}
+        style={{
+          alignSelf: "center",
+          paddingLeft: 10,
+          borderRadius: 10,
+          backgroundColor: Color.DuoBackGray,
+          color: "white",
+        }}
         onPress={() => setTermService(true)}
       />
       <Modal visible={privacyPolicy}>
@@ -68,8 +81,11 @@ function Legal(props) {
             flexDirection: "row",
           }}
         >
-          <Ionicons name="chevron-back" size={20} color="blue" />
-          <Text style={{ color: "blue" }} onPress={() => setTermService(false)}>
+          <Ionicons name="chevron-back" size={20} color="white" />
+          <Text
+            style={{ color: "white" }}
+            onPress={() => setTermService(false)}
+          >
             Go Back
           </Text>
         </View>
