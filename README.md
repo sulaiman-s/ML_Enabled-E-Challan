@@ -1,5 +1,4 @@
-# AVND_Frontend(Autometic Vehicle Number Plate detection)
-This project Interface is designed in React Native  in which  the main component i have added that is connected to my backend app which 
-will recieve an image and it will detect the liscense out of it using machine learning models
+# ML Enabled E-Challan
+ Android App for Traffic Wardens using multiple machine learning models to detect the number from license plate and generating challans and managing data with database management
 
 DO Run Backend [Server](https://github.com/sulaiman-s/AVND_Backend) to run this.
